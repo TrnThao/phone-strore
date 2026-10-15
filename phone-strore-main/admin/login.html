@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập quản trị</title>
+    <!-- Liên kết file CSS chính của admin -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <div class="login-box">
+            <h2>ĐĂNG NHẬP QUẢN TRỊ</h2>
+            <p class="subtitle">Vui lòng đăng nhập tài khoản Admin để tiếp tục</p>
+
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminUsername">Tên đăng nhập / Email</label>
+                    <input type="text" id="adminUsername" placeholder="Nhập tài khoản admin..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="adminPassword">Mật khẩu</label>
+                    <input type="password" id="adminPassword" placeholder="Nhập mật khẩu..." required>
+                </div>
+
+                <button type="submit" class="btn-submit">Đăng nhập</button>
+            </form>
+
+            <div id="adminMessage" class="message-box"></div>
+        </div>
+    </div>
+
+    <!-- Liên kết file JavaScript xử lý logic -->
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>
