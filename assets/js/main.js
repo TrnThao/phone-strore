@@ -137,6 +137,11 @@ const SEED_DATA = {
   // 3. KHÁCH HÀNG (Users)
   users: [
     {
+        name: "admin",
+        password: "123"
+
+    },
+    {
       id: "KH01",
       name: "Nguyễn Văn An",
       email: "an.nguyen@gmail.com",

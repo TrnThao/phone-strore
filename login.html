@@ -7,9 +7,19 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- TODO: Đăng nhập + đăng ký tài khoản khách hàng. Đăng nhập xong header thay nút Đăng nhập bằng tên + nút Đăng xuất -->
-
   <script src="assets/js/main.js"></script>
+  <div class="container">
+    <form class="login">
+      <h1>Đăng nhập</h1>
+      <div class="login-form">
+        <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+      </div>
+      <div class="login-form">
+        <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
+      </div>
+      <button type="submit">Đăng nhập</button>
+    </form>
+  </div>
   <script src="assets/js/auth.js"></script>
 </body>
 </html>

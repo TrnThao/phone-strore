@@ -41,7 +41,7 @@ document.getElementById("btn-logout")?.addEventListener("click", function (e) {
   e.preventDefault();
   if (confirm("Bạn có muốn đăng xuất khỏi trang quản trị?")) {
     localStorage.removeItem("currentAdmin");
-    location.href = "login-admin.html";
+    location.href = "../../login.html";
   }
 });
 

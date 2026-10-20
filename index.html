@@ -7,10 +7,21 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- TODO: Trang chủ: banner, sản phẩm theo phân loại (có phân trang), bấm vào sản phẩm -> product-detail.html?id=xxx -->
-
-  <script src="assets/js/main.js"></script>
+  <div>
+    <div class="header">
+      <h1>Chào mừng đến với cửa hàng điện thoại</h1>
+      <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+      <div id="HienThiND" style="display: none;">
+        <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
+        <button id="DangXuat" type="click">Đăng xuất</button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="Left_Menu">Left</div>
+      <div class="Content">Right</div>
+    </div>
+    <div class="footer">footer</div>
+  </div>
   <script src="assets/js/auth.js"></script>
-  <script src="assets/js/product.js"></script>
 </body>
 </html>
