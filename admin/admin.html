@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản trị cửa hàng điện thoại</title>
+  <link rel="stylesheet" href="../assets/css/admin.css">
+  <script>
+    // Chưa đăng nhập admin thì chuyển về trang đăng nhập (chạy ngay, trước khi hiện giao diện)
+    //if (!localStorage.getItem("currentAdmin")) location.replace("login.html");
+  </script>
+</head>
+<body>
+
+  <!-- ===== MENU ĐIỀU HƯỚNG ===== -->
+  <nav id="admin-menu">
+    <div class="brand">Cửa hàng điện thoại di động</div>
+    <a href="#dashboard">📊 Tổng quan</a>
+    <a href="#users">👥 Khách hàng</a>
+    <a href="#categories">🏷️ Hãng sản xuất</a>
+    <a href="#products">📱 Sản phẩm</a>
+    <a href="#imports">📥 Nhập hàng</a>
+    <a href="#pricing">💰 Giá bán</a>
+    <a href="#orders">🧾 Đơn hàng</a>
+    <a href="#inventory">📦 Tồn kho</a>
+    <div class="spacer"></div>
+    <a href="#" id="btn-logout">Đăng xuất</a>
+  </nav>
+
+  <main id="admin-content">
+
+    <!-- ================= 1. TỔNG QUAN ================= -->
+    <section id="dashboard" class="tab">
+      <div class="page-head"><h1>Tổng quan</h1></div>
+      <div class="stats">
+        <div class="stat"><b id="stat-users">0</b><span>Khách hàng</span></div>
+        <div class="stat"><b id="stat-products">0</b><span>Sản phẩm</span></div>
+        <div class="stat"><b id="stat-new-orders">0</b><span>Đơn mới đặt</span></div>
+        <div class="stat"><b id="stat-revenue">0 ₫</b><span>Doanh thu</span></div>
+      </div>
+      <div class="card-box">
+        <h2>⚠️ Sản phẩm sắp hết hàng</h2>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã</th><th>Sản phẩm</th><th>Tồn</th></tr></thead>
+          <tbody id="dashboard-low-body"></tbody>
+        </table></div>
+      </div>
+      <div class="card-box">
+        <h2>Đơn hàng gần đây</h2>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead>
+          <tbody id="dashboard-orders-body"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= 2. KHÁCH HÀNG ================= -->
+    <section id="users" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý khách hàng</h1></div>
+      <div class="filter-bar">
+        <label>Tìm khách hàng<input type="search" id="users-search" placeholder="Tên, email, SĐT…"></label>
+      </div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>ID</th><th>Họ tên</th><th>Email</th><th>SĐT</th><th>Ngày đăng ký</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="users-body"></tbody>
+      </table></div>
+    </section>
+
+    <!-- ================= 3. QUẢN LÝ HÃNG SẢN XUẤT ================= -->
+    <section id="categories" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý hãng sản xuất</h1><button class="btn" data-open="dlg-category">+ Thêm hãng</button></div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>ID</th><th>Tên hãng</th><th>Số sản phẩm</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="categories-body"></tbody>
+      </table></div>
+
+      <dialog id="dlg-category">
+        <form method="dialog">
+          <h2>Thêm / Sửa hãng sản xuất</h2>
+          <div class="dlg-body">
+            <div class="field"><label for="cat-name">Tên hãng</label><input id="cat-name" placeholder="Ví dụ: Apple, Samsung..." required></div>
+          </div>
+          <div class="dlg-actions"><button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button><button class="btn" value="ok">Lưu</button></div>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- ================= 4. SẢN PHẨM ================= -->
+    <section id="products" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý sản phẩm</h1><button class="btn" data-open="dlg-product">+ Thêm sản phẩm</button></div>
+      <div class="filter-bar">
+        <label>Tìm kiếm<input type="search" id="products-search" placeholder="Tên hoặc mã…"></label>
+        <label>Hãng<select id="products-filter-cat"><option value="">Tất cả hãng</option></select></label>
+      </div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>Hình</th><th>Mã</th><th>Tên</th><th>Hãng</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="products-body"></tbody>
+      </table></div>
+
+      <dialog id="dlg-product">
+        <form method="dialog">
+          <h2>Thêm / Sửa sản phẩm</h2>
+          <div class="dlg-body">
+            <div class="field"><label for="p-cat">Hãng sản xuất</label><select id="p-cat"></select></div>
+            <div class="row2">
+              <div class="field"><label for="p-code">Mã sản phẩm</label><input id="p-code" required></div>
+              <div class="field"><label for="p-name">Tên sản phẩm</label><input id="p-name" required></div>
+            </div>
+            <div class="field"><label for="p-img">Hình ảnh</label><input type="file" id="p-img" accept="image/*"><div class="preview" id="p-preview"></div></div>
+            <div class="field"><label for="p-desc">Mô tả cấu hình / chi tiết</label><textarea id="p-desc" rows="4"></textarea></div>
+          </div>
+          <div class="dlg-actions"><button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button><button class="btn" value="ok">Lưu</button></div>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- ================= 5. NHẬP HÀNG ================= -->
+    <section id="imports" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý nhập hàng</h1><button class="btn" data-open="dlg-import">+ Thêm phiếu nhập</button></div>
+      <div class="filter-bar">
+        <label>Tìm phiếu (mã / sản phẩm)<input type="search" id="imports-search"></label>
+        <label>Từ ngày<input type="date" id="imports-from"></label>
+        <label>Đến ngày<input type="date" id="imports-to"></label>
+        <label>Trạng thái<select id="imports-status"><option value="">Tất cả</option><option value="draft">Nháp</option><option value="done">Đã hoàn thành</option></select></label>
+      </div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>Mã phiếu</th><th>Ngày nhập</th><th>Sản phẩm</th><th>Tổng giá nhập</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="imports-body"></tbody>
+      </table></div>
+
+      <dialog id="dlg-import">
+        <form method="dialog">
+          <h2>Thêm / Sửa phiếu nhập</h2>
+          <div class="dlg-body">
+            <div class="field"><label for="i-date">Ngày nhập</label><input id="i-date" type="date" required></div>
+            <div class="lines-head"><span>Sản phẩm</span><span>Số lượng</span><span>Giá nhập (₫)</span><span></span></div>
+            <div id="import-lines"></div>
+            <button type="button" class="btn btn-sm btn-ghost" id="import-add-line">+ Thêm dòng</button>
+          </div>
+          <div class="dlg-actions"><button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button><button class="btn" value="ok">Lưu phiếu</button></div>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- ================= 6. GIÁ BÁN ================= -->
+    <section id="pricing" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý giá bán</h1></div>
+      <p class="muted">Giá bán = giá vốn × (1 + % lợi nhuận). Để trống “% riêng” thì dùng % của hãng.</p>
+      <div class="card-box">
+        <h2>% lợi nhuận theo hãng sản xuất</h2>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Hãng</th><th>% lợi nhuận</th><th></th></tr></thead>
+          <tbody id="pricing-cat-body"></tbody>
+        </table></div>
+      </div>
+      <div class="card-box">
+        <h2>Giá vốn – % lợi nhuận – giá bán theo sản phẩm</h2>
+        <div class="filter-bar">
+          <label>Tìm kiếm<input type="search" id="pricing-search" placeholder="Tên hoặc mã…"></label>
+          <label>Hãng<select id="pricing-filter-cat"><option value="">Tất cả hãng</option></select></label>
+        </div>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã</th><th>Sản phẩm</th><th>Hãng</th><th>Giá vốn</th><th>% riêng</th><th>% áp dụng</th><th>Giá bán</th><th></th></tr></thead>
+          <tbody id="pricing-prod-body"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <!-- ================= 7. ĐƠN HÀNG ================= -->
+    <section id="orders" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý đơn hàng</h1></div>
+      <div class="filter-bar">
+        <label>Từ ngày<input type="date" id="orders-from"></label>
+        <label>Đến ngày<input type="date" id="orders-to"></label>
+        <label>Tình trạng<select id="orders-status"><option value="">Tất cả</option><option value="new">Mới đặt</option><option value="processed">Đã xử lý</option><option value="delivered">Đã giao</option><option value="cancelled">Đã hủy</option></select></label>
+      </div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Ngày đặt</th><th>Tổng tiền</th><th>Trạng thái</th><th></th></tr></thead>
+        <tbody id="orders-body"></tbody>
+      </table></div>
+
+      <dialog id="dlg-order">
+        <form method="dialog">
+          <h2 id="order-title">Chi tiết đơn hàng</h2>
+          <div class="dlg-body">
+            <div class="info-grid">
+              <p><b>Khách hàng:</b> <span id="order-customer"></span></p><p><b>Ngày đặt:</b> <span id="order-date"></span></p>
+              <p><b>Người nhận:</b> <span id="order-receiver"></span></p><p><b>Thanh toán:</b> <span id="order-payment"></span></p>
+              <p style="grid-column:1/-1"><b>Địa chỉ giao:</b> <span id="order-address"></span></p>
+            </div>
+            <div class="table-wrap"><table class="tbl">
+              <thead><tr><th>Sản phẩm</th><th>Đơn giá</th><th>SL</th><th>Thành tiền</th></tr></thead>
+              <tbody id="order-items"></tbody>
+            </table></div>
+            <div class="field" style="margin-top:1rem"><label for="order-status-select">Cập nhật tình trạng</label>
+              <select id="order-status-select"></select></div>
+          </div>
+          <div class="dlg-actions"><button class="btn btn-ghost" value="cancel" formnovalidate>Đóng</button><button class="btn" value="ok">Cập nhật</button></div>
+        </form>
+      </dialog>
+    </section>
+
+    <!-- ================= 8. TỒN KHO ================= -->
+    <section id="inventory" class="tab" hidden>
+      <div class="page-head"><h1>Quản lý tồn kho</h1></div>
+
+      <div class="card-box">
+        <h2>⚠️ Cảnh báo sắp hết hàng</h2>
+        <div class="filter-bar"><label>Cảnh báo khi tồn ≤<input type="number" id="inventory-threshold" class="inline-input" min="0" value="5"></label></div>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã</th><th>Sản phẩm</th><th>Tồn hiện tại</th></tr></thead>
+          <tbody id="inventory-low-body"></tbody>
+        </table></div>
+      </div>
+
+      <div class="card-box">
+        <h2>Tra cứu số lượng tồn tại một thời điểm</h2>
+        <div class="filter-bar">
+          <label>Sản phẩm<input type="search" id="stock-search" placeholder="Tên hoặc mã…"></label>
+          <label>Hãng<select id="stock-cat"><option value="">Tất cả hãng</option></select></label>
+          <label>Tồn đến hết ngày<input type="date" id="stock-date"></label>
+        </div>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã</th><th>Sản phẩm</th><th>Hãng</th><th>Tồn</th></tr></thead>
+          <tbody id="inventory-stock-body"></tbody>
+        </table></div>
+      </div>
+
+      <div class="card-box">
+        <h2>Báo cáo nhập – xuất – tồn theo khoảng thời gian</h2>
+        <div class="filter-bar">
+          <label>Sản phẩm<input type="search" id="report-search" placeholder="Tên hoặc mã…"></label>
+          <label>Hãng<select id="report-cat"><option value="">Tất cả hãng</option></label>
+          <label>Từ ngày<input type="date" id="report-from"></label>
+          <label>Đến ngày<input type="date" id="report-to"></label>
+        </div>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th>Mã</th><th>Sản phẩm</th><th>Tồn đầu kỳ</th><th>Nhập</th><th>Xuất</th><th>Tồn cuối kỳ</th></tr></thead>
+          <tbody id="inventory-report-body"></tbody>
+        </table></div>
+      </div>
+    </section>
+
+  </main>
+  
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>
