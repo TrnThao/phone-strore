@@ -1,5 +1,5 @@
 // ==========================================================================
-// assets/js/admin.js - TOÀN BỘ CHỨC NĂNG QUẢN TRỊ (JAVASCRIPT THUẦN)
+// assets/js/admin.js - TOÀN BỘ CHỨC NĂNG QUẢN TRỊ
 // ==========================================================================
 
 // --- TIỆN ÍCH DÙNG CHUNG ---
@@ -19,7 +19,9 @@ function showTab() {
   if (id === "dashboard") renderDashboard();
   else if (id === "users") users_render();
   else if (id === "categories") categories_render();
-  else if (id === "products") products_render();
+  else if (id === "products") {
+    updateCategoryDropdowns(); 
+    products_render();}
   else if (id === "imports") imports_render();
   else if (id === "pricing") pricing_render();
   else if (id === "orders") orders_render();
@@ -306,6 +308,21 @@ document.getElementById("p-img")?.addEventListener("change", function () {
   }
 });
 
+document.querySelector('[data-open="dlg-product"]')?.addEventListener("click", function () {
+  editingProdId = null;
+  currentProdImgBase64 = "";
+  
+  updateCategoryDropdowns();
+
+  const form = document.querySelector("#dlg-product form");
+  if (form) form.reset();
+
+  const preview = document.getElementById("p-preview");
+  if (preview) {
+    preview.style.backgroundImage = "none";
+  }
+});
+
 function products_edit(id) {
   const prods = JSON.parse(localStorage.getItem("products") || "[]");
   const p = prods.find(x => x.id === id);
@@ -397,7 +414,13 @@ function imports_render() {
 
   const keyword = (document.getElementById("imports-search")?.value || "").trim().toLowerCase();
   const fromDate = document.getElementById("imports-from")?.value;
-  const toDate = document.getElementById("imports-to")?.value;
+
+  const toInput = document.getElementById("imports-to");
+  if (toInput && !toInput.value) {
+    toInput.value = new Date().toISOString().split("T")[0];
+  }
+  const toDate = toInput?.value;
+
   const statusFilter = document.getElementById("imports-status")?.value;
   const tbody = document.getElementById("imports-body");
   if (!tbody) return;
@@ -647,7 +670,13 @@ let currentViewingOrderId = null;
 function orders_render() {
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
   const fromDate = document.getElementById("orders-from")?.value;
-  const toDate = document.getElementById("orders-to")?.value;
+
+  const toInput = document.getElementById("orders-to");
+  if (toInput && !toInput.value) {
+    toInput.value = new Date().toISOString().split("T")[0];
+  }
+  const toDate = toInput?.value;
+
   const statusFilter = document.getElementById("orders-status")?.value;
   const tbody = document.getElementById("orders-body");
   if (!tbody) return;
@@ -784,7 +813,12 @@ function inventory_renderStockAtDate() {
 
   const keyword = (document.getElementById("stock-search")?.value || "").trim().toLowerCase();
   const catFilter = document.getElementById("stock-cat")?.value;
-  const targetDate = document.getElementById("stock-date")?.value;
+  const targetDate = dateInput?.value;
+
+  const dateInput = document.getElementById("stock-date");
+  if (dateInput && !dateInput.value) {
+    dateInput.value = new Date().toISOString().split("T")[0];
+  }
 
   const stockMap = calculateCurrentInventory(targetDate || null);
   const tbody = document.getElementById("inventory-stock-body");
@@ -815,7 +849,12 @@ function inventory_renderReport() {
   const keyword = (document.getElementById("report-search")?.value || "").trim().toLowerCase();
   const catFilter = document.getElementById("report-cat")?.value;
   const fromDate = document.getElementById("report-from")?.value;
-  const toDate = document.getElementById("report-to")?.value;
+
+  const toInput = document.getElementById("report-to");
+  if (toInput && !toInput.value) {
+    toInput.value = new Date().toISOString().split("T")[0];
+  }
+  const toDate = toInput?.value;
 
   const tbody = document.getElementById("inventory-report-body");
   if (!tbody) return;
@@ -872,5 +911,6 @@ function inventory_renderReport() {
 // ==========================================================================
 // TỰ ĐỘNG CHẠY KHI MỞ TRANG
 // ==========================================================================
+updateCategoryDropdowns();
 showTab();
 renderDashboard();
