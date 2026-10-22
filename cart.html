@@ -8,6 +8,49 @@
 </head>
 <body>
   <!-- TODO: Tăng/giảm/xóa sản phẩm; chọn địa chỉ (tài khoản / nhập mới, có validate); thanh toán (mặc định tiền mặt); xác nhận đơn -> order-history.html -->
+  <!--Header chung-->
+  <header id="header"></header>
+  <main class="main">
+    <div class="content">
+      <h2>Giỏ hàng của bạn</h2>
+      <div class="cart-list">
+        <!--Dữ liệu sản phẩm trong giỏ hàng JS render ở đây-->
+        <div class="text-muted">Đang tải giỏ hàng...</div>
+      </div>
+      <!--Cột thông tin thanh toán và form để đặt hàng-->
+      <div class="left_menu">
+        <h3>Thông tin thanh toán</h3>
+        <form id="checkout-form">
+          <div class="form-infomation">
+            <label for="fullname" class="form-label">Họ và tên người nhận</label>
+            <input type="text" class="form-control" id="fullname" required>
+          </div>
+          <div class="form-infomation">
+            <label for="phone" class="form-label">Số điện thoại</label>
+            <input type="tel" class="form-control" id="phone" required>
+          </div>
+          <div class="form-infomation">
+            <label for="address" class="form-label">Địa chỉ giao hàng</label>
+            <textarea class="form-control" id="address" rows="3" required></textarea>
+          </div>
+          <div class="form-infomation">
+            <label class="form-label">Hình thức thanh toán</label>
+            <input type="text" class="form-control" value="Tiền mặt khi nhận hàng (COD)" disabled>
+          </div>
+          <hr>
+          <div class="form-infomation">
+            <span>Tổng thanh toán:</span>
+            <strong class="text-danger" id="cart-total">0 VNĐ</strong>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" id="btn-checkout">Xác nhận đặt hàng</button>
+        </form>
+      
+      </div>
+    </div>
+  </main>
+
+  <!--Footer chung-->
+  <footer id="footer"></footer>
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
