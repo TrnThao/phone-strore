@@ -10,18 +10,43 @@
   <div>
     <div class="header">
       <h1>Chào mừng đến với cửa hàng điện thoại</h1>
-      <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+      <div class="header-dangnhap-dangky">
+        <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+        <button id="dangky" type="button" onclick="location.href='login.html?mode=register'">Đăng ký</button>
+      </div>
       <div id="HienThiND" style="display: none;">
         <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
         <button id="DangXuat" type="click">Đăng xuất</button>
       </div>
     </div>
     <div class="main">
-      <div class="Left_Menu">Left</div>
-      <div class="Content">Right</div>
+      <div class="Left_Menu">
+        <a href="index.html" class="active">🏠 Trang chủ</a>
+        <a href="products.html">📱 Danh sách sản phẩm</a>
+        <a href="cart.html">🛒 Giỏ hàng</a>
+        <a href="order-history.html">📦 Lịch sử đơn hàng</a>
+        <a href="profile.html" class="active">👤 Thông tin cá nhân</a>
+      </div>
+      <div class="Content">
+        <h2>Chào mừng đến với hệ thống mua sắm điện thoại</h2>
+        <p class="muted">Vui lòng chọn danh mục sản phẩm bên trái hoặc sử dụng menu để bắt đầu mua sắm.</p>
+      </div>
     </div>
-    <div class="footer">footer</div>
+    <!--Footer-->
+    <div class="footer">
+      <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+    </div>
   </div>
   <script src="assets/js/auth.js"></script>
+  <script>
+    // Ẩn nút đăng ký khi người dùng đã đăng nhập
+    document.addEventListener("DOMContentLoaded", function() {
+      const userDangNhap = sessionStorage.getItem('currentUser');
+      const nutDangKy = document.getElementById('dangky');
+      if (userDangNhap && nutDangKy) {
+        nutDangKy.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>

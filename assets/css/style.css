@@ -4,67 +4,101 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
+/* ==========================================================
+   CSS CHO TRANG LOGIN
+   ========================================================== */
+/* Lớp tiện ích ẩn/hiện form không cần viết inline style */
 .container {
     width: 100%;
-    border: 1px solid black;
-    background:rgb(235, 168, 168);
+    background: var(--bg); /* Đồng bộ màu nền chung của hệ thống */
     display: flex;
     justify-content: center;
     align-items: center;
-    height:100vh;
+    height: 100vh;
 }
-.login{
-    width: 500px;
-    border: 1px solid black;
-    background: white;
+
+.login {
+    width: 420px;
+    background: var(--white); /* Nền khung trắng sạch sẽ */
+    border: 1px solid var(--line); /* Dùng đường viền đồng bộ hệ thống */
+    border-radius: 12px; /* Bo góc mềm mại, hiện đại hơn */
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(20, 24, 31, 0.08); /* Tạo độ nổi 3D nhẹ nhàng */
 }
-.login h1{
+
+.login h1 {
     text-align: center;
+    color: var(--text);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
 }
+
 .login .login-form {
-    width:100%;
-    height:50px;
-    margin:30px 0;
-    padding:0 20px;
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    padding: 0;
 }
+
 .login-form input {
-    width:100%;
-    height:100%;
-    padding: 0 10px;
-    outline:none;
-    border:none;
-    border: 1px solid black;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    outline: none;
+    border: 1px solid var(--line); /* Đồng bộ viền input */
+    border-radius: 8px; /* Bo góc hiện đại thay vì bo tròn dài */
+    font-size: 14px;
+    color: var(--text);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+/* Hiệu ứng khi focus vào ô input */
+.login-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232, 69, 30, 0.15);
+}
+
 .login button {
-    width:30%;
-    height:50px;
-    margin:0 35%;
-    margin-bottom:30px;
-    border:none;
-    border-radius: 20px;
+    width: 100%; /* Đổi nút bấm rộng toàn khung cho chuyên nghiệp */
+    height: 45px;
+    margin: 10px 0 20px 0;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent); /* Dùng màu cam thương hiệu */
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
 
+.login button:hover {
+    background: var(--accent-dark); /* Đổi màu khi hover */
 }
-.header {
-    height: 100px;
-    background-color: red;
-    position:relative;
-    
+.hidden {
+    display: none !important;
 }
-.header h1{
+
+/* Kiểu dáng cho phần chuyển đổi giữa Đăng nhập và Đăng ký */
+.auth-switch {
     text-align: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: var(--muted);
 }
-#dangnhap{
-    position:absolute;
-    bottom:10px;
-    right:10px;
 
+.auth-switch a {
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
 }
-#HienThiND{
-    position:absolute;
-    bottom:10px;
-    right:10px;
+
+.auth-switch a:hover {
+    text-decoration: underline;
 }
+
 .main{
     display:flex;
     width:100%;
@@ -74,4 +108,394 @@
 }
 .content{
     width:80%;
+}
+
+
+/*Chỉnh sửa 23/10/2026*/
+/* ==========================================================
+   1. CSS CHO TRANG GIỎ HÀNG 
+   ========================================================== */
+
+/* Thiết lập bố cục dạng lưới hoặc flex cho thẻ chứa .content trong trang giỏ hàng */
+.main .content {
+    display: flex;                /* Sử dụng Flexbox để sắp xếp các phần tử con nằm ngang (chia cột) */
+    flex-wrap: wrap;              /* Cho phép rớt dòng nếu màn hình nhỏ (responsive) */
+    gap: 30px;                    /* Khoảng cách khoảng trống giữa cột danh sách sản phẩm và cột thanh toán */
+    padding: 30px;                /* Khoảng cách lề bên trong để nội dung không sát mép màn hình */
+    justify-content: space-between;/* Căn đều khoảng cách giữa các cột */
+}
+
+/* Định dạng tiêu đề lớn của trang */
+.main .content h2 {
+    width: 100%;                  /* Chiếm toàn bộ chiều ngang dòng đầu tiên */
+    margin-bottom: 20px;          /* Tạo khoảng cách phía dưới với phần nội dung giỏ hàng */
+    font-size: 24px;              /* Kích thước chữ tiêu đề */
+    color: #333;                  /* Màu chữ xám đậm, dễ nhìn */
+}
+
+/* Khu vực chứa danh sách các sản phẩm trong giỏ hàng */
+.cart-list {
+    flex: 1;                      /* Cho phép cột này co giãn chiếm phần lớn không gian (khoảng 60-70%) */
+    min-width: 300px;             /* Đảm bảo chiều rộng tối thiểu không bị bóp méo trên màn hình nhỏ */
+    background: #fff;             /* Màu nền trắng nổi bật */
+    padding: 20px;                /* Khoảng cách đệm bên trong khung */
+    border-radius: 8px;           /* Bo tròn góc khung nhìn mềm mại hơn */
+    border: 1px solid #e0e0e0;    /* Đường viền mỏng bao quanh */
+}
+
+/* Định dạng từng dòng sản phẩm riêng lẻ trong giỏ hàng (do JS render ra) */
+.cart-item {
+    display: flex;                /* Sắp xếp ảnh, tên, giá, số lượng nằm trên một hàng ngang */
+    align-items: center;          /* Canh giữa theo chiều dọc */
+    justify-content: space-between;/* Đẩy các thành phần sang hai bên biên */
+    padding: 15px 0;              /* Khoảng cách trên dưới cho từng sản phẩm */
+    border-bottom: 1px solid #f0f0f0; /* Đường kẻ ngăn cách giữa các sản phẩm */
+}
+
+/* Định dạng hình ảnh sản phẩm trong giỏ hàng */
+.cart-item img {
+    width: 70px;                  /* Cố định chiều rộng ảnh */
+    height: 70px;                 /* Cố định chiều cao ảnh */
+    object-fit: cover;            /* Cắt ảnh vừa vặn khung, không bị méo hình */
+    border-radius: 5px;           /* Bo tròn nhẹ góc ảnh */
+}
+
+/* Cột chứa thông tin thanh toán (trong HTML bạn đặt class là .left_menu) */
+.main .content .left_menu {
+    flex: 0 0 350px;              /* Cố định chiều rộng cột thanh toán là 350px, không co giãn */
+    background: #f9f9f9;          /* Màu nền xám nhạt phân biệt rõ với vùng sản phẩm */
+    padding: 20px;                /* Khoảng cách đệm bên trong khung thanh toán */
+    border-radius: 8px;           /* Bo tròn các góc */
+    border: 1px solid #ddd;       /* Viền khung thanh toán */
+    height: fit-content;          /* Chiều cao tự động co giãn theo nội dung form bên trong */
+}
+
+/* Định dạng tiêu đề "Thông tin thanh toán" */
+.left_menu h3 {
+    font-size: 18px;              /* Kích thước chữ vừa phải */
+    margin-bottom: 15px;          /* Khoảng cách phía dưới tiêu đề */
+    color: #222;                  /* Màu chữ đậm */
+}
+
+/* Khung bọc từng trường nhập liệu (label + input) trong form */
+.form-infomation {
+    margin-bottom: 15px;          /* Tạo khoảng cách giữa các ô input */
+}
+
+/* Nhãn tên của các trường input */
+.form-label {
+    display: block;               /* Hiển thị dạng khối để nằm trên ô input */
+    margin-bottom: 5px;           /* Khoảng cách giữa nhãn và ô input */
+    font-weight: bold;            /* In đậm chữ nhãn để dễ phân biệt */
+    font-size: 14px;              /* Kích thước chữ tiêu chuẩn */
+}
+
+/* Định dạng chung cho các ô input text, tel và textarea */
+.form-control {
+    width: 100%;                  /* Chiếm toàn bộ chiều ngang khung chứa */
+    padding: 10px;                /* Tạo khoảng đệm gõ chữ bên trong ô */
+    border: 1px solid #ccc;       /* Viền xám nhạt */
+    border-radius: 4px;           /* Bo tròn góc ô nhập liệu */
+    font-size: 14px;              /* Cỡ chữ khi người dùng nhập vào */
+    outline: none;                /* Bỏ viền mặc định khi click vào ô */
+}
+
+/* Hiệu ứng khi người dùng click vào ô input để gõ */
+.form-control:focus {
+    border-color: #007bff;        /* Đổi màu viền sang xanh dương nổi bật */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25); /* Tạo hiệu ứng phát sáng mờ xung quanh */
+}
+
+/* Định dạng nút bấm xác nhận đặt hàng */
+.btn-primary {
+    background-color: #28a745;    /* Màu xanh lá cây biểu thị hành động thành công/hoàn tất */
+    color: white;                 /* Chữ màu trắng */
+    border: none;                 /* Bỏ đường viền mặc định */
+    padding: 12px;                /* Khoảng cách đệm nút to dễ bấm */
+    font-size: 16px;              /* Cỡ chữ to rõ */
+    font-weight: bold;            /* Chữ in đậm */
+    border-radius: 4px;           /* Bo tròn góc nút */
+    cursor: pointer;              /* Đổi con trỏ chuột thành hình bàn tay khi rê vào */
+    transition: background 0.3s;  /* Hiệu ứng chuyển màu mượt mà khi hover */
+}
+
+/* Hiệu ứng khi rê chuột vào nút đặt hàng */
+.btn-primary:hover {
+    background-color: #218838;    /* Đổi sang màu xanh lá đậm hơn một chút */
+}
+
+/* Lớp tiện ích giúp nút bấm rộng toàn phần 100% */
+.w-100 {
+    width: 100%;                  
+}
+
+/* Màu chữ đỏ dùng cho phần hiển thị tổng tiền */
+.text-danger {
+    color: #dc3545;               /* Mã màu đỏ tiêu chuẩn cảnh báo/tiền bạc */
+    font-size: 18px;              /* Kích thước chữ lớn hơn một chút cho nổi bật */
+}
+
+
+/* ==========================================================
+   2. CSS CHO TRANG LỊCH SỬ MUA HÀNG
+   ========================================================== */
+
+/* Định dạng khung chứa toàn bộ danh sách lịch sử đơn hàng */
+#order-list {
+    width: 100%;                  /* Chiếm toàn bộ chiều ngang màn hình */
+    display: flex;                
+    flex-direction: column;       /* Sắp xếp các thẻ đơn hàng xếp chồng theo chiều dọc từ trên xuống */
+    gap: 20px;                    /* Khoảng cách khoảng trống giữa các đơn hàng */
+}
+
+/* Định dạng cho từng thẻ đơn hàng riêng lẻ (do JavaScript render ra) */
+.order-card {
+    background: #fff;             /* Nền trắng sạch sẽ */
+    border: 1px solid #ddd;       /* Viền xám bao quanh thẻ đơn hàng */
+    border-radius: 8px;           /* Bo tròn góc thẻ */
+    padding: 20px;                /* Khoảng cách đệm nội dung bên trong thẻ */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Tạo độ nổi 3D nhẹ nhàng cho thẻ đơn hàng */
+}
+
+/* Phần tiêu đề bên trong thẻ đơn hàng (Mã đơn + Ngày đặt) */
+.order-header {
+    display: flex;                
+    justify-content: space-between;/* Đẩy mã đơn sang trái, ngày đặt sang phải */
+    border-bottom: 1px solid #eee;/* Đường kẻ ngăn cách phần thông tin chung với danh sách sản phẩm */
+    padding-bottom: 10px;         
+    margin-bottom: 10px;          
+    font-size: 14px;
+    color: #666;
+}
+
+/* Hiển thị trạng thái đơn hàng (Mới đặt, Đã xử lý, Đã giao...) */
+.order-status {
+    font-weight: bold;            /* In đậm trạng thái */
+    padding: 4px 8px;             /* Tạo khoảng đệm nhỏ xung quanh chữ trạng thái */
+    border-radius: 4px;           /* Bo tròn viền nhãn trạng thái */
+    background-color: #fff3cd;    /* Màu nền vàng nhạt mặc định (thể hiện trạng thái chờ xử lý) */
+    color: #856404;               /* Màu chữ vàng sậm tương phản */
+    font-size: 13px;              
+}
+
+/* ===== ĐỒNG BỘ HỆ THỐNG MÀU SẮC & CƠ BẢN ===== */
+:root {
+  --bg: #f5f6f8;          /* nền trang */
+  --white: #ffffff;
+  --text: #14181f;        /* chữ chính + nền menu */
+  --muted: #5d6676;       /* chữ phụ */
+  --line: #e1e4ea;        /* đường viền */
+  --accent: #e8451e;      /* màu nhấn (cam thương hiệu) */
+  --accent-dark: #c43614; /* màu nhấn khi hover */
+  --danger: #c62828;      /* màu đỏ */
+}
+
+* { 
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; 
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ===== HEADER KHÁCH HÀNG ĐỒNG BỘ ===== */
+.header {
+  height: 80px;
+  background-color: var(--text); /* Đồng bộ màu tối với sidebar admin */
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Nút đăng nhập / Thông tin người dùng ở Header */
+.header-dangnhap-dangky{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+#dangnhap {
+  position: static;  
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#dangnhap:hover {
+  background: var(--accent-dark);
+}
+#dangky{
+    position: static;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+#dangky:hover{
+    background: var(--accent-dark);
+}
+
+#HienThiND {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--white);
+}
+
+#DangXuat {
+  background: transparent;
+  color: #c9cfda;
+  border: 1px solid var(--line);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#DangXuat:hover {
+  background: #222833;
+  color: var(--white);
+}
+
+/* ===== BỐ CỤC CHÍNH (MAIN LAYOUT) & SIDEBAR LINH HOẠT ===== */
+.main {
+  display: grid;
+  grid-template-columns: 240px 1fr; /* Màn hình bình thường: Sidebar bên trái 240px, phần nội dung chiếm phần còn lại */
+  min-height: calc(100vh - 80px);
+}
+
+/* Menu bên trái (Sidebar) */
+.Left_Menu {
+  background: var(--white);
+  border-right: 1px solid var(--line);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Thêm phong cách cho các liên kết/mục trong menu nếu có */
+.Left_Menu a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  display: block;
+}
+.Left_Menu a:hover, .Left_Menu a.active {
+  background: #eef0f4;
+  color: var(--accent);
+}
+
+/* Khu vực nội dung chính bên phải */
+.Content {
+  padding: 1.5rem;
+  background: var(--bg);
+  min-width: 0;
+}
+
+/* Footer đồng bộ */
+.footer {
+  background: var(--text);
+  color: var(--muted);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ===== RESPONSIVE: CO NHỎ MÀN HÌNH THÌ SIDEBAR NHẢY LÊN ĐẦU ===== */
+@media (max-width: 800px) {
+  .main {
+    grid-template-columns: 1fr; /* Chuyển thành 1 cột duy nhất */
+  }
+  .Left_Menu {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    flex-direction: row; /* Trải ngang menu khi lên đầu nếu muốn, hoặc giữ cột dọc tùy ý */
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+/*Chỉnh sửa 23/10/2026*/
+/* ==========================================================
+   CSS BỔ SUNG CHO TRANG DANH SÁCH SẢN PHẨM
+   ========================================================== */
+/* Hiệu ứng hover cho thẻ sản phẩm */
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(20, 24, 31, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================
+   CSS CHO TRANG THÔNG TIN CÁ NHÂN
+   ========================================================== */
+
+.user-display-header {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    align-items: center;
+    gap: 1rem;
+    color: var(--white);
+}
+
+.profile-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    max-width: 600px;
+}
+
+.profile-card .form-infomation {
+    margin-bottom: 15px;
+}
+
+.profile-email-input {
+    background: #f5f6f8;
+    color: var(--muted);
+}
+
+.profile-textarea {
+    resize: vertical;
+}
+
+.profile-btn {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.profile-btn:hover {
+    background: var(--accent-dark);
 }

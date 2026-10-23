@@ -8,6 +8,44 @@
 </head>
 <body>
   <!-- TODO: Các đơn hàng khách hàng này đã đặt thành công -->
+  <div class="wrapper">
+    <!-- Header đồng bộ tuyệt đối -->
+    <div class="header">
+      <h1>Cửa hàng điện thoại di động</h1>
+      <div class="header-dangnhap-dangky">
+        <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+        <button id="dangky" type="button" onclick="location.href='login.html?mode=register'">Đăng ký</button>
+      </div>
+      <div id="HienThiND" style="display: none;">
+        <span>Chào <strong id="HienThiTen"></strong>!</span>
+        <button id="DangXuat" type="button">Đăng xuất</button>
+      </div>
+    </div>
+
+    <!-- Main Layout có Sidebar bên trái -->
+    <div class="main">
+      <div class="Left_Menu">
+        <a href="index.html">🏠 Trang chủ</a>
+        <a href="products.html">📱 Danh sách sản phẩm</a>
+        <a href="cart.html">🛒 Giỏ hàng</a>
+        <a href="order-history.html" class="active">📦 Lịch sử đơn hàng</a>
+        <a href="profile.html" class="active">👤 Thông tin cá nhân</a>
+      </div>
+
+      <div class="Content">
+        <h2>Lịch sử mua hàng của bạn</h2>
+        <div id="order-list">
+          <!-- Danh sách đơn hàng sẽ được JavaScript render tự động vào đây -->
+          <div class="text-muted">Đang tải lịch sử đơn hàng...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer đồng bộ -->
+    <div class="footer">
+      <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+    </div>
+  </div>
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
