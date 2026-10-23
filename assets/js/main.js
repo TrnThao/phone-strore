@@ -392,7 +392,7 @@ function renderHeader() {
   const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   headerContainer.innerHTML = `
-    <header class="main-header">
+    <header class="header">
       <div class="header-container">
         <a href="index.html" class="logo">📱 DiĐộng<span>Store</span></a>
         
