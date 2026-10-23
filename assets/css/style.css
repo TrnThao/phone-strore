@@ -4,68 +4,101 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
+/* ==========================================================
+   CSS CHO TRANG LOGIN
+   ========================================================== */
+/* Lớp tiện ích ẩn/hiện form không cần viết inline style */
 .container {
     width: 100%;
-    border: 1px solid black;
-    background:rgb(235, 168, 168);
+    background: var(--bg); /* Đồng bộ màu nền chung của hệ thống */
     display: flex;
     justify-content: center;
     align-items: center;
-    height:100vh;
+    height: 100vh;
 }
-.login{
-    width: 500px;
-    border: 1px solid black;
-    background: white;
+
+.login {
+    width: 420px;
+    background: var(--white); /* Nền khung trắng sạch sẽ */
+    border: 1px solid var(--line); /* Dùng đường viền đồng bộ hệ thống */
+    border-radius: 12px; /* Bo góc mềm mại, hiện đại hơn */
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(20, 24, 31, 0.08); /* Tạo độ nổi 3D nhẹ nhàng */
 }
-.login h1{
+
+.login h1 {
     text-align: center;
+    color: var(--text);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
 }
+
 .login .login-form {
-    width:100%;
-    height:50px;
-    margin:30px 0;
-    padding:0 20px;
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    padding: 0;
 }
+
 .login-form input {
-    width:100%;
-    height:100%;
-    padding: 0 10px;
-    outline:none;
-    border:none;
-    border: 1px solid black;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    outline: none;
+    border: 1px solid var(--line); /* Đồng bộ viền input */
+    border-radius: 8px; /* Bo góc hiện đại thay vì bo tròn dài */
+    font-size: 14px;
+    color: var(--text);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
+
+/* Hiệu ứng khi focus vào ô input */
+.login-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232, 69, 30, 0.15);
+}
+
 .login button {
-    width:30%;
-    height:50px;
-    margin:0 35%;
-    margin-bottom:30px;
-    border:none;
-    border-radius: 20px;
+    width: 100%; /* Đổi nút bấm rộng toàn khung cho chuyên nghiệp */
+    height: 45px;
+    margin: 10px 0 20px 0;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent); /* Dùng màu cam thương hiệu */
+    color: var(--white);
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
 
+.login button:hover {
+    background: var(--accent-dark); /* Đổi màu khi hover */
 }
-.header {
-    height: 100px;
-    background-color: red;
-    position:relative;
-    
+.hidden {
+    display: none !important;
 }
-.header h1{
+
+/* Kiểu dáng cho phần chuyển đổi giữa Đăng nhập và Đăng ký */
+.auth-switch {
     text-align: center;
-}
-#dangnhap{
-    position:absolute;
-    bottom:10px;
-    right:10px;
-
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: var(--muted);
 }
 
-#HienThiND{
-    position:absolute;
-    bottom:10px;
-    right:10px;
+.auth-switch a {
+    color: var(--accent);
+    font-weight: bold;
+    text-decoration: none;
 }
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
 .main{
     display:flex;
     width:100%;
@@ -77,9 +110,10 @@
     width:80%;
 }
 
+
 /*Chỉnh sửa 23/10/2026*/
 /* ==========================================================
-   1. CSS CHO TRANG GIỎ HÀNG (CART.HTML)
+   1. CSS CHO TRANG GIỎ HÀNG 
    ========================================================== */
 
 /* Thiết lập bố cục dạng lưới hoặc flex cho thẻ chứa .content trong trang giỏ hàng */
@@ -203,7 +237,7 @@
 
 
 /* ==========================================================
-   2. CSS CHO TRANG LỊCH SỬ MUA HÀNG (ORDER-HISTORY_2.HTML)
+   2. CSS CHO TRANG LỊCH SỬ MUA HÀNG
    ========================================================== */
 
 /* Định dạng khung chứa toàn bộ danh sách lịch sử đơn hàng */
@@ -288,7 +322,16 @@ body {
 }
 
 /* Nút đăng nhập / Thông tin người dùng ở Header */
+.header-dangnhap-dangky{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
 #dangnhap {
+  position: static;  
   background: var(--accent);
   color: var(--white);
   border: none;
@@ -299,6 +342,19 @@ body {
 }
 #dangnhap:hover {
   background: var(--accent-dark);
+}
+#dangky{
+    position: static;
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+#dangky:hover{
+    background: var(--accent-dark);
 }
 
 #HienThiND {
@@ -381,4 +437,65 @@ body {
     flex-wrap: wrap;
     align-items: center;
   }
+}
+
+/*Chỉnh sửa 23/10/2026*/
+/* ==========================================================
+   CSS BỔ SUNG CHO TRANG DANH SÁCH SẢN PHẨM
+   ========================================================== */
+/* Hiệu ứng hover cho thẻ sản phẩm */
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(20, 24, 31, 0.1);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================
+   CSS CHO TRANG THÔNG TIN CÁ NHÂN
+   ========================================================== */
+
+.user-display-header {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    align-items: center;
+    gap: 1rem;
+    color: var(--white);
+}
+
+.profile-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    max-width: 600px;
+}
+
+.profile-card .form-infomation {
+    margin-bottom: 15px;
+}
+
+.profile-email-input {
+    background: #f5f6f8;
+    color: var(--muted);
+}
+
+.profile-textarea {
+    resize: vertical;
+}
+
+.profile-btn {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.profile-btn:hover {
+    background: var(--accent-dark);
 }

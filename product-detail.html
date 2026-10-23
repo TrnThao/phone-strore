@@ -8,6 +8,43 @@
 </head>
 <body>
   <!-- TODO: Chi tiết sản phẩm theo ?id=xxx: hình, cấu hình, nút thêm vào giỏ -->
+  <div class="wrapper">
+    <!-- Header đồng bộ -->
+    <div class="header">
+      <h1>Cửa hàng điện thoại di động</h1>
+      <div class="header-dangnhap-dangky">
+        <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+        <button id="dangky" type="button" onclick="location.href='login.html?mode=register'">Đăng ký</button>
+      </div>
+      <div id="HienThiND" style="display: none;">
+        <span>Chào <strong id="HienThiTen"></strong>!</span>
+        <button id="DangXuat" type="button">Đăng xuất</button>
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main">
+      <div class="Left_Menu">
+        <a href="index.html">🏠 Trang chủ</a>
+        <a href="products.html">📱 Danh sách sản phẩm</a>
+        <a href="cart.html">🛒 Giỏ hàng</a>
+        <a href="order-history.html">📦 Lịch sử đơn hàng</a>
+        <a href="profile.html" class="active">👤 Thông tin cá nhân</a>
+      </div>
+
+      <div class="Content">
+        <!-- Vùng hiển thị chi tiết sản phẩm -->
+        <div id="product-detail-container" style="background:#fff; border:1px solid var(--line); border-radius:8px; padding:25px;">
+          <p class="muted" style="text-align:center; padding: 40px;">Đang tải thông tin sản phẩm...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+    </div>
+  </div>
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>

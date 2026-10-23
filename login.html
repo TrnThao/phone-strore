@@ -7,19 +7,46 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <script src="assets/js/main.js"></script>
   <div class="container">
-    <form class="login">
+    <!-- Form Đăng nhập -->
+    <form class="login" id="form-login">
       <h1>Đăng nhập</h1>
       <div class="login-form">
-        <input type="text" id="username" name="username" placeholder="Tên đăng nhập" required>
+        <input type="text" id="username" name="username" placeholder="Tên đăng nhập hoặc SĐT" required>
       </div>
       <div class="login-form">
         <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
       </div>
       <button type="submit">Đăng nhập</button>
+      <div class="auth-switch">
+        <span>Chưa có tài khoản? </span>
+        <a href="#" id="link-to-register">Đăng ký ngay</a>
+      </div>
+    </form>
+
+    <!-- Form Đăng ký -->
+    <form class="login hidden" id="form-register">
+      <h1>Đăng ký tài khoản</h1>
+      <div class="login-form">
+        <input type="text" id="reg-name" placeholder="Họ và tên" required>
+      </div>
+      <div class="login-form">
+        <input type="email" id="reg-email" placeholder="Email" required>
+      </div>
+      <div class="login-form">
+        <input type="tel" id="reg-phone" placeholder="Số điện thoại" required>
+      </div>
+      <div class="login-form">
+        <input type="password" id="reg-password" placeholder="Mật khẩu" required>
+      </div>
+      <button type="submit">Đăng ký</button>
+      <div class="auth-switch">
+        <span>Đã có tài khoản? </span>
+        <a href="#" id="link-to-login">Đăng nhập ngay</a>
+      </div>
     </form>
   </div>
+  <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
 </body>
 </html>
