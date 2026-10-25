@@ -1,52 +1,38 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đăng nhập / Đăng ký</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <title>Đăng nhập / Đăng ký</title>
+    <link href="assets/css/auth.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="container">
-    <!-- Form Đăng nhập -->
-    <form class="login" id="form-login">
-      <h1>Đăng nhập</h1>
-      <div class="login-form">
-        <input type="text" id="username" name="username" placeholder="Tên đăng nhập hoặc SĐT" required>
-      </div>
-      <div class="login-form">
-        <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
-      </div>
-      <button type="submit">Đăng nhập</button>
-      <div class="auth-switch">
-        <span>Chưa có tài khoản? </span>
-        <a href="#" id="link-to-register">Đăng ký ngay</a>
-      </div>
-    </form>
-
-    <!-- Form Đăng ký -->
-    <form class="login hidden" id="form-register">
-      <h1>Đăng ký tài khoản</h1>
-      <div class="login-form">
-        <input type="text" id="reg-name" placeholder="Họ và tên" required>
-      </div>
-      <div class="login-form">
-        <input type="email" id="reg-email" placeholder="Email" required>
-      </div>
-      <div class="login-form">
-        <input type="tel" id="reg-phone" placeholder="Số điện thoại" required>
-      </div>
-      <div class="login-form">
-        <input type="password" id="reg-password" placeholder="Mật khẩu" required>
-      </div>
-      <button type="submit">Đăng ký</button>
-      <div class="auth-switch">
-        <span>Đã có tài khoản? </span>
-        <a href="#" id="link-to-login">Đăng nhập ngay</a>
-      </div>
-    </form>
-  </div>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/auth.js"></script>
+    <main>
+        <a href="index.html">← Trang chủ</a>
+        <h1 id="title">Đăng nhập</h1>
+        <form id="auth">
+            <div hidden="" id="extra">
+                <label>Họ và tên
+                    <input name="name"/>
+                </label>
+                <label>Số điện thoại
+                    <input inputmode="tel" name="phone" pattern="[0-9]{9,11}"/>
+                </label>
+            </div>
+            <label>Email
+                <input name="email" required="" type="email"/>
+            </label>
+            <label>Mật khẩu
+                <input minlength="6" name="password" required="" type="password"/>
+            </label>
+            <button id="submit">Đăng nhập</button>
+        </form>
+        <p class="error" id="msg"></p>
+        <p id="switch"></p>
+        <p><small>Chỉ dành cho mô phỏng front-end. Không sử dụng mật khẩu thật.</small>
+        </p>
+    </main>
+    <script defer="" src="assets/js/login.js"></script>
 </body>
 </html>
+

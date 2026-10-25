@@ -1,52 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trang chủ</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+    <title>Phone Store</title><link href="assets/css/home.css" rel="stylesheet"/>
 </head>
 <body>
-  <div>
-    <div class="header">
-      <h1>Chào mừng đến với cửa hàng điện thoại</h1>
-      <div class="header-dangnhap-dangky">
-        <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
-        <button id="dangky" type="button" onclick="location.href='login.html?mode=register'">Đăng ký</button>
-      </div>
-      <div id="HienThiND" style="display: none;">
-        <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
-        <button id="DangXuat" type="click">Đăng xuất</button>
-      </div>
-    </div>
-    <div class="main">
-      <div class="Left_Menu">
-        <a href="index.html" class="active">🏠 Trang chủ</a>
-        <a href="products.html">📱 Danh sách sản phẩm</a>
-        <a href="cart.html">🛒 Giỏ hàng</a>
-        <a href="order-history.html">📦 Lịch sử đơn hàng</a>
-        <a href="profile.html" class="active">👤 Thông tin cá nhân</a>
-      </div>
-      <div class="Content">
-        <h2>Chào mừng đến với hệ thống mua sắm điện thoại</h2>
-        <p class="muted">Vui lòng chọn danh mục sản phẩm bên trái hoặc sử dụng menu để bắt đầu mua sắm.</p>
-      </div>
-    </div>
-    <!--Footer-->
-    <div class="footer">
-      <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
-    </div>
-  </div>
-  <script src="assets/js/auth.js"></script>
-  <script>
-    // Ẩn nút đăng ký khi người dùng đã đăng nhập
-    document.addEventListener("DOMContentLoaded", function() {
-      const userDangNhap = sessionStorage.getItem('currentUser');
-      const nutDangKy = document.getElementById('dangky');
-      if (userDangNhap && nutDangKy) {
-        nutDangKy.style.display = 'none';
-      }
-    });
-  </script>
+    <header>📱 PHONE STORE</header>
+    <main>
+        <h1>Khám phá điện thoại phù hợp với bạn</h1>
+        <p>Trang chủ mô phỏng dành cho đồ án quản lý cửa hàng điện thoại. Khám phá sản phẩm, đặt hàng, theo dõi đơn hàng và quản lý tài khoản.</p>
+        <a href="products.html?view=products">Xem sản phẩm</a>
+        <a href="login.html">Đăng nhập</a>
+        <a href="login.html?mode=register">Đăng ký</a>
+    </main>
 </body>
 </html>
+
