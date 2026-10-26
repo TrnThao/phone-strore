@@ -360,7 +360,7 @@ function formatCurrency(num) {
 // Lấy giỏ hàng từ localStorage
 function getCart() {
   return JSON.parse(localStorage.getItem("userCart") || "[]");
-}
+} 
 
 // Lưu giỏ hàng vào localStorage
 function saveCart(cart) {

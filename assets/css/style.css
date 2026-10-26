@@ -53,6 +53,7 @@
 }
 
 .header {
+
     height: 150px;
     background: red;
     position: relative;
@@ -102,6 +103,8 @@
     margin: 10px;
     box-sizing: border-box;
     text-align: center;
+    padding:15px;
+    position: relative;
 }
 
 .locsp {
@@ -117,7 +120,7 @@
     border-radius: 10px;
     background-color: darkgrey;
     padding: 15px;
-    margin: 20px;
+    margin: 05px;
     margin-top: 0px;
 }
 
@@ -135,6 +138,24 @@
 .pic {
     width: 150px;
     height:150px;
+    transition: 0.3s;
+}
+
+
+.product-card h2 {
+    text-align: left;
+}
+
+.product-card h3 {
+    color: red;
+    position: absolute;
+    bottom: 20px;
+}
+
+.pic:hover {
+    transform: scale(1.1,1.1);
+    opacity: 1;
+    box-shadow: 0 0 6px gray;
 }
 
 @media only screen and (max-width: 700px) {

@@ -12,10 +12,10 @@
   <!-- TODO: Danh sách theo loại (có phân trang) + tìm cơ bản (tên) + tìm nâng cao (tên + loại + khoảng giá), kết quả có phân trang -->
   <div>
     <div id="site-header"></div>
-    <div class="khunglocsp">
+    <form action name="tksp" class="khunglocsp">
       <label class="locsp">
         Ten san pham
-        <input id="fQ" type="text" placeholder="VD: Iphone 15">
+        <input id="fQ" name="tktsp" type="text" placeholder="VD: Iphone 15">
       </label>
       <label class="locsp">
         Hang
@@ -24,11 +24,11 @@
 
       <div class="">Khoảng giá (₫)
         <div class="locsp" style="margin:0">
-          <input id="" type="number" min="0" step="100000" placeholder="Từ" aria-label="Giá từ">
-          <input id="" type="number" min="0" step="100000" placeholder="Đến" aria-label="Giá đến">
+          <input id="priceFrom" type="number" min="0" step="100000" placeholder="Từ" aria-label="Giá từ">
+          <input id="priceTo" type="number" min="0" step="100000" placeholder="Đến" aria-label="Giá đến">
         </div>
       </div>
-      <button onclick="search()">Tim kiem</button>
+      <button type="button" onclick="loc()">Tim kiem</button>
       <button class="" type="submit">Xoa bo loc</button>
     </div>
     <div>
@@ -77,7 +77,7 @@
           <div class="productList" data-product-id="SP07"></div>
         </div>
       </div>
-    </div>
+    </form>
     <div class="footer">
       <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
     </div>
