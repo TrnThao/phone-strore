@@ -24,65 +24,32 @@
 
       <div class="">Khoảng giá (₫)
         <div class="locsp" style="margin:0">
-          <input id="priceFrom" type="number" min="0" step="100000" placeholder="Từ" aria-label="Giá từ">
-          <input id="priceTo" type="number" min="0" step="100000" placeholder="Đến" aria-label="Giá đến">
+          <input class="input" id="price-min" min="0" placeholder="Giá từ (₫)" type="number"/>
+          <input class="input" id="price-max" min="0" placeholder="Giá đến (₫)" type="number"/>
         </div>
       </div>
       <button type="button" onclick="loc()">Tim kiem</button>
       <button class="" type="submit">Xoa bo loc</button>
     </div>
-    <div>
-      <div class="left_menu">
-        <div>Trang chu</div>
-      </div>
-      <div class="content">
-        <div class="sanpham">
-          <img src="assets/images/ip15prmm.png"
-            class="pic">
-          <div class="productList" data-product-id="SP01"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/ip15.png"
-            class="pic">
-
-          <div class="productList" data-product-id="SP02"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/ip13.png"
-            class="pic">
-
-          <div class="productList" data-product-id="SP03"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/s24ultra.png"
-            class="pic">
-
-          <div class="productList" data-product-id="SP04"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/zfold5.jpg"
-            class="pic">
-
-          <div class="productList" data-product-id="SP05"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/a55.png"
-            class="pic">
-
-          <div class="productList" data-product-id="SP06"></div>
-        </div>
-        <div class="sanpham">
-          <img src="assets/images/xom14.png"
-          class="pic">
-          <div class="productList" data-product-id="SP07"></div>
-        </div>
-      </div>
-    </form>
-    <div class="footer">
-      <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+    <div class="layout">
+      <nav aria-label="Menu khách hàng" class="side">
+          <a data-link="products" href="?view=products"> Danh sách sản phẩm</a>
+          <a data-link="cart" href="?view=cart"> Giỏ hàng</a>
+          <a data-link="orders" href="?view=orders"> Lịch sử mua hàng</a>
+          <a data-link="profile" href="?view=profile"> Hồ sơ cá nhân</a>
+      </nav>
     </div>
-  </div>
+    <div>
+      <div class="content" id="productContainer"></div>
+    </div>
+    </form>
 
+
+
+    
+  <div class="footer">
+    <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+  </div>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/product.js"></script>
