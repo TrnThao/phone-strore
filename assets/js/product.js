@@ -2,7 +2,6 @@
 const categoryFilter = document.getElementById("categoryFilter");
 const categories = JSON.parse(localStorage.getItem("categories") || "[]")
 
-
 if (categoryFilter) {
   const placeholder = document.createElement("option");
   placeholder.value = "";
@@ -19,11 +18,8 @@ if (categoryFilter) {
     });
 }
 
-
-
 const products = JSON.parse(localStorage.getItem("products") || "[]");
 const imports = JSON.parse(localStorage.getItem("imports") || "[]").filter(importRecord => importRecord.status === "done");
-
 
 const productContainer = document.getElementById("productContainer");
 
@@ -51,7 +47,6 @@ if (productContainer) {
     });
 }
 
-
 function getProductPrice(product) {
   const category = categories.find(item => item.id === product.catId);
   const importItem = imports
@@ -64,23 +59,17 @@ function getProductPrice(product) {
   return importPrice * (1 + profitRate / 100);
 }
 
-
-
 document.querySelectorAll(".productList").forEach(productList => {
   const selectedId = productList.dataset.productId;
   const product = products.find(item => item.id === selectedId);
 
   if (!product) return;
 
-
   const card = document.createElement("form");
   card.className = "product-card";
 
   const name = document.createElement("h2");
   name.textContent = product.name;
-
-
-
 
   const price = document.createElement("h3");
   price.textContent = formatCurrency(getProductPrice(product));
@@ -90,19 +79,10 @@ document.querySelectorAll(".productList").forEach(productList => {
   detailButton.textContent = "Chi tiết";
   detailButton.addEventListener("click", () => renderDetail(product.id));
 
-
   card.append(name, price, detailButton);
   productList.appendChild(card);
 
-
-
-
 });
-
-
-
-
-
 
 // 1. Hàm bỏ dấu tiếng Việt để tìm "dien thoai" vẫn ra "điện thoại"
 const norm = s => String(s || "")
@@ -145,9 +125,8 @@ function loc() {
 
 }
 
-
 // ========================================
-// 6. CHI TIẾT SẢN PHẨM
+// CHI TIẾT SẢN PHẨM
 // ========================================
 
 function renderDetail(id) {
@@ -170,8 +149,12 @@ function renderDetail(id) {
   addCart.className = "cart";
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
- // addCart.addEventListener("click", ());
-
+  addCart.addEventListener("click", () => {
+    if (window.Shop && Shop.addToCart(product.id)) {
+      addCart.textContent = "Đã thêm ✓";
+      setTimeout(() => { addCart.textContent = "Thêm vào giỏ hàng"; }, 1200);
+    }
+  });
 
   const title = document.createElement("h2");
   const image = document.createElement("img");
