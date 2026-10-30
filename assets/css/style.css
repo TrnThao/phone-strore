@@ -164,7 +164,7 @@
 } 
 
 #product-detail-dialog {
-    position: relative;
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 60%;
