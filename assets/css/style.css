@@ -1,33 +1,37 @@
-*{
-    padding:0;
-    margin:0;
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
 .container {
     width: 100%;
     border: 1px solid black;
-    background:rgb(235, 168, 168);
+    background:white;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
     height:100vh;
 }
-.login{
+.dangki-login{
     width: 500px;
     border: 1px solid black;
     background: white;
+    border-radius: 100px;
+    box-shadow: 10px 10px 50px 0px black;
+
 }
-.login h1{
+.dangki-login h1{
     text-align: center;
 }
-.login .login-form {
+.dangki-login .dangki-login-form {
     width:100%;
     height:50px;
     margin:30px 0;
     padding:0 20px;
 }
-.login-form input {
+.dangki-login-form input {
     width:100%;
     height:100%;
     padding: 0 10px;
@@ -36,7 +40,7 @@
     border: 1px solid black;
     border-radius: 20px;
 }
-.login button {
+.dangki-login button {
     width:30%;
     height:50px;
     margin:0 35%;
@@ -47,31 +51,240 @@
 }
 .header {
     height: 100px;
-    background-color: red;
+    background-color: rgb(195, 255, 0);
     position:relative;
     
 }
 .header h1{
     text-align: center;
 }
-#dangnhap{
-    position:absolute;
-    bottom:10px;
-    right:10px;
+#dangnhap {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 
 }
-#HienThiND{
-    position:absolute;
-    bottom:10px;
-    right:10px;
+
+#HienThiND {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
-.main{
+
+.main {
+    display: flex;
+    width: 100%;
+}
+
+.left_menu {
+    width: 25%;
+}
+
+.content {
+    width: 80%;
+    float: right;
+    border: solid 1px black;
+    box-sizing: border-box;
+    background-color: #faf8ff;
+    height: auto;
+}
+
+.sanpham {
+    float: left;
+    width: calc(33.3% - 20px);
+    height: 300px;
+    border: 2px solid red;
+    margin: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    padding:15px;
+    position: relative;
+    background-color: white;
+}
+
+.locsp {
+    border: 0px solid black;
+    background-color: f1ecfb;
+    border-radius: 10px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.khunglocsp {
+    border: 0px solid black;
+    border-radius: 10px;
+    background-color: darkgrey;
+    padding: 15px;
+    margin: 05px;
+    margin-top: 0px;
+}
+
+.footer {
+    clear: both;
     display:flex;
-    width:100%;
+    flex-direction: column;
+    background:rgb(235, 168, 168);
+    color: var(--muted);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--line);
 }
-.left_menu{
-    width:20%;
+.pic {
+    width: 150px;
+    height:150px;
+    transition: 0.3s;
 }
-.content{
-    width:80%;
+
+
+.product-card h2 {
+    text-align: left;
+}
+
+.product-card h3 {
+    color: red;
+    position: absolute;
+    bottom: 20px;
+}
+
+.product-card button {
+    position: absolute;
+    bottom: 7%;
+    right: 8%;
+    width: 30%;
+    height: 30%px;
+    background-color:#e6f0ff;
+    border-radius: 10px;
+} 
+
+#product-detail-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    background-color:antiquewhite;
+}
+
+
+#product-detail-dialog img {
+    width: 40%;
+    height: 80%;
+    float: left ;
+
+}
+
+#product-detail-dialog .close {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+
+}
+
+#product-detail-dialog .cart {
+    position: absolute;
+    margin-top: 40%;
+    margin-left: 42%;
+    width: 27%;
+    height: 8%;
+    border-radius: 10px;
+    background: #174F91;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+#product-detail-dialog h2 {
+    font-size: 30px;
+    color: #134e94;
+    position: absolute;
+    top: 10%;
+    margin-left: 42%;
+}
+
+#product-detail-dialog p:first-of-type {
+    margin-top: 13%;
+}
+
+#product-detail-dialog p {
+    font-size: 18px;
+    bottom: 20%;
+    margin-left: 42%;
+    text-align: left;
+    line-height: 1.1;
+    margin-top: 20px;
+    color:#333;
+
+}
+
+
+.pic:hover {
+    transform: scale(1.1,1.1);
+    opacity: 1;
+    box-shadow: 0 0 6px gray;
+}
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .sanpham {
+        width: calc(50% - 20px);
+    }
+
+    .side {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 430px) {
+    .sanpham {
+        width: calc(100% - 20px);
+    }
+
+}
+
+
+/*LeftMenu Products*/
+.layout{
+    margin:25px auto;
+    display:grid;
+    grid-template-columns:220px minmax(0,1fr);
+    gap:20px;
+}
+
+
+.side {
+    position: absolute;
+    width: 20%;
+    float: left;
+}
+
+.side a{
+    display:block;
+    padding:13px;
+    border-radius:9px;
+    margin:4px 0;
+    text-decoration: none;
+}
+.side a.active,.side a:hover{
+    background:#e6f0ff;
+    color:#134e94;
+    font-weight:bold;
+}
+.chitietgiohang img{
+    position:absolute;
+    left:0px;
+}
+.chitietgiohang .thong-tin{
+    position:absolute;
+    left:20%;
+}
+.chitietgiohang button{
+    position:absolute;
+    right:0;
 }

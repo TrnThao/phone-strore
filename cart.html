@@ -7,9 +7,20 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <!-- TODO: Tăng/giảm/xóa sản phẩm; chọn địa chỉ (tài khoản / nhập mới, có validate); thanh toán (mặc định tiền mặt); xác nhận đơn -> order-history.html -->
+  <div class="header">
+      <h1>Giỏ hàng</h1>
+      <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
+      <div id="HienThiND" style="display: none;">
+        <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
+        <button id="DangXuat" type="click">Đăng xuất</button>
+      </div>
+      <a href="/index.html">Quay lại</a>
+  </div>
+  <div class="danhsachgiohang"></div>
+
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
+  <script src="assets/js/shop.js"></script>
 </body>
 </html>

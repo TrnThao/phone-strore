@@ -17,7 +17,7 @@ const SEED_DATA = {
       code: "IP15PM",
       name: "iPhone 15 Pro Max 256GB",
       catId: "CAT01",
-      img: "",
+      img: "assets/images/ip15prmm.png",
       desc: "Chip Apple A17 Pro mạnh mẽ, màn hình OLED 6.7 inch Super Retina XDR, vỏ hợp kim Titan chuẩn hàng không.",
       customProfitRate: null,
       status: true
@@ -27,7 +27,7 @@ const SEED_DATA = {
       code: "IP15",
       name: "iPhone 15 128GB",
       catId: "CAT01",
-      img: "",
+      img: "assets/images/ip15.png",
       desc: "Màn hình Dynamic Island, camera chính 48MP sắc nét, chip A16 Bionic mượt mà, cổng kết nối Type-C.",
       customProfitRate: 14,
       status: true
@@ -37,7 +37,7 @@ const SEED_DATA = {
       code: "IP13",
       name: "iPhone 13 128GB",
       catId: "CAT01",
-      img: "",
+      img: "assets/images/ip13.png",
       desc: "Chip Apple A15 Bionic, thời lượng pin ấn tượng, camera kép chống rung cảm biến quang học hiện đại.",
       customProfitRate: null,
       status: true
@@ -47,7 +47,7 @@ const SEED_DATA = {
       code: "SS24U",
       name: "Samsung Galaxy S24 Ultra 5G",
       catId: "CAT02",
-      img: "",
+      img: "assets/images/s24ultra.png",
       desc: "Trang bị Galaxy AI đột phá, chip Snapdragon 8 Gen 3 for Galaxy, camera 200MP zoom 100x và bút S-Pen tiện ích.",
       customProfitRate: null,
       status: true
@@ -57,7 +57,7 @@ const SEED_DATA = {
       code: "SSZF5",
       name: "Samsung Galaxy Z Fold5 5G",
       catId: "CAT02",
-      img: "",
+      img: "assets/images/zfold5.jpg",
       desc: "Thiết kế màn hình gập không kẽ hở, đa nhiệm linh hoạt tối đa 3 ứng dụng, trang bị chuẩn kháng nước IPX8.",
       customProfitRate: 15,
       status: true
@@ -67,7 +67,7 @@ const SEED_DATA = {
       code: "SSA55",
       name: "Samsung Galaxy A55 5G",
       catId: "CAT02",
-      img: "",
+      img: "assets/images/a55.png",
       desc: "Khung viền kim loại sang trọng, màn hình Super AMOLED 120Hz, viên pin dung lượng lớn 5000 mAh bền bỉ.",
       customProfitRate: null,
       status: true
@@ -77,7 +77,7 @@ const SEED_DATA = {
       code: "MI14",
       name: "Xiaomi 14 5G 512GB",
       catId: "CAT03",
-      img: "",
+      img: "assets/images/xom14.png",
       desc: "Hệ thống ống kính Leica quang học thế hệ mới, vi xử lý Snapdragon 8 Gen 3, hỗ trợ sạc nhanh HyperCharge 90W.",
       customProfitRate: 12,
       status: true
@@ -87,7 +87,7 @@ const SEED_DATA = {
       code: "RN13P",
       name: "Xiaomi Redmi Note 13 Pro 4G",
       catId: "CAT03",
-      img: "",
+      img: "assets/images/xomrdn13.png",
       desc: "Cảm biến camera siêu nét 200MP, màn hình tràn viền AMOLED 120Hz mượt mà, công nghệ sạc nhanh Turbo 67W.",
       customProfitRate: null,
       status: true
@@ -97,7 +97,7 @@ const SEED_DATA = {
       code: "OPF11",
       name: "OPPO Reno11 Pro 5G",
       catId: "CAT04",
-      img: "",
+      img: "assets/images/opporeno11pr.png",
       desc: "Chuyên gia chụp ảnh chân dung chân thật, đường nét uốn cong 3D sang trọng, hỗ trợ sạc nhanh SuperVOOC 80W.",
       customProfitRate: null,
       status: true
@@ -107,7 +107,7 @@ const SEED_DATA = {
       code: "OPA79",
       name: "OPPO A79 5G",
       catId: "CAT04",
-      img: "",
+      img: "assets/images/oppa79.png",
       desc: "Thiết kế lông vũ phát sáng độc đáo, loa kép âm lượng siêu lớn 300%, pin khủng 5000 mAh tích hợp sạc 33W.",
       customProfitRate: null,
       status: true
@@ -117,7 +117,7 @@ const SEED_DATA = {
       code: "VVV30",
       name: "Vivo V30e 5G",
       catId: "CAT05",
-      img: "",
+      img: "assets/images/vvv30e.png",
       desc: "Vòng sáng Aura thế hệ mới tạo hiệu ứng chân dung studio, màn hình cong 3D 120Hz, thân máy siêu mỏng nhẹ.",
       customProfitRate: 10,
       status: true
@@ -137,8 +137,8 @@ const SEED_DATA = {
   // 3. KHÁCH HÀNG (Users)
   users: [
     {
-        name: "admin",
-        password: "123"
+      name: "admin",
+      password: "123"
 
     },
     {
@@ -336,6 +336,25 @@ function initDefaultData() {
   if (!localStorage.getItem("products")) {
     localStorage.setItem("products", JSON.stringify(SEED_DATA.products));
   }
+  const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+  const seedImages = Object.fromEntries(
+    SEED_DATA.products
+      .filter(product => product.img)
+      .map(product => [product.id, product.img])
+  );
+
+  let imagesUpdated = false;
+
+  savedProducts.forEach(product => {
+    if (seedImages[product.id] && product.img !== seedImages[product.id]) {
+      product.img = seedImages[product.id];
+      imagesUpdated = true;
+    }
+  });
+
+  if (imagesUpdated) {
+    localStorage.setItem("products", JSON.stringify(savedProducts));
+  }
   if (!localStorage.getItem("users")) {
     localStorage.setItem("users", JSON.stringify(SEED_DATA.users));
   }
@@ -392,7 +411,7 @@ function renderHeader() {
   const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
 
   headerContainer.innerHTML = `
-    <header class="main-header">
+    <header class="header">
       <div class="header-container">
         <a href="index.html" class="logo">📱 DiĐộng<span>Store</span></a>
         
