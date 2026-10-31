@@ -1,0 +1,223 @@
+/* shop.css - giao diện các hộp thoại: giỏ hàng, thanh toán, lịch sử mua hàng, hồ sơ, đăng nhập */
+
+/* ----- Khung hộp thoại (nằm giữa trang) ----- */
+#shop-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  width: 90%;
+  max-width: 700px;
+  box-sizing: border-box;
+  padding: 24px;
+  border: none;
+  border-radius: 12px;
+  background: white;
+  color: #222;
+}
+
+/* Nền tối phía sau hộp thoại */
+#shop-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#shop-dialog h2 {
+  margin: 0 0 16px;
+}
+
+#shop-dialog h3 {
+  margin: 0 0 12px;
+}
+
+#shop-dialog hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* ----- Nút đóng (X) ----- */
+#shop-dialog .x {
+  float: right;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: #eee;
+  cursor: pointer;
+}
+
+/* ----- Ô nhập ----- */
+#shop-dialog .field {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+#shop-dialog .field input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-weight: normal;
+}
+
+/* ----- Nút bấm ----- */
+/* Nút thường: màu xanh */
+#shop-dialog button:not(.x) {
+  padding: 10px 18px;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+/* Nút phụ: nền trắng */
+#shop-dialog button.secondary {
+  border-color: #ccc;
+  background: white;
+  color: #222;
+}
+
+/* Nút xóa, đăng xuất: viền đỏ */
+#shop-dialog button.danger {
+  border-color: #dc2626;
+  background: white;
+  color: #dc2626;
+}
+
+/* Các nút nằm cùng một hàng, canh phải */
+#shop-dialog .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* ----- Thông báo ----- */
+#shop-dialog .msg {
+  min-height: 1.2em;
+  margin: 0 0 10px;
+}
+
+#shop-dialog .msg.err {
+  color: #dc2626;
+}
+
+#shop-dialog .msg.ok {
+  color: #16a34a;
+}
+
+#shop-dialog .empty {
+  padding: 20px 0;
+  text-align: center;
+  color: #777;
+}
+
+/* ----- Giỏ hàng ----- */
+#shop-dialog .table-wrap {
+  overflow-x: auto;
+}
+
+#shop-dialog .cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#shop-dialog .cart-table th,
+#shop-dialog .cart-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+#shop-dialog .cart-table input {
+  width: 60px;
+  padding: 6px;
+  text-align: center;
+}
+
+#shop-dialog .cart-table button {
+  padding: 6px 12px;
+}
+
+#shop-dialog .total {
+  margin: 16px 0;
+  text-align: right;
+}
+
+/* ----- Thanh toán ----- */
+#shop-dialog .pay-title {
+  margin: 0 0 6px;
+  font-weight: bold;
+}
+
+#shop-dialog .pay-options label {
+  display: block;
+  margin-bottom: 8px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Màn hình "Đặt hàng thành công" */
+#shop-dialog .center {
+  text-align: center;
+}
+
+#shop-dialog .center .actions {
+  justify-content: center;
+}
+
+#shop-dialog .success-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: #16a34a;
+  color: white;
+  font-size: 30px;
+  line-height: 56px;
+}
+
+/* ----- Lịch sử mua hàng ----- */
+/* Viền trái đổi màu theo trạng thái đơn */
+#shop-dialog .order {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-left: 4px solid gray;
+  border-radius: 8px;
+}
+
+#shop-dialog .order[data-status="new"] {
+  border-left-color: #2563eb;
+}
+
+#shop-dialog .order[data-status="processed"] {
+  border-left-color: orange;
+}
+
+#shop-dialog .order[data-status="delivered"] {
+  border-left-color: #16a34a;
+}
+
+#shop-dialog .order[data-status="cancelled"] {
+  border-left-color: #dc2626;
+}
+
+#shop-dialog .order summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#shop-dialog .order p {
+  margin: 6px 0;
+}
