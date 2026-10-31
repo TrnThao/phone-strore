@@ -91,55 +91,49 @@ document.querySelectorAll(".productList").forEach(productList => {
   detailButton.textContent = "Chi tiết";
   detailButton.addEventListener("click", () => renderDetail(product.id));
 
- productList.appendChild(card);
+  productList.appendChild(card);
   card.append(name, price, detailButton);
 });
 
 
-  const maxsp = 9;
-  const cacSanPham = Array.from(
-    document.querySelectorAll("#productContainer .sanpham")
-  );
-  const sotrang = Math.ceil(products.length / 9);
-  const pagination = document.getElementById("pagination");
 
 
-  function hienTrang(trangIndex) {
-  cacSanPham.forEach((sanPham, index) => {
-     sanPham.hidden = 
-     index < trangIndex * maxsp ||
-     index >= (trangIndex + 1) * maxsp;
+const maxsp = 9;
+const cacSanPham = Array.from(
+  document.querySelectorAll("#productContainer .sanpham")
+);
+let sanPhamPhuHop = [...cacSanPham];
+let trangHienTai = 0;
+const pagination = document.getElementById("pagination");
+
+
+function hienTrang() {
+
+  const batDau = trangHienTai * maxsp;
+  const sanPhamTrangNay = sanPhamPhuHop.slice(batDau, batDau + maxsp);
+  cacSanPham.forEach(sanPham => {
+    sanPham.hidden = !sanPhamTrangNay.includes(sanPham);
   });
-  }
+  pagination.innerHTML = "";
+  const sotrang = Math.ceil(sanPhamPhuHop.length / 9);
 
-  const cacTrang = [] ;
-  
-  for (let i = 0; i < sotrang; i++){
+
+for (let i = 0; i < sotrang; i++) {
   const nutTrang = document.createElement("button");
   nutTrang.type = "button";
-  nutTrang.textContent = i + 1; 
-  cacTrang[i] = nutTrang;
-  }
-  cacTrang[0].classList.add("active");
-  cacTrang.forEach((nutTrang,i)=> { pagination.appendChild(nutTrang);
-  nutTrang.addEventListener("click", () =>{ 
-    hienTrang(i);
-    cacTrang.forEach(nut => 
-      nut.classList.remove("active")
-    );
-    cacTrang[i].classList.add("active");
+  nutTrang.textContent = i + 1;
+
+  if (i === trangHienTai) nutTrang.classList.add("active");
+
+
+  nutTrang.addEventListener("click", () => {
+    trangHienTai = i;
+    hienTrang();
   });
-
-});
-
-
-  hienTrang(0);
-
-
-
-
-
-
+  pagination.appendChild(nutTrang);
+}
+}
+hienTrang();
 // 1. Hàm bỏ dấu tiếng Việt để tìm "dien thoai" vẫn ra "điện thoại"
 const norm = s => String(s || "")
   .normalize("NFD")
@@ -154,13 +148,16 @@ function loc() {
 
   const priceMin = (document.getElementById("price-min").value);
   const priceMax = (document.getElementById("price-max").value);
+  const min = priceMin === "" ? null : Number(priceMin);
+  const max = priceMax === "" ? null : Number(priceMax);
 
+  sanPhamPhuHop = cacSanPham.filter(card => {
+    const productList = card.querySelector(".productList");
 
-  document.querySelectorAll(".productList").forEach(productList => {
     const product = products.find(
       item => item.id === productList.dataset.productId
     );
-    const card = productList.closest(".sanpham");
+    card = productList.closest(".sanpham");
 
     if (!product || !card) return;
 
@@ -168,18 +165,20 @@ function loc() {
     const matchCategory =
       !selectedCategory || product.catId === selectedCategory;
 
-    const min = priceMin === "" ? null : Number(priceMin);
-    const max = priceMax === "" ? null : Number(priceMax);
+
+
     const price = getProductPrice(product);
     const matchPrice =
       (min === null || price >= min) &&
       (max === null || price <= max);
-    card.hidden = !(matchName && matchCategory && matchPrice);
 
+      return matchName && matchCategory && matchPrice;
 
   });
-
+  trangHienTai = 0;
+  hienTrang();
 }
+hienTrang();
 
 
 // ========================================
@@ -206,7 +205,7 @@ function renderDetail(id) {
   addCart.className = "cart";
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
-  // addCart.addEventListener("click", ());
+  //addCart.addEventListener("click", () => window.Shop.addToCart(product.id));
 
 
   const btnNext = document.createElement("button");
@@ -262,3 +261,8 @@ function renderDetail(id) {
   dialog.showModal();
 
 }
+
+
+
+
+
