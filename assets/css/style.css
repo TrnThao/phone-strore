@@ -8,59 +8,54 @@
 .container {
     width: 100%;
     border: 1px solid black;
-    background: rgb(235, 168, 168);
+    background:white;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items:center;
+    height:100vh;
 }
-
-.login {
+.dangki-login{
     width: 500px;
     border: 1px solid black;
     background: white;
-}
+    border-radius: 100px;
+    box-shadow: 10px 10px 50px 0px black;
 
-.login h1 {
+}
+.dangki-login h1{
     text-align: center;
 }
-
-.login .login-form {
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
-    padding: 0 20px;
+.dangki-login .dangki-login-form {
+    width:100%;
+    height:50px;
+    margin:30px 0;
+    padding:0 20px;
 }
-
-.login-form input {
-    width: 100%;
-    height: 100%;
+.dangki-login-form input {
+    width:100%;
+    height:100%;
     padding: 0 10px;
-    outline: none;
-    border: none;
+    outline:none;
+    border:none;
     border: 1px solid black;
     border-radius: 20px;
 }
-
-.login button {
-    width: 30%;
-    height: 50px;
-    margin: 0 35%;
-    margin-bottom: 30px;
-    border: none;
+.dangki-login button {
+    width:30%;
+    height:50px;
+    margin:0 35%;
+    margin-bottom:30px;
+    border:none;
     border-radius: 20px;
 
 }
-
 .header {
-
-    height: 150px;
-    background: red;
-    position: relative;
-
+    height: 100px;
+    background-color: rgb(195, 255, 0);
+    position:relative;
+    
 }
-
-.header h1 {
+.header h1{
     text-align: center;
 }
 
@@ -172,6 +167,7 @@
     transform: translate(-50%, -50%);
     margin: 0;
     background-color:antiquewhite;
+    border-radius: 15px;
 }
 
 
@@ -189,9 +185,49 @@
 
 }
 
+
+
+
+#product-detail-dialog .slide-prev,
+#product-detail-dialog .slide-next {
+    position: absolute;
+    top: 40%;
+    z-index: 1;
+    cursor: pointer;
+    width: 3%;
+    height: 8%;
+    border-radius: 5px;
+    background-color:gray;
+    opacity: 0.2;
+}
+
+#product-detail-dialog .slide-prev:hover{
+    transition: 0.3s;
+    opacity: 1.5;
+}
+#product-detail-dialog .slide-next:hover {
+    transition: 0.3s;
+    opacity: 1.5;
+}
+
+
+#product-detail-dialog .slide-prev {
+    left: 1%;
+}
+
+#product-detail-dialog .slide-next {
+    left: 36%;
+}
+
+
+
+
+
+
+
 #product-detail-dialog .cart {
     position: absolute;
-    margin-top: 40%;
+    margin-top: 38%;
     margin-left: 42%;
     width: 27%;
     height: 8%;
@@ -220,7 +256,7 @@
     margin-left: 42%;
     text-align: left;
     line-height: 1.1;
-    margin-top: 20px;
+    margin-top: 3%;
     color:#333;
 
 }
@@ -233,6 +269,19 @@
 }
 
 
+.pagination {
+    position: static;
+    clear: both;
+    text-align: center;
+    padding: 10px 0;
+
+}
+
+
+.pagination button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
 
 
 
@@ -261,6 +310,7 @@
     display:grid;
     grid-template-columns:220px minmax(0,1fr);
     gap:20px;
+
 }
 
 
@@ -281,4 +331,9 @@
     background:#e6f0ff;
     color:#134e94;
     font-weight:bold;
+}
+.cate-container{
+    display:flex;
+
+    
 }
