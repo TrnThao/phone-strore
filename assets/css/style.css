@@ -13,6 +13,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    position: relative;
 }
 
 .login {
@@ -93,7 +94,9 @@
     box-sizing: border-box;
     background-color: #faf8ff;
     height: auto;
+    display: flow-root;
 }
+
 
 .sanpham {
     float: left;
@@ -172,6 +175,7 @@
     transform: translate(-50%, -50%);
     margin: 0;
     background-color:antiquewhite;
+    border-radius: 15px;
 }
 
 
@@ -189,9 +193,49 @@
 
 }
 
+
+
+
+#product-detail-dialog .slide-prev,
+#product-detail-dialog .slide-next {
+    position: absolute;
+    top: 40%;
+    z-index: 1;
+    cursor: pointer;
+    width: 3%;
+    height: 8%;
+    border-radius: 5px;
+    background-color:gray;
+    opacity: 0.2;
+}
+
+#product-detail-dialog .slide-prev:hover{
+    transition: 0.3s;
+    opacity: 1.5;
+}
+#product-detail-dialog .slide-next:hover {
+    transition: 0.3s;
+    opacity: 1.5;
+}
+
+
+#product-detail-dialog .slide-prev {
+    left: 1%;
+}
+
+#product-detail-dialog .slide-next {
+    left: 36%;
+}
+
+
+
+
+
+
+
 #product-detail-dialog .cart {
     position: absolute;
-    margin-top: 40%;
+    margin-top: 38%;
     margin-left: 42%;
     width: 27%;
     height: 8%;
@@ -220,7 +264,7 @@
     margin-left: 42%;
     text-align: left;
     line-height: 1.1;
-    margin-top: 20px;
+    margin-top: 3%;
     color:#333;
 
 }
@@ -233,6 +277,19 @@
 }
 
 
+.pagination {
+    position: static;
+    clear: both;
+    text-align: center;
+    padding: 10px 0;
+
+}
+
+
+.pagination button.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
 
 
 
@@ -261,6 +318,7 @@
     display:grid;
     grid-template-columns:220px minmax(0,1fr);
     gap:20px;
+
 }
 
 
