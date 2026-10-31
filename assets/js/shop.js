@@ -119,7 +119,7 @@
     if (!rows.length) return openDialog("Giỏ hàng", h("p", { textContent: "Giỏ hàng đang trống." }));
 
     const total = rows.reduce((s, i) => s + i.price * i.qty, 0);
-    const table = h("table", { style: "width:100%;border-collapse:collapse" },
+    const table = h("table", { class:"bang-gio-hang" },
       h("tr", {}, ...["Sản phẩm", "Đơn giá", "Số lượng", "Thành tiền", ""].map(t => h("th", { textContent: t, style: "text-align:left" }))),
       ...rows.map(i => h("tr", {},
         h("td", { textContent: i.product.name }),
@@ -393,3 +393,57 @@
 
   window.Shop = { addToCart, openCart, openOrders, openProfile, openLogin, logout, currentUser };
 })();
+
+
+// //danh sach gio hang
+// const gioHangContainer = document.querySelector(".danhsachgiohang");
+
+// // Viết thành 1 hàm để sau này có thể gọi lại dễ dàng (khi xóa/sửa số lượng)
+// function hienThiGioHang() {
+//   // 1. Lấy dữ liệu từ localStorage
+//   const gioHang = JSON.parse(localStorage.getItem("cart")) || [];
+
+//   // XÓA SẠCH nội dung cũ trước khi in cái mới (nếu không nó sẽ bị in trùng lặp)
+//   gioHangContainer.innerHTML = "";
+
+//   // 2. Nếu giỏ hàng trống thì báo cho khách biết
+//   if (gioHang.length === 0) {
+//     gioHangContainer.innerHTML = "<p>Giỏ hàng của bạn đang trống! Hãy đi mua sắm nhé.</p>";
+//     return; // Dừng hàm luôn, không chạy vòng lặp bên dưới nữa
+//   }
+
+//   // 3. Vòng lặp in ra từng sản phẩm
+//   gioHang.forEach((sanPham, viTri) => {
+//     // Tạo 1 thẻ div bọc bên ngoài mỗi sản phẩm
+//     const theSanPham = document.createElement("div");
+//     theSanPham.className = "item-gio-hang"; // Đặt class để lát CSS cho đẹp
+    
+//     // Dùng innerHTML để chèn nhanh cấu trúc bên trong (đỡ phải createElement từng cái)
+//     // Tính luôn tổng tiền của món đó = Giá x Số lượng
+//     const tongTienMon = sanPham.price * sanPham.quantity;
+    
+//     theSanPham.innerHTML = `
+//     <div class="chitietgiohang">
+//       <img src="${sanPham.img}" alt="${sanPham.name}" width="80">
+//       <div class="thong-tin">
+//         <h3>${sanPham.name}</h3>
+//         <p>Đơn giá: ${sanPham.price.toLocaleString('vi-VN')} đ</p>
+//         <p>Số lượng: ${sanPham.quantity}</p>
+//         <p style="color: red; font-weight: bold;">Thành tiền: ${tongTienMon.toLocaleString('vi-VN')} đ</p>
+//       </div>
+//       <button class="xoa-mon" data-vitri="${viTri}">Xóa</button>
+//     </div>
+//     `;
+
+//     // Nhét thẻ div vừa tạo vào giao diện chính
+//     gioHangContainer.appendChild(theSanPham);
+//   });
+
+//   // Gọi tiếp hàm tính tổng tiền toàn bộ giỏ hàng (nếu bạn muốn)
+//   // tinhTongTien(gioHang);
+// }
+
+// // Chạy hàm hiển thị ngay khi trang web tải xong
+// if (gioHangContainer) {
+//   hienThiGioHang();
+// }

@@ -8,62 +8,56 @@
 .container {
     width: 100%;
     border: 1px solid black;
-    background: rgb(235, 168, 168);
+    background:white;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items:center;
+    height:100vh;
 }
-
-.login {
+.dangki-login{
     width: 500px;
     border: 1px solid black;
     background: white;
-}
+    border-radius: 100px;
+    box-shadow: 10px 10px 50px 0px black;
 
-.login h1 {
+}
+.dangki-login h1{
     text-align: center;
 }
-
-.login .login-form {
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
-    padding: 0 20px;
+.dangki-login .dangki-login-form {
+    width:100%;
+    height:50px;
+    margin:30px 0;
+    padding:0 20px;
 }
-
-.login-form input {
-    width: 100%;
-    height: 100%;
+.dangki-login-form input {
+    width:100%;
+    height:100%;
     padding: 0 10px;
-    outline: none;
-    border: none;
+    outline:none;
+    border:none;
     border: 1px solid black;
     border-radius: 20px;
 }
-
-.login button {
-    width: 30%;
-    height: 50px;
-    margin: 0 35%;
-    margin-bottom: 30px;
-    border: none;
+.dangki-login button {
+    width:30%;
+    height:50px;
+    margin:0 35%;
+    margin-bottom:30px;
+    border:none;
     border-radius: 20px;
 
 }
-
 .header {
-
-    height: 150px;
-    background: red;
-    position: relative;
-
+    height: 100px;
+    background-color: rgb(195, 255, 0);
+    position:relative;
+    
 }
-
-.header h1 {
+.header h1{
     text-align: center;
 }
-
 #dangnhap {
     position: absolute;
     bottom: 10px;
@@ -281,4 +275,16 @@
     background:#e6f0ff;
     color:#134e94;
     font-weight:bold;
+}
+.chitietgiohang img{
+    position:absolute;
+    left:0px;
+}
+.chitietgiohang .thong-tin{
+    position:absolute;
+    left:20%;
+}
+.chitietgiohang button{
+    position:absolute;
+    right:0;
 }
