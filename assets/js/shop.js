@@ -20,7 +20,6 @@
     const input = scope.querySelector(`[name="${k}"]`);
     if (input) input.value = v ?? "";
   });
-  // Gán chữ lần lượt cho các phần tử khớp selector
   const fillText = (scope, selector, texts) =>
     scope.querySelectorAll(selector).forEach((el, n) => el.textContent = texts[n]);
   const say = (scope, text, ok) => {
@@ -70,11 +69,10 @@
   }
   // Chưa đăng nhập -> chuyển sang trang đăng nhập có sẵn (login.html, do auth.js xử lý)
   function goLogin() {
-    document.getElementById("product-detail-dialog")?.close();
     alert("Vui lòng đăng nhập để tiếp tục.");
     location.href = "login.html";
   }
-  // Đăng nhập từ login.html chỉ có sessionStorage -> chép sang localStorage cho header
+
   if (sessionStorage.getItem(SESSION) && !localStorage.getItem(SESSION)) {
     localStorage.setItem(SESSION, sessionStorage.getItem(SESSION));
   }
@@ -304,9 +302,15 @@
   const views = { cart: openCart, orders: openOrders, profile: openProfile };
   const pages = { "cart.html": openCart, "order-history.html": openOrders, "profile.html": openProfile };
 
-  // Bắt click ở cấp document vì header được vẽ lại bằng renderHeader()
   document.addEventListener("click", e => {
-    if (e.target.closest("#btn-user-logout")) sessionStorage.removeItem(SESSION); // header chỉ xóa localStorage
+    if (e.target.closest("#DangXuat") || e.target.closest("#btn-user-logout")) {
+      sessionStorage.removeItem(SESSION);
+      localStorage.removeItem(SESSION);
+      alert("Bạn đã đăng xuất thành công!");
+      location.href = "index.html"; 
+      return; 
+    }
+
     const a = e.target.closest("a");
     const open = a && (views[a.dataset.link] || pages[a.getAttribute("href")]);
     if (open) { e.preventDefault(); open(); }
