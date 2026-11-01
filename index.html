@@ -1,27 +1,65 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trang chủ</title>
+  <title>Danh sách sản phẩm & Tìm kiếm</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/shop.css">
 </head>
+
 <body>
-  <div>
     <div class="header">
       <h1>Chào mừng đến với cửa hàng điện thoại</h1>
       <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
       <div id="HienThiND" style="display: none;">
         <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
-        <button id="DangXuat" type="click">Đăng xuất</button>
+        <button id="DangXuat" type="button">Đăng xuất</button>
       </div>
-    </div>
-    <div class="main">
-      <div class="Left_Menu">Left</div>
-      <div class="Content">Right</div>
-    </div>
-    <div class="footer">footer</div>
   </div>
+  <div>
+    <form action name="tksp" class="khunglocsp">
+      <label class="locsp">
+        Ten san pham
+        <input id="fQ" name="tktsp" type="text" placeholder="VD: Iphone 15">
+      </label>
+
+      <div class="">Khoảng giá (₫)
+        <div class="locsp" style="margin:0">
+          <input class="input" id="price-min" min="0" placeholder="Giá từ (₫)" type="number"/>
+          <input class="input" id="price-max" min="0" placeholder="Giá đến (₫)" type="number"/>
+        </div>
+      </div>
+      <button type="button" onclick="loc()">Tim kiem</button>
+      <button class="" type="submit">Xoa bo loc</button>
+    </form>
+    </div>
+    <div id="categoryFilter" class="cate-container"></div>
+    <div class="layout">
+      <nav aria-label="Menu khách hàng" class="side">
+          <a data-link="products" href="?view=products"> Danh sách sản phẩm</a>
+          <a data-link="cart" href="?view=cart"> Giỏ hàng</a>
+          <a data-link="orders" href="?view=orders"> Lịch sử mua hàng</a>
+          <a data-link="profile" href="?view=profile"> Hồ sơ cá nhân</a>
+      </nav>
+    </div>
+    <div class="danhmuc">
+    <div class="content" id="productContainer"> </div>
+   <nav id="pagination" class="pagination" aria-label="Phân trang sản phẩm"></nav>
+  </div>
+    <div>
+      <div class="content" id="productContainer"></div>
+    </div>
+    </form>
+    
+  <div class="footer">
+    <p>&copy; Quản lý Cửa hàng Điện thoại di động</p>
+  </div>
+  <script src="assets/js/main.js"></script>
   <script src="assets/js/auth.js"></script>
+  <script src="assets/js/product.js"></script>
+  <script src="assets/js/shop.js"></script>
 </body>
+
 </html>
