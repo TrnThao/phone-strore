@@ -1,23 +1,6 @@
-// Hiển thị hãng trong danh sách chọn
+// Danh sách hãng (dùng cho nút lọc và chi tiết sản phẩm)
 const categoryFilter = document.getElementById("categoryFilter");
-const categories = JSON.parse(localStorage.getItem("categories") || "[]")
-
-
-if (categoryFilter) {
-  const placeholder = document.createElement("option");
-  placeholder.value = "";
-  placeholder.textContent = "Chọn hãng";
-  categoryFilter.appendChild(placeholder);
-
-  categories
-    .filter(category => category.status !== false)
-    .forEach(category => {
-      const option = document.createElement("option");
-      option.value = category.id;
-      option.textContent = category.name;
-      categoryFilter.appendChild(option);
-    });
-}
+const categories = JSON.parse(localStorage.getItem("categories") || "[]");
 
 
 
@@ -118,20 +101,20 @@ function hienTrang() {
   const sotrang = Math.ceil(sanPhamPhuHop.length / 9);
 
 
-for (let i = 0; i < sotrang; i++) {
-  const nutTrang = document.createElement("button");
-  nutTrang.type = "button";
-  nutTrang.textContent = i + 1;
+  for (let i = 0; i < sotrang; i++) {
+    const nutTrang = document.createElement("button");
+    nutTrang.type = "button";
+    nutTrang.textContent = i + 1;
 
-  if (i === trangHienTai) nutTrang.classList.add("active");
+    if (i === trangHienTai) nutTrang.classList.add("active");
 
 
-  nutTrang.addEventListener("click", () => {
-    trangHienTai = i;
-    hienTrang();
-  });
-  pagination.appendChild(nutTrang);
-}
+    nutTrang.addEventListener("click", () => {
+      trangHienTai = i;
+      hienTrang();
+    });
+    pagination.appendChild(nutTrang);
+  }
 }
 hienTrang();
 // 1. Hàm bỏ dấu tiếng Việt để tìm "dien thoai" vẫn ra "điện thoại"
@@ -172,13 +155,78 @@ function loc() {
       (min === null || price >= min) &&
       (max === null || price <= max);
 
-      return matchName && matchCategory && matchPrice;
+    return matchName && matchCategory && matchPrice;
 
   });
   trangHienTai = 0;
   hienTrang();
 }
 hienTrang();
+
+
+// ========================================
+// 5. LỌC THEO HÃNG (Apple, Samsung, Xiaomi, Oppo, Vivo)
+// Hàm mới, không đụng tới hàm loc() ở trên
+// ========================================
+
+// Hãng đang được chọn ("" = hiển thị tất cả)
+let hangDangChon = "";
+
+// Chỉ lọc theo hãng rồi hiển thị lại danh sách + phân trang
+function locTheoHang(catId) {
+  hangDangChon = catId;
+
+  sanPhamPhuHop = cacSanPham.filter(card => {
+    // Không chọn hãng nào thì hiện tất cả
+    if (!hangDangChon) return true;
+
+    const productList = card.querySelector(".productList");
+    if (!productList) return false;
+
+    const product = products.find(
+      item => String(item.id) === String(productList.dataset.productId)
+    );
+    if (!product) return false;
+
+    return String(product.catId) === String(hangDangChon);
+  });
+
+  trangHienTai = 0; // quay về trang đầu
+  hienTrang();
+}
+
+// Tạo các nút hãng và gắn sự kiện click
+function khoiTaoNutHang() {
+  if (!categoryFilter) return;
+
+  categoryFilter.innerHTML = "";
+
+  categories
+    .filter(category => category.status !== false)
+    .forEach(category => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "nut-hang";
+      btn.dataset.id = category.id;
+      btn.textContent = category.name;
+
+      btn.addEventListener("click", () => {
+        // Bấm lại đúng nút đang chọn thì bỏ lọc
+        const idMoi = hangDangChon === String(category.id) ? "" : String(category.id);
+
+        // Tô sáng nút đang chọn
+        categoryFilter.querySelectorAll("button").forEach(b => {
+          b.classList.toggle("active", idMoi !== "" && b.dataset.id === idMoi);
+        });
+
+        locTheoHang(idMoi);
+      });
+
+      categoryFilter.appendChild(btn);
+    });
+}
+
+khoiTaoNutHang();
 
 
 // ========================================
@@ -205,7 +253,10 @@ function renderDetail(id) {
   addCart.className = "cart";
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
-  //addCart.addEventListener("click", () => window.Shop.addToCart(product.id));
+  addCart.addEventListener("click", function () {
+    window.Shop.addToCart(product.id);
+    addCart.textContent = "Đã thêm"
+  });
 
 
   const btnNext = document.createElement("button");
@@ -245,24 +296,59 @@ function renderDetail(id) {
 
   dialog.append(closeButton, addCart, btnPrev, image, btnNext, title);
 
+
+
   const details = [
-    `Mã sản phẩm: ${product.code || "Chưa cập nhật"}`,
-    `Hãng: ${category?.name || "Chưa cập nhật"}`,
-    `Giá bán: ${formatCurrency(getProductPrice(product))}`,
-    `Mô tả: ${product.desc || "Chưa có mô tả"}`
+    { label: "Mã sản phẩm:", value: product.code || "Chưa cập nhật" },
+    { label: "Hãng:", value: category?.name || "Chưa cập nhật" },
+    { label: "Giá bán:", value: formatCurrency(getProductPrice(product)) }
   ];
-  details.forEach(text => {
-    const paragraph = document.createElement("p");
-    paragraph.textContent = text;
-    dialog.appendChild(paragraph);
+
+  const papa = document.createElement("div");
+  papa.classList.add("product-details");
+
+  details.forEach(item => {
+    const line = document.createElement("div");
+    line.classList.add("detail-row");
+
+    const label = document.createElement("span");
+    label.textContent = item.label;
+    label.classList.add("label");
+
+    const value = document.createElement("span");
+    value.textContent = item.value;
+    value.classList.add("value");
+
+    line.append(label, value);
+    papa.append(line);
   });
+
+  dialog.append(papa);
+
+  const detailmota = [{ label: "Mô tả: ", value: product.desc || "Chưa cập nhật" }];
+  const para = document.createElement("div");
+  para.classList.add("product-detailsmota");
+  detailmota.forEach(item => {
+    const linee = document.createElement("div");
+    linee.classList.add("detail-rowmota");
+
+    const labell = document.createElement("span");
+    labell.textContent = item.label;
+    labell.classList.add("label");
+
+    const valuee = document.createElement("span");
+    valuee.textContent = `\n${item.value}`;
+    valuee.classList.add("value");
+
+    linee.append(labell, valuee);
+    para.append(linee);
+
+  });
+  dialog.append(para);
+
+
 
   document.body.appendChild(dialog);
   dialog.showModal();
 
 }
-
-
-
-
-
