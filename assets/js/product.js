@@ -56,15 +56,11 @@ document.querySelectorAll(".productList").forEach(productList => {
 
   if (!product) return;
 
-
   const card = document.createElement("form");
   card.className = "product-card";
 
   const name = document.createElement("h2");
   name.textContent = product.name;
-
-
-
 
   const price = document.createElement("h3");
   price.textContent = formatCurrency(getProductPrice(product));
@@ -77,9 +73,6 @@ document.querySelectorAll(".productList").forEach(productList => {
   productList.appendChild(card);
   card.append(name, price, detailButton);
 });
-
-
-
 
 const maxsp = 9;
 const cacSanPham = Array.from(
