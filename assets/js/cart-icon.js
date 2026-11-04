@@ -1,4 +1,4 @@
-// cart-icon.js - Chỉ quan sát #cart-count (do updateCartBadge() của main.js).
+// cart-icon.js - Chỉ quan sát #cart-count (do updateCartBadge() của main.js cập nhật).
 // Không đụng vào getCart/saveCart/localStorage.
 (function () {
   const badge = document.getElementById("cart-count");
