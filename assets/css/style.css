@@ -233,6 +233,36 @@ body {
     background: #e6f0ff;
 }
 
+/* ===== Nút Giỏ hàng: sang phải + bo góc + bỏ gạch chân ===== */
+.khunglocsp a.gio-hang,
+.khunglocsp a.gio-hang:visited {
+    margin-left: auto;              /* đẩy sang bên phải */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 6px 16px;
+    background: #134e94;
+    color: white;
+    border: 1px solid #134e94;
+    border-radius: 8px;             /* bo góc bao quanh */
+    text-decoration: none;          /* bỏ gạch chân */
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.khunglocsp a.gio-hang:hover {
+    background: #0d3a70;
+    color: white;
+    text-decoration: none;
+}
+
+/* Huy hiệu nằm lọt trong góc để không bị cắt ở mép phải màn hình */
+.gio-hang-badge {
+    top: -9px;
+    right: 2px;
+}
+
 .footer {
     clear: both;
     display:flex;
