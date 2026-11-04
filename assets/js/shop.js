@@ -102,42 +102,44 @@
   }
   const sum = rows => rows.reduce((s, i) => s + i.price * i.qty, 0);
 
-  function openCart() {
-    if (!user()) return goLogin();
-    const rows = cartRows();
-    if (!rows.length) return show("Giỏ hàng", `<p class="empty">Giỏ hàng đang trống.</p>`);
+//Đã fix lỗi nút xóa, đổi số lượng và thanh toán không phản hồi <<bắt đầu từ dòng này 
+function openCart() {
+  if (!user()) return goLogin();
+  const rows = cartRows();
+  if (!rows.length) return show("Giỏ hàng", `<p class="empty">Giỏ hàng đang trống.</p>`);
 
-    const dlg = show("Giỏ hàng", `
-      <div class="table-wrap">
-        <table class="cart-table">
-          <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>
-          ${rows.map((i, n) => `
-            <tr>
-              <td class="name"></td>
-              <td>${formatCurrency(i.price)}</td>
-              <td><input type="number" min="1" max="99" value="${clamp(i.qty)}" data-n="${n}"></td>
-              <td>${formatCurrency(i.price * i.qty)}</td>
-              <td><button class="danger" data-del="${n}">Xóa</button></td>
-            </tr>`).join("")}
-        </table>
-      </div>
-      <h3 class="total">Tổng tiền: ${formatCurrency(sum(rows))}</h3>
-      <div class="actions"><button class="pay">Thanh toán</button></div>`);
+  const dlg = show("Giỏ hàng", `
+    <div class="table-wrap">
+      <table class="cart-table">
+        <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>
+        ${rows.map((i, n) => `
+          <tr>
+            <td class="name"></td>
+            <td>${formatCurrency(i.price)}</td>
+            <td><input type="number" min="1" max="99" value="${clamp(i.qty)}" data-n="${n}"></td>
+            <td>${formatCurrency(i.price * i.qty)}</td>
+            <td><button type="button" class="danger" data-del="${n}">Xóa</button></td>
+          </tr>`).join("")}
+      </table>
+    </div>
+    <h3 class="total">Tổng tiền: ${formatCurrency(sum(rows))}</h3>
+    <div class="actions"><button type="button" class="pay">Thanh toán</button></div>`);
 
-    fillText(dlg, ".name", rows.map(i => i.product.name));
+  // Điền tên sản phẩm bằng textContent
+  dlg.querySelectorAll("td.name").forEach((td, n) => td.textContent = rows[n].product.name);
 
-    dlg.querySelectorAll("[data-n]").forEach(input => input.onchange = () => {
-      const id = rows[input.dataset.n].prodId;
-      saveCart(getCart().map(i => i.prodId === id ? { ...i, qty: clamp(input.value) } : i));
-      openCart();
-    });
-    dlg.querySelectorAll("[data-del]").forEach(btn => btn.onclick = () => {
-      const id = rows[btn.dataset.del].prodId;
-      saveCart(getCart().filter(i => i.prodId !== id));
-      openCart();
-    });
-    dlg.querySelector(".pay").onclick = openCheckout;
-  }
+  dlg.querySelectorAll("[data-n]").forEach(input => input.onchange = () => {
+    const id = rows[input.dataset.n].prodId;
+    saveCart(getCart().map(i => i.prodId === id ? { ...i, qty: clamp(input.value) } : i));
+    openCart();
+  });
+  dlg.querySelectorAll("[data-del]").forEach(btn => btn.onclick = () => {
+    const id = rows[btn.dataset.del].prodId;
+    saveCart(getCart().filter(i => i.prodId !== id));
+    openCart();
+  });
+  dlg.querySelector(".pay").onclick = openCheckout;
+} //<<Kết thúc code sửa
 
   // ---------- Thanh toán ----------
   function openCheckout() {
@@ -321,3 +323,57 @@
 
   window.Shop = { addToCart };
 })();
+
+
+// //danh sach gio hang
+// const gioHangContainer = document.querySelector(".danhsachgiohang");
+
+// // Viết thành 1 hàm để sau này có thể gọi lại dễ dàng (khi xóa/sửa số lượng)
+// function hienThiGioHang() {
+//   // 1. Lấy dữ liệu từ localStorage
+//   const gioHang = JSON.parse(localStorage.getItem("cart")) || [];
+
+//   // XÓA SẠCH nội dung cũ trước khi in cái mới (nếu không nó sẽ bị in trùng lặp)
+//   gioHangContainer.innerHTML = "";
+
+//   // 2. Nếu giỏ hàng trống thì báo cho khách biết
+//   if (gioHang.length === 0) {
+//     gioHangContainer.innerHTML = "<p>Giỏ hàng của bạn đang trống! Hãy đi mua sắm nhé.</p>";
+//     return; // Dừng hàm luôn, không chạy vòng lặp bên dưới nữa
+//   }
+
+//   // 3. Vòng lặp in ra từng sản phẩm
+//   gioHang.forEach((sanPham, viTri) => {
+//     // Tạo 1 thẻ div bọc bên ngoài mỗi sản phẩm
+//     const theSanPham = document.createElement("div");
+//     theSanPham.className = "item-gio-hang"; // Đặt class để lát CSS cho đẹp
+    
+//     // Dùng innerHTML để chèn nhanh cấu trúc bên trong (đỡ phải createElement từng cái)
+//     // Tính luôn tổng tiền của món đó = Giá x Số lượng
+//     const tongTienMon = sanPham.price * sanPham.quantity;
+    
+//     theSanPham.innerHTML = `
+//     <div class="chitietgiohang">
+//       <img src="${sanPham.img}" alt="${sanPham.name}" width="80">
+//       <div class="thong-tin">
+//         <h3>${sanPham.name}</h3>
+//         <p>Đơn giá: ${sanPham.price.toLocaleString('vi-VN')} đ</p>
+//         <p>Số lượng: ${sanPham.quantity}</p>
+//         <p style="color: red; font-weight: bold;">Thành tiền: ${tongTienMon.toLocaleString('vi-VN')} đ</p>
+//       </div>
+//       <button class="xoa-mon" data-vitri="${viTri}">Xóa</button>
+//     </div>
+//     `;
+
+//     // Nhét thẻ div vừa tạo vào giao diện chính
+//     gioHangContainer.appendChild(theSanPham);
+//   });
+
+//   // Gọi tiếp hàm tính tổng tiền toàn bộ giỏ hàng (nếu bạn muốn)
+//   // tinhTongTien(gioHang);
+// }
+
+// // Chạy hàm hiển thị ngay khi trang web tải xong
+// if (gioHangContainer) {
+//   hienThiGioHang();
+// }
