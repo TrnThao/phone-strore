@@ -11,7 +11,7 @@
 
 <body>
     <div class="header">
-      <h1>Chào mừng đến với cửa hàng điện thoại</h1>
+      <h1>CHÀO MỪNG ĐẾN VỚI CỬA HÀNG ĐIỆN THOẠI</h1>
       <button id="dangnhap" type="button" onclick="location.href='login.html'">Đăng nhập</button>
       <div id="HienThiND" style="display: none;">
         <span>Chào mừng <strong id="HienThiTen"></strong>!</span>
@@ -33,13 +33,22 @@
       </div>
       <button type="button" onclick="loc()">Tim kiem</button>
       <button class="" type="submit">Xoa bo loc</button>
+      <a class="gio-hang" data-link="cart" href="?view=cart">
+        <svg class="gio-hang-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
+        </svg>
+        <span>Giỏ hàng</span>
+        <span class="gio-hang-badge" id="cart-count" hidden>0</span>
+      </a>
     </form>
     </div>
     <div id="categoryFilter" class="cate-container"></div>
     <div class="layout">
       <nav aria-label="Menu khách hàng" class="side">
           <a data-link="products" href="?view=products"> Danh sách sản phẩm</a>
-          <a data-link="cart" href="?view=cart"> Giỏ hàng</a>
           <a data-link="orders" href="?view=orders"> Lịch sử mua hàng</a>
           <a data-link="profile" href="?view=profile"> Hồ sơ cá nhân</a>
       </nav>
@@ -60,6 +69,7 @@
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/product.js"></script>
   <script src="assets/js/shop.js"></script>
+  <script src="assets/js/cart-icon.js"></script>
 </body>
 
 </html>
