@@ -102,66 +102,44 @@
   }
   const sum = rows => rows.reduce((s, i) => s + i.price * i.qty, 0);
 
-  function openCart() {
-    if (!user()) return goLogin();
-    const rows = cartRows();
-    if (!rows.length) return show("Giỏ hàng", `<p class="empty">Giỏ hàng đang trống.</p>`);
+//Đã fix lỗi nút xóa, đổi số lượng và thanh toán không phản hồi <<bắt đầu từ dòng này 
+function openCart() {
+  if (!user()) return goLogin();
+  const rows = cartRows();
+  if (!rows.length) return show("Giỏ hàng", `<p class="empty">Giỏ hàng đang trống.</p>`);
 
-    const dlg = show("Giỏ hàng", `
-      <div class="table-wrap">
-        <table class="cart-table">
-          <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>
-          ${rows.map((i, n) => `
-            <tr>
-              <td class="name"></td>
-              <td>${formatCurrency(i.price)}</td>
-              <td><input type="number" min="1" max="99" value="${clamp(i.qty)}" data-n="${n}"></td>
-              <td>${formatCurrency(i.price * i.qty)}</td>
-              <td><button class="danger" data-del="${n}">Xóa</button></td>
-            </tr>`).join("")}
-        </table>
-      </div>
-      <h3 class="total">Tổng tiền: ${formatCurrency(sum(rows))}</h3>
-      <div class="actions"><button class="pay">Thanh toán</button></div>`);
+  const dlg = show("Giỏ hàng", `
+    <div class="table-wrap">
+      <table class="cart-table">
+        <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>
+        ${rows.map((i, n) => `
+          <tr>
+            <td class="name"></td>
+            <td>${formatCurrency(i.price)}</td>
+            <td><input type="number" min="1" max="99" value="${clamp(i.qty)}" data-n="${n}"></td>
+            <td>${formatCurrency(i.price * i.qty)}</td>
+            <td><button type="button" class="danger" data-del="${n}">Xóa</button></td>
+          </tr>`).join("")}
+      </table>
+    </div>
+    <h3 class="total">Tổng tiền: ${formatCurrency(sum(rows))}</h3>
+    <div class="actions"><button type="button" class="pay">Thanh toán</button></div>`);
 
-    const total = rows.reduce((s, i) => s + i.price * i.qty, 0);
-    const table = h("table", { class:"bang-gio-hang" },
-      h("tr", {}, ...["Sản phẩm", "Đơn giá", "Số lượng", "Thành tiền", ""].map(t => h("th", { textContent: t, style: "text-align:left" }))),
-      ...rows.map(i => h("tr", {},
-        h("td", { textContent: i.product.name }),
-        h("td", { textContent: formatCurrency(i.price) }),
-        h("td", {}, h("input", {
-          type: "number", min: 1, max: 99, value: i.qty, style: "width:64px",
-          onchange: e => {
-            const cart = getCart();
-            const line = cart.find(x => String(x.prodId) === String(i.prodId));
-            if (line) line.qty = clampQty(e.target.value);
-            saveCart(cart);
-            openCart();
-          }
-        })),
-        h("td", { textContent: formatCurrency(i.price * i.qty) }),
-        h("td", {}, h("button", {
-          type: "button", textContent: "Xóa",
-          onclick: () => {
-            saveCart(getCart().filter(x => String(x.prodId) !== String(i.prodId)));
-            openCart();
-          }
-        }))
-      )));
+  // Điền tên sản phẩm bằng textContent
+  dlg.querySelectorAll("td.name").forEach((td, n) => td.textContent = rows[n].product.name);
 
-    dlg.querySelectorAll("[data-n]").forEach(input => input.onchange = () => {
-      const id = rows[input.dataset.n].prodId;
-      saveCart(getCart().map(i => i.prodId === id ? { ...i, qty: clamp(input.value) } : i));
-      openCart();
-    });
-    dlg.querySelectorAll("[data-del]").forEach(btn => btn.onclick = () => {
-      const id = rows[btn.dataset.del].prodId;
-      saveCart(getCart().filter(i => i.prodId !== id));
-      openCart();
-    });
-    dlg.querySelector(".pay").onclick = openCheckout;
-  }
+  dlg.querySelectorAll("[data-n]").forEach(input => input.onchange = () => {
+    const id = rows[input.dataset.n].prodId;
+    saveCart(getCart().map(i => i.prodId === id ? { ...i, qty: clamp(input.value) } : i));
+    openCart();
+  });
+  dlg.querySelectorAll("[data-del]").forEach(btn => btn.onclick = () => {
+    const id = rows[btn.dataset.del].prodId;
+    saveCart(getCart().filter(i => i.prodId !== id));
+    openCart();
+  });
+  dlg.querySelector(".pay").onclick = openCheckout;
+} //<<Kết thúc code sửa
 
   // ---------- Thanh toán ----------
   function openCheckout() {
