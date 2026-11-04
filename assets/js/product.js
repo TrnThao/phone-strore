@@ -76,18 +76,47 @@ document.querySelectorAll(".productList").forEach(productList => {
 
   productList.appendChild(card);
   card.append(name, price, detailButton);
-  productList.appendChild(card);
-
-
-
-
 });
 
 
 
 
+const maxsp = 9;
+const cacSanPham = Array.from(
+  document.querySelectorAll("#productContainer .sanpham")
+);
+let sanPhamPhuHop = [...cacSanPham];
+let trangHienTai = 0;
+const pagination = document.getElementById("pagination");
 
 
+function hienTrang() {
+
+  const batDau = trangHienTai * maxsp;
+  const sanPhamTrangNay = sanPhamPhuHop.slice(batDau, batDau + maxsp);
+  cacSanPham.forEach(sanPham => {
+    sanPham.hidden = !sanPhamTrangNay.includes(sanPham);
+  });
+  pagination.innerHTML = "";
+  const sotrang = Math.ceil(sanPhamPhuHop.length / 9);
+
+
+for (let i = 0; i < sotrang; i++) {
+  const nutTrang = document.createElement("button");
+  nutTrang.type = "button";
+  nutTrang.textContent = i + 1;
+
+  if (i === trangHienTai) nutTrang.classList.add("active");
+
+
+  nutTrang.addEventListener("click", () => {
+    trangHienTai = i;
+    hienTrang();
+  });
+  pagination.appendChild(nutTrang);
+}
+}
+hienTrang();
 // 1. Hàm bỏ dấu tiếng Việt để tìm "dien thoai" vẫn ra "điện thoại"
 const norm = s => String(s || "")
   .normalize("NFD")
@@ -123,14 +152,81 @@ function loc() {
 
     const price = getProductPrice(product);
     const matchPrice =
-        (min === null || price >= min) && 
-        (max === null || price <=max);
-    card.hidden = !(matchName && matchCategory && matchPrice);
+      (min === null || price >= min) &&
+      (max === null || price <= max);
 
+      return matchName && matchCategory && matchPrice;
 
   });
-
+  trangHienTai = 0;
+  hienTrang();
 }
+hienTrang();
+
+
+// ========================================
+// 5. LỌC THEO HÃNG (Apple, Samsung, Xiaomi, Oppo, Vivo)
+// Hàm mới, không đụng tới hàm loc() ở trên
+// ========================================
+
+// Hãng đang được chọn ("" = hiển thị tất cả)
+let hangDangChon = "";
+
+// Chỉ lọc theo hãng rồi hiển thị lại danh sách + phân trang
+function locTheoHang(catId) {
+  hangDangChon = catId;
+
+  sanPhamPhuHop = cacSanPham.filter(card => {
+    // Không chọn hãng nào thì hiện tất cả
+    if (!hangDangChon) return true;
+
+    const productList = card.querySelector(".productList");
+    if (!productList) return false;
+
+    const product = products.find(
+      item => String(item.id) === String(productList.dataset.productId)
+    );
+    if (!product) return false;
+
+    return String(product.catId) === String(hangDangChon);
+  });
+
+  trangHienTai = 0; // quay về trang đầu
+  hienTrang();
+}
+
+// Tạo các nút hãng và gắn sự kiện click
+function khoiTaoNutHang() {
+  if (!categoryFilter) return;
+
+  categoryFilter.innerHTML = "";
+
+  categories
+    .filter(category => category.status !== false)
+    .forEach(category => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "nut-hang";
+      btn.dataset.id = category.id;
+      btn.textContent = category.name;
+
+      btn.addEventListener("click", () => {
+        // Bấm lại đúng nút đang chọn thì bỏ lọc
+        const idMoi = hangDangChon === String(category.id) ? "" : String(category.id);
+
+        // Tô sáng nút đang chọn
+        categoryFilter.querySelectorAll("button").forEach(b => {
+          b.classList.toggle("active", idMoi !== "" && b.dataset.id === idMoi);
+        });
+
+        locTheoHang(idMoi);
+      });
+
+      categoryFilter.appendChild(btn);
+    });
+}
+
+khoiTaoNutHang();
 
 
 // ========================================
@@ -157,8 +253,24 @@ function renderDetail(id) {
   addCart.className = "cart";
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
- // addCart.addEventListener("click", ());
+  addCart.addEventListener("click", function(){
+    window.Shop.addToCart(product.id);
+    addCart.textContent = "Đã thêm"
+  });
 
+
+  const btnNext = document.createElement("button");
+  const btnPrev = document.createElement("button");
+  btnNext.className = "slide-next";
+  btnPrev.className = "slide-prev";
+  btnNext.type = "button";
+  btnPrev.type = "button";
+  btnNext.textContent = ">";
+  btnPrev.textContent = "<";
+  btnNext.addEventListener("click", nextImg);
+  btnPrev.addEventListener("click", preImg);
+
+  let currentIndex = 0;
 
   const title = document.createElement("h2");
   const image = document.createElement("img");
@@ -166,57 +278,35 @@ function renderDetail(id) {
   image.alt = product.name || "Ảnh sản phẩm";
   title.textContent = product.name || "Chi tiết sản phẩm";
 
-  dialog.append(closeButton,addCart ,image, title);
+
+  function nextImg(index) {
+    currentIndex++;
+    if (currentIndex >= product.img.length) {
+      currentIndex = 0;
+    }
+    image.src = product.img[currentIndex];
+  }
+  function preImg(index) {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = product.img.length - 1;
+    }
+    image.src = product.img[currentIndex];
+  }
+
+  dialog.append(closeButton, addCart, btnPrev, image, btnNext, title);
 
   const details = [
-    { label: "Mã sản phẩm:", value: product.code || "Chưa cập nhật" },
-    { label: "Hãng:", value: category?.name || "Chưa cập nhật" },
-    { label: "Giá bán:", value: formatCurrency(getProductPrice(product)) }
+    `Mã sản phẩm: ${product.code || "Chưa cập nhật"}`,
+    `Hãng: ${category?.name || "Chưa cập nhật"}`,
+    `Giá bán: ${formatCurrency(getProductPrice(product))}`,
+    `Mô tả: ${product.desc || "Chưa có mô tả"}`
   ];
-
-  const papa = document.createElement("div");
-  papa.classList.add("product-details");
-
-  details.forEach(item => {
-    const line = document.createElement("div");
-    line.classList.add("detail-row");
-
-    const label = document.createElement("span");
-    label.textContent = item.label;
-    label.classList.add("label");
-
-    const value = document.createElement("span");
-    value.textContent = item.value;
-    value.classList.add("value");
-
-    line.append(label, value);
-    papa.append(line);
+  details.forEach(text => {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = text;
+    dialog.appendChild(paragraph);
   });
-
-  dialog.append(papa);
-
-  const detailmota = [{ label: "Mô tả: ", value: product.desc || "Chưa cập nhật" }];
-  const para = document.createElement("div");
-  para.classList.add("product-detailsmota");
-  detailmota.forEach(item => {
-    const linee = document.createElement("div");
-    linee.classList.add("detail-rowmota");
-
-    const labell = document.createElement("span");
-    labell.textContent = item.label;
-    labell.classList.add("label");
-
-    const valuee = document.createElement("span");
-    valuee.textContent = `\n${item.value}`;
-    valuee.classList.add("value");
-
-    linee.append(labell, valuee);
-    para.append(linee);
-
-  });
-  dialog.append(para);
-
-
 
   document.body.appendChild(dialog);
   dialog.showModal();

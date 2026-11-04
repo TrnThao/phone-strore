@@ -26,8 +26,7 @@ body {
     align-items:center;
     height:100vh;
 }
-
-.login {
+.dangki-login{
     width: 500px;
     border: 1px solid #cfdcec;
     background: white;
@@ -35,47 +34,56 @@ body {
     box-shadow: 0 10px 40px 0px rgba(19, 78, 148, 0.25);
 
 }
-
-.login h1 {
+.dangki-login h1{
     text-align: center;
+    color: #134e94;
 }
-
-.login .login-form {
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
-    padding: 0 20px;
+.dangki-login .dangki-login-form {
+    width:100%;
+    height:50px;
+    margin:30px 0;
+    padding:0 20px;
 }
-
-.login-form input {
-    width: 100%;
-    height: 100%;
+.dangki-login-form input {
+    width:100%;
+    height:100%;
     padding: 0 10px;
-    outline: none;
-    border: none;
-    border: 1px solid black;
+    outline:none;
+    border:none;
+    border: 1px solid #b6c7dd;
     border-radius: 20px;
+    transition: 0.2s;
 }
-
-.login button {
-    width: 30%;
-    height: 50px;
-    margin: 0 35%;
-    margin-bottom: 30px;
-    border: none;
+.dangki-login-form input:focus {
+    border-color: #134e94;
+    box-shadow: 0 0 0 3px rgba(19, 78, 148, 0.15);
+}
+.dangki-login button {
+    width:30%;
+    height:50px;
+    margin:0 35%;
+    margin-bottom:30px;
+    border:none;
     border-radius: 20px;
-
+    background: #134e94;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
-
+.dangki-login button:hover {
+    background: #0d3a70;
+}
 .header {
-
-    height: 150px;
-    background: red;
-    position: relative;
-
+    height: 100px;
+    background: linear-gradient(135deg, #134e94, #2a7de1);
+    color: white;
+    box-shadow: 0 2px 8px rgba(19, 78, 148, 0.35);
+    position: sticky;   /*Sửa ở đây - Cố định thanh Header*/
+    top: 0;             /*Sửa ở đây*/
+    z-index: 1000;      /*Sửa ở đây*/
 }
-
-.header h1 {
+.header h1{
     text-align: center;
 }
 #dangnhap {
@@ -143,7 +151,7 @@ body {
     margin: 10px;
     box-sizing: border-box;
     text-align: center;
-    padding: 15px;
+    padding:15px;
     position: relative;
     background-color: white;
     box-shadow: 0 2px 6px rgba(19, 78, 148, 0.08);
@@ -172,11 +180,62 @@ body {
     padding: 15px;
     margin: 05px;
     margin-top: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    position: fixed;    /*Sửa ở đây - Cố định khung lọc sp*/
+    width: 100%;        /*Sửa ở đây*/
+    top: 100px;         /*Sửa ở đây - Bằng chiều cao của khung Header*/
+    z-index: 999;       /*Sửa ở đây*/
+}
+
+.khunglocsp label.locsp,
+.khunglocsp > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.khunglocsp input {
+    border: 1px solid #b6c7dd;
+    border-radius: 6px;
+    background: white;
+    color: #1f2d3d;
+    font-weight: normal;
+    outline: none;
+}
+
+.khunglocsp input:focus {
+    border-color: #134e94;
+    box-shadow: 0 0 0 3px rgba(19, 78, 148, 0.15);
+}
+
+.khunglocsp button {
+    background: #134e94;
+    color: white;
+    border: 1px solid #134e94;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.khunglocsp button:hover {
+    background: #0d3a70;
+}
+
+.khunglocsp button[type="submit"] {
+    background: white;
+    color: #134e94;
+}
+
+.khunglocsp button[type="submit"]:hover {
+    background: #e6f0ff;
 }
 
 .footer {
     clear: both;
-    display: flex;
+    display:flex;
     flex-direction: column;
     background: #134e94;
     color: #dbe7f5;
@@ -185,10 +244,9 @@ body {
     font-size: 0.9rem;
     border-top: 1px solid #0d3a70;
 }
-
 .pic {
     width: 150px;
-    height: 150px;
+    height:150px;
     transition: 0.3s;
 }
 
@@ -209,10 +267,45 @@ body {
     bottom: 7%;
     right: 8%;
     width: 30%;
-    height: 30%px;
     background-color:#e6f0ff;
+    color: #134e94;
+    border: 1px solid #b6d0f5;
     border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
 } 
+
+.product-card button:hover {
+    background-color: #134e94;
+    color: white;
+}
+
+/* Nút lọc theo hãng (Apple, Samsung, Xiaomi, Oppo, Vivo) */
+#categoryFilter.cate-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+    margin-top: 80px; /*Sửa ở đây - Khoảng trống để các nút này không bị che bởi khung locsp*/
+}
+
+#categoryFilter .nut-hang {
+    padding: 8px 20px;
+    border: 1px solid #134e94;
+    border-radius: 10px;
+    background: white;
+    color: #134e94;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#categoryFilter .nut-hang:hover,
+#categoryFilter .nut-hang.active {
+    background: #134e94;
+    color: white;
+}
+
 
 #product-detail-dialog {
     position: fixed;
@@ -222,14 +315,21 @@ body {
     height: 60%;
     transform: translate(-50%, -50%);
     margin: 0;
-    background-color:antiquewhite;
+    background-color:#f5f9ff;
+    border: 1px solid #cfdcec;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(19, 78, 148, 0.35);
+}
+
+#product-detail-dialog::backdrop {
+    background: rgba(13, 58, 112, 0.45);
 }
 
 
 #product-detail-dialog img {
     width: 40%;
     height: 80%;
-    float: left;
+    float: left ;
 
 }
 
@@ -237,8 +337,56 @@ body {
     position: absolute;
     top: 2%;
     right: 2%;
+    background: white;
+    color: #134e94;
+    border: 1px solid #b6c7dd;
+    border-radius: 6px;
+    cursor: pointer;
 
 }
+
+#product-detail-dialog .close:hover {
+    background: #e53935;
+    color: white;
+    border-color: #e53935;
+}
+
+
+
+
+#product-detail-dialog .slide-prev,
+#product-detail-dialog .slide-next {
+    position: absolute;
+    top: 40%;
+    z-index: 1;
+    cursor: pointer;
+    width: 3%;
+    height: 8%;
+    border-radius: 5px;
+    background-color:#134e94;
+    color: white;
+    border: none;
+    opacity: 0.2;
+}
+
+#product-detail-dialog .slide-prev:hover{
+    transition: 0.3s;
+    opacity: 1.5;
+}
+#product-detail-dialog .slide-next:hover {
+    transition: 0.3s;
+    opacity: 1.5;
+}
+
+
+#product-detail-dialog .slide-prev {
+    left: 1%;
+}
+
+#product-detail-dialog .slide-next {
+    left: 36%;
+}
+
 
 #product-detail-dialog .cart {
     position: absolute;
@@ -261,85 +409,15 @@ body {
 
 #product-detail-dialog h2 {
     font-size: 30px;
-    color: #142B50;
+    color: #134e94;
     position: absolute;
     top: 10%;
     margin-left: 42%;
-    border-bottom: 1px black solid;
 }
 
 #product-detail-dialog p:first-of-type {
     margin-top: 13%;
 }
-
-
-.product-details>div:nth-child(2) {
-    margin-top: 1.5%;
-
-    margin-bottom: 1.5%;
-}
-
-.detail-rowmota {
-    color: #17365D;
-}
-
-    
-.detail-rowmota .label {
-    font-size: 17px; 
-    color: #142B50;
-    font-weight: 550;
-
-}
-.detail-rowmota .value {
-    white-space: pre-line;
-    color: black;
-    font-size: 16px;
-}
-
-
-.detail-row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 70px;
-    align-items: center;
-
-}
-
-#product-detail-dialog .product-detailsmota {
-    width: 55%;
-    height: auto;
-    margin-left: 42%;
-    padding: 8px 12px;
-    height: auto;
-    margin-top: 2%;
-    border: 0px solid black;
-    background-color: #F0F4FC;
-
-}
-
-.detail-row:nth-child(3) .value {
-    font-weight: bold;
-    font-size: 25px;
-}
-
-.label {
-    font-size: 17px;
-}
-
-
-
-#product-detail-dialog .product-details {
-    width: 55%;
-    height: auto;
-    padding: 8px 12px;
-    margin-top: 12%;
-    margin-left: 42%;
-    border: 0px solid black;
-    box-sizing: border-box;
-    background-color: #F0F4FC;
-
-}
-
 
 #product-detail-dialog p {
     font-size: 18px;
@@ -347,18 +425,14 @@ body {
     margin-left: 42%;
     text-align: left;
     line-height: 1.1;
-    margin-top: 20px;
+    margin-top: 3%;
     color:#333;
 
 }
 
-.ma-sp {
-    border: 1px solid black;
-}
-
 
 .pic:hover {
-    transform: scale(1.1, 1.1);
+    transform: scale(1.1,1.1);
     opacity: 1;
     box-shadow: 0 0 10px rgba(19, 78, 148, 0.4);
 }
@@ -422,10 +496,13 @@ body {
 
 /*LeftMenu Products*/
 .layout{
-    margin:25px auto;
+    position: relative;
+    margin: 0;
+    padding-top: 15px;
     display:grid;
     grid-template-columns:220px minmax(0,1fr);
     gap:20px;
+
 }
 
 
@@ -442,12 +519,14 @@ body {
     box-shadow: 0 2px 6px rgba(19, 78, 148, 0.08);
 }
 
-.side a {
-    display: block;
-    padding: 13px;
-    border-radius: 9px;
-    margin: 4px 0;
+.side a{
+    display:block;
+    padding:13px;
+    border-radius:9px;
+    margin:4px 0;
     text-decoration: none;
+    color: #334e68;
+    transition: 0.2s;
 }
 .side a.active,.side a:hover{
     background:#e6f0ff;
@@ -458,10 +537,4 @@ body {
     display:flex;
 
     
-}
-
-.cate-container {
-    display: flex;
-
-
 }
