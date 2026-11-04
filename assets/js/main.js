@@ -406,16 +406,27 @@ function formatCurrency(num) {
   return Number(num || 0).toLocaleString("vi-VN") + " ₫";
 }
 
-// Lấy giỏ hàng từ localStorage
-function getCart() {
-  return JSON.parse(localStorage.getItem("userCart") || "[]");
+//Đã fix lỗi giỏ hàng người này mà người kia vẫn thấy +
+//Đã fix lỗi không thanh toán được / không xóa được <<bắt đầu từ dòng này
+
+// Mỗi người dùng có giỏ hàng riêng, khóa theo id (hoặc name nếu không có id)
+function cartKey() {
+  const u = JSON.parse(
+    sessionStorage.getItem("currentUser") ||
+    localStorage.getItem("currentUser") ||
+    "null"
+  );
+  return u ? "userCart_" + (u.id || u.name) : "userCart_guest";
 }
 
-// Lưu giỏ hàng vào localStorage
-function saveCart(cart) {
-  localStorage.setItem("userCart", JSON.stringify(cart));
-  updateCartBadge();
+function getCart() {
+  return JSON.parse(localStorage.getItem(cartKey()) || "[]");
 }
+
+function saveCart(cart) {
+  localStorage.setItem(cartKey(), JSON.stringify(cart));
+  updateCartBadge();
+}   //<<Kết thúc code sửa
 
 // Cập nhật số lượng sản phẩm trên icon giỏ hàng ở header
 function updateCartBadge() {
@@ -438,6 +449,7 @@ function renderHeader() {
   const cart = getCart();
   // Xử lý sự kiện đăng xuất khách hàng
   document.getElementById("btn-user-logout")?.addEventListener("click", function () {
+    sessionStorage.removeItem("currentUser"); // Đã thêm vào dòng này để đăng xuất thống nhất xóa cả localStorage và sessionStorage
     localStorage.removeItem("currentUser");
     location.reload();
   });
