@@ -11,7 +11,7 @@ const SEED_DATA = {
   ],
 
   // 2. SẢN PHẨM ĐIỆN THOẠI (Products)
-  products: [
+products: [
     {
       id: "SP01",
       code: "IP15PM",
@@ -435,43 +435,7 @@ function getCurrentUser() {
 function renderHeader() {
   const headerContainer = document.getElementById("site-header");
   if (!headerContainer) return;
-
-  const currentUser = getCurrentUser();
   const cart = getCart();
-  const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
-
-  headerContainer.innerHTML = `
-    <header class="header">
-      <div class="header-container">
-        <a href="index.html" class="logo">📱 DiĐộng<span>Store</span></a>
-        
-        <nav class="main-nav">
-          <a href="index.html">Trang chủ</a>
-          <a href="products.html">Sản phẩm</a>
-        </nav>
-
-        <div class="header-actions">
-          <a href="cart.html" class="cart-btn">
-            🛒 Giỏ hàng (<span id="cart-count">${totalQty}</span>)
-          </a>
-
-          ${currentUser ? `
-            <div class="user-menu">
-              <span>👋 Chào, <b>${currentUser.name}</b></span>
-              <a href="profile.html">Tài khoản</a>
-              <a href="order-history.html">Lịch sử đơn</a>
-              <button id="btn-user-logout" class="btn-logout-client">Đăng xuất</button>
-            </div>
-          ` : `
-            <div class="auth-links">
-              <a href="login.html" class="btn-login">Đăng nhập</a>
-            </div>
-          `}
-        </div>
-      </div>
-    </header>
-  `;
-
   // Xử lý sự kiện đăng xuất khách hàng
   document.getElementById("btn-user-logout")?.addEventListener("click", function () {
     localStorage.removeItem("currentUser");
