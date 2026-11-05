@@ -6,7 +6,7 @@
   <title>Quản trị cửa hàng điện thoại</title>
   <link rel="stylesheet" href="../assets/css/admin.css">
   <script>
-if (!localStorage.getItem("currentAdmin")) location.replace("login-admin.html");
+      if (!localStorage.getItem("currentAdmin")) location.replace("login-admin.html");
   </script>
 </head>
 <body>
@@ -143,7 +143,7 @@ if (!localStorage.getItem("currentAdmin")) location.replace("login-admin.html");
             </div>
           </div>
           <div class="dlg-actions">
-            <button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('dlg-product').close()">Hủy</button> 
             <button class="btn" value="ok">Lưu</button>
           </div>
         </form>
@@ -199,7 +199,6 @@ if (!localStorage.getItem("currentAdmin")) location.replace("login-admin.html");
     <!-- ================= 6. GIÁ BÁN ================= -->
     <section id="pricing" class="tab" hidden>
       <div class="page-head"><h1>Quản lý giá bán</h1></div>
-      <p class="muted">Giá bán = giá vốn × (1 + % lợi nhuận). Để trống “% riêng” thì dùng % của hãng.</p>
 
       <div class="card-box">
         <h2>% lợi nhuận theo hãng sản xuất</h2>

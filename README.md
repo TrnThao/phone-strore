@@ -7,24 +7,12 @@
 ## 🏗️ 1. Cấu trúc thư mục dự án (Front-end Prototype)
 
 ```text
-quan-ly-cua-hang-dien-thoai/
+Phone-store/
 ├── index.html              # Trang chủ (Khách hàng)
 ├── login.html              # Trang đăng nhập / Đăng ký (Khách hàng)
-├── profile.html            # Trang thông tin cá nhân khách hàng
-├── products.html           # Trang danh sách sản phẩm & Tìm kiếm (có phân trang)
-├── product-detail.html     # Trang chi tiết sản phẩm
-├── cart.html               # Trang giỏ hàng & Thanh toán
-├── order-history.html      # Trang xem lại lịch sử đơn hàng của khách
 ├── admin/                  # Thư mục riêng cho phân hệ Quản trị
-│   ├── login.html          # Trang đăng nhập Admin (riêng biệt)
-│   ├── dashboard.html      # Trang chủ Admin / Tổng quan
-│   ├── users.html          # Quản lý khách hàng (Khóa/mở, reset mật khẩu)
-│   ├── categories.html     # Quản lý loại sản phẩm (Thêm, sửa, xóa)
-│   ├── products.html       # Quản lý danh mục sản phẩm (CRUD điện thoại)
-│   ├── imports.html        # Quản lý Nhập sản phẩm & Chi tiết phiếu nhập
-│   ├── pricing.html        # Quản lý giá bán & % lợi nhuận
-│   ├── orders.html         # Quản lý đơn hàng & Cập nhật trạng thái
-│   └── inventory.html      # Quản lý tồn kho, cảnh báo hết hàng, báo cáo X-N-T
+│   ├── login-admin.html    # Trang đăng nhập Admin (riêng biệt)
+|   └── admin.html          # Admin
 └── assets/                 # Tài nguyên tĩnh chung
     ├── css/
     │   ├── style.css       # CSS chung cho phía khách hàng
