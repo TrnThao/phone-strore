@@ -53,12 +53,11 @@
   const refresh = () => { renderHeader(); updateCartBadge(); };
 
   function user() {
-    const s = JSON.parse(sessionStorage.getItem(SESSION) || localStorage.getItem(SESSION) || "null");
+    const s = JSON.parse(sessionStorage.getItem(SESSION) || "null");
     return s && users().find(u => same(u, s)) || null;
   }
   function login(u) {
     sessionStorage.setItem(SESSION, JSON.stringify(u));
-    localStorage.setItem(SESSION, JSON.stringify(u));
     refresh();
   }
   function logout() {
@@ -73,9 +72,7 @@
     location.href = "login.html";
   }
 
-  if (sessionStorage.getItem(SESSION) && !localStorage.getItem(SESSION)) {
-    localStorage.setItem(SESSION, sessionStorage.getItem(SESSION));
-  }
+  localStorage.removeItem(SESSION); // xóa bản đăng nhập cũ còn sót trong localStorage
 
   // ---------- Giỏ hàng ----------
   const clamp = n => Math.min(99, Math.max(1, Math.floor(Number(n)) || 1));
@@ -170,6 +167,7 @@ function openCart() {
     dlg.querySelector(".back").onclick = openCart;
     dlg.querySelector("form").onsubmit = e => {
       e.preventDefault();
+      if (!user()) return goLogin();
       const f = Object.fromEntries(new FormData(e.target));
       if (!PHONE.test(f.receiverPhone.trim())) return say(e.target, "Số điện thoại phải gồm 10 chữ số, bắt đầu bằng 0.");
 
