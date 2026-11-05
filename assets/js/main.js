@@ -167,11 +167,6 @@ products: [
   // 3. KHÁCH HÀNG (Users)
   users: [
     {
-      name: "admin",
-      password: "123"
-
-    },
-    {
       id: "KH01",
       name: "Nguyễn Văn An",
       email: "an.nguyen@gmail.com",
@@ -349,7 +344,7 @@ products: [
       address: "456 Lê Văn Sỹ, Phường 14, Quận 3, TP.HCM",
       date: "2026-03-27",
       payment: "Chuyển khoản",
-      status: "cancelled", // Đơn đã hủy
+      status: "cancelled",
       items: [
         { prodId: "SP02", name: "iPhone 15 128GB", price: 19950000, qty: 1 }
       ],
