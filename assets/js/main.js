@@ -167,11 +167,6 @@ products: [
   // 3. KHÁCH HÀNG (Users)
   users: [
     {
-      name: "admin",
-      password: "123"
-
-    },
-    {
       id: "KH01",
       name: "Nguyễn Văn An",
       email: "an.nguyen@gmail.com",
@@ -349,7 +344,7 @@ products: [
       address: "456 Lê Văn Sỹ, Phường 14, Quận 3, TP.HCM",
       date: "2026-03-27",
       payment: "Chuyển khoản",
-      status: "cancelled", // Đơn đã hủy
+      status: "cancelled",
       items: [
         { prodId: "SP02", name: "iPhone 15 128GB", price: 19950000, qty: 1 }
       ],
@@ -411,11 +406,7 @@ function formatCurrency(num) {
 
 // Mỗi người dùng có giỏ hàng riêng, khóa theo id (hoặc name nếu không có id)
 function cartKey() {
-  const u = JSON.parse(
-    sessionStorage.getItem("currentUser") ||
-    localStorage.getItem("currentUser") ||
-    "null"
-  );
+  const u = JSON.parse(sessionStorage.getItem("currentUser") || "null");
   return u ? "userCart_" + (u.id || u.name) : "userCart_guest";
 }
 
@@ -439,7 +430,7 @@ function updateCartBadge() {
 
 // Kiểm tra phiên đăng nhập của khách hàng
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem("currentUser") || "null");
+  return JSON.parse(sessionStorage.getItem("currentUser") || "null");
 }
 
 // Render header dùng chung cho các trang khách hàng
