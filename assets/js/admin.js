@@ -60,18 +60,16 @@ showTab();
 
 
 // Xử lý nút mở Modal
-document.onclick = function (e) {
-  var target = e.target;
-  while (target && target !== document) {
-    var openId = target.getAttribute("data-open");
-    if (openId) {
-      var dlg = document.getElementById(openId);
-      if (dlg) dlg.showModal();
-      break;
+var openButtons = document.querySelectorAll("[data-open]");
+for (var i = 0; i < openButtons.length; i++) {
+  openButtons[i].onclick = function () {
+    var dialogId = this.getAttribute("data-open");
+    var dlg = document.getElementById(dialogId);
+    if (dlg) {
+      dlg.showModal();
     }
-    target = target.parentNode;
-  }
-};
+  };
+}
 
 // Đăng xuất
 var btnLogout = document.getElementById("btn-logout");
