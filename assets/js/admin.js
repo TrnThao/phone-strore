@@ -39,7 +39,7 @@ document.getElementById("btn-logout")?.addEventListener("click", function (e) {
   e.preventDefault();
   if (confirm("Bạn có muốn đăng xuất khỏi trang quản trị?")) {
     localStorage.removeItem("currentAdmin");
-    location.href = "../../login-admin.html";
+    location.href = "../admin/login-admin.html";
   }
 });
 
@@ -428,7 +428,7 @@ document.querySelector("#dlg-product form")?.addEventListener("submit", function
       desc: desc,
       img: currentProdImgArray,
       customProfitRate: null,
-      status: flase
+      status: false
     });
   }
 
