@@ -4,41 +4,83 @@ function formatMoney(num) {
 }
 
 function showTab() {
-  const id = location.hash.slice(1) || "dashboard";
-  document.querySelectorAll(".tab").forEach(function (s) { s.hidden = s.id !== id; });
-  document.querySelectorAll("#admin-menu a[href^='#']").forEach(function (a) {
-    a.classList.toggle("on", a.getAttribute("href") === "#" + id);
-  });
+  var hash = location.hash;
+  var id = hash ? hash.substring(1) : "dashboard";
 
-  if (id === "dashboard") renderDashboard();
-  else if (id === "users") users_render();
-  else if (id === "categories") categories_render();
-  else if (id === "products") {
-    updateCategoryDropdowns(); 
-    products_render();
+  var tabs = document.getElementsByClassName("tab");
+  for (var i = 0; i < tabs.length; i++) {
+    if (tabs[i].id === id) {
+      tabs[i].style.display = "block";
+    } else {
+      tabs[i].style.display = "none";
+    }
   }
-  else if (id === "imports") imports_render();
-  else if (id === "pricing") pricing_render();
-  else if (id === "orders") orders_render();
-  else if (id === "inventory") inventory_render();
+
+  var menu = document.getElementById("admin-menu");
+  if (menu) {
+    var links = menu.getElementsByTagName("a");
+    for (var j = 0; j < links.length; j++) {
+      var a = links[j];
+      var href = a.getAttribute("href");
+      if (href && href.indexOf("#") === 0) {
+        if (href === "#" + id) {
+          a.className = "on";
+        } else {
+          a.className = "";
+        }
+      }
+    }
+  }
+
+  try {
+    if (id === "dashboard") {
+      renderDashboard();
+    } else if (id === "users") {
+      users_render();
+    } else if (id === "categories") {
+      categories_render();
+    } else if (id === "products") {
+      updateCategoryDropdowns();
+      products_render();
+    } else if (id === "imports") {
+      imports_render();
+    } else if (id === "pricing") {
+      pricing_render();
+    } else if (id === "orders") {
+      orders_render();
+    } else if (id === "inventory") {
+      inventory_render();
+    }
+  } catch (err) {
+    console.error("Lỗi khi nạp dữ liệu tab " + id + ":", err);
+  }
 }
-window.addEventListener("hashchange", showTab);
+window.onhashchange = showTab;
+showTab();
 
-document.addEventListener("click", function (e) {
-  const b = e.target.closest("[data-open]");
-  if (b) {
-    const dlg = document.getElementById(b.dataset.open);
-    if (dlg) dlg.showModal();
-  }
-});
 
-document.getElementById("btn-logout")?.addEventListener("click", function (e) {
-  e.preventDefault();
-  if (confirm("Bạn có muốn đăng xuất khỏi trang quản trị?")) {
-    localStorage.removeItem("currentAdmin");
-    location.href = "../../login-admin.html";
-  }
-});
+// Xử lý nút mở Modal
+var openButtons = document.querySelectorAll("[data-open]");
+for (var i = 0; i < openButtons.length; i++) {
+  openButtons[i].onclick = function () {
+    var dialogId = this.getAttribute("data-open");
+    var dlg = document.getElementById(dialogId);
+    if (dlg) {
+      dlg.showModal();
+    }
+  };
+}
+
+var btnLogout = document.getElementById("btn-logout");
+if (btnLogout) {
+  btnLogout.onclick = function (e) {
+    e.preventDefault();
+    if (confirm("Bạn có muốn đăng xuất khỏi trang quản trị?")) {
+      localStorage.removeItem("currentAdmin");
+      location.href = "login-admin.html";
+    }
+  };
+}
 
 // ==========================================================================
 // 1. TỔNG QUAN (DASHBOARD)

@@ -379,11 +379,7 @@ function formatCurrency(num) {
 }
 
 function cartKey() {
-  const u = JSON.parse(
-    sessionStorage.getItem("currentUser") ||
-    localStorage.getItem("currentUser") ||
-    "null"
-  );
+  const u = JSON.parse(sessionStorage.getItem("currentUser") || "null");
   return u ? "userCart_" + (u.id || u.name) : "userCart_guest";
 }
 
