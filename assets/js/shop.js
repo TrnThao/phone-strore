@@ -53,12 +53,11 @@
   const refresh = () => { renderHeader(); updateCartBadge(); };
 
   function user() {
-    const s = JSON.parse(sessionStorage.getItem(SESSION) || localStorage.getItem(SESSION) || "null");
+    const s = JSON.parse(sessionStorage.getItem(SESSION) || "null");
     return s && users().find(u => same(u, s)) || null;
   }
   function login(u) {
     sessionStorage.setItem(SESSION, JSON.stringify(u));
-    localStorage.setItem(SESSION, JSON.stringify(u));
     refresh();
   }
   function logout() {
