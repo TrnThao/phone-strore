@@ -117,9 +117,11 @@ function renderDashboard() {
   if (orderBody) {
     var statusMap = { new: "Mới đặt", processed: "Đã xử lý", delivered: "Đã giao", cancelled: "Đã hủy" };
     var htmlOrders = "";
-    var recentOrders = orders.slice(-5).reverse();
-    for (var k = 0; k < recentOrders.length; k++) {
-      var o = recentOrders[k];
+    var count = 0;
+    for (var k = orders.length - 1; k >= 0; k--) {
+      if (count >= 5) break;
+
+      var o = orders[k];
       htmlOrders += "<tr>" +
         "<td><b>" + o.id + "</b></td>" +
         "<td>" + o.customerName + "</td>" +
@@ -127,6 +129,7 @@ function renderDashboard() {
         "<td><b>" + formatMoney(o.total) + "</b></td>" +
         "<td><span class=\"badge " + o.status + "\">" + (statusMap[o.status] || o.status) + "</span></td>" +
         "</tr>";
+      count++;
     }
     orderBody.innerHTML = htmlOrders || "<tr><td colspan=\"5\" class=\"muted\" style=\"text-align:center;\">Chưa có đơn hàng nào</td></tr>";
   }
