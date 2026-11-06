@@ -1,28 +1,35 @@
 # 📱 Đồ án Website Quản lý Cửa hàng Điện thoại (Phone Store Management)
 
-Đồ án xây dựng hệ thống website thương mại điện tử và quản trị cửa hàng kinh doanh điện thoại di động, được chia thành 2 phân hệ chính (mỗi phân hệ chiếm 5.0 điểm).
+Đồ án xây dựng hệ thống website thương mại điện tử và quản trị cửa hàng kinh doanh điện thoại di động, được chia thành 2 phân hệ chính (mỗi phân hệ chiếm 5.0 điểm). Dữ liệu được lưu trữ và mô phỏng hoàn toàn trên `localStorage`.
 
 ---
 
-## 🏗️ 1. Cấu trúc thư mục dự án (Front-end Prototype)
+## 🏗️ 1. Cấu trúc thư mục dự án
 
 ```text
 Phone-store/
-├── index.html              # Trang chủ (Khách hàng)
+├── .vscode/                # Cấu hình môi trường Visual Studio Code
+├── admin/                  # Phân hệ Quản trị (Admin)
+│   ├── admin.html          # Trang quản trị chính (Dashboard & CRUD)
+│   └── login-admin.html    # Trang đăng nhập dành riêng cho Admin
+├── assets/                 # Tài nguyên tĩnh
+│   ├── css/
+│   │   ├── admin.css       # CSS bảng điều khiển quản trị
+│   │   ├── login-admin.css # CSS trang đăng nhập quản trị
+│   │   ├── shop.css        # CSS hiển thị danh sách cửa hàng & giỏ hàng
+│   │   └── style.css       # CSS giao diện người dùng chung
+│   ├── images/             # Hình ảnh sản phẩm, banner, icon
+│   └── js/
+│       ├── admin.js        # Logic phân hệ quản trị (Kho, Đơn hàng, SP, Khách hàng)
+│       ├── auth.js         # Logic xác thực khách hàng (Đăng ký/Đăng nhập)
+│       ├── cart-icon.js    # Logic hiển thị badge số lượng & tương tác icon giỏ hàng
+│       ├── login-admin.js  # Logic xác thực đăng nhập tài khoản quản trị
+│       ├── main.js         # Khởi tạo dữ liệu mẫu, điều hướng & tiện ích dùng chung
+│       ├── product.js      # Xử lý chi tiết sản phẩm, lọc & phân trang
+│       └── shop.js         # Xử lý giỏ hàng, cập nhật số lượng và đặt hàng
+├── index.html              # Trang chủ mua sắm (Khách hàng)
 ├── login.html              # Trang đăng nhập / Đăng ký (Khách hàng)
-├── admin/                  # Thư mục riêng cho phân hệ Quản trị
-│   ├── login-admin.html    # Trang đăng nhập Admin (riêng biệt)
-|   └── admin.html          # Admin
-└── assets/                 # Tài nguyên tĩnh chung
-    ├── css/
-    │   ├── style.css       # CSS chung cho phía khách hàng
-    │   └── admin.css       # CSS riêng cho giao diện trang quản trị
-    ├── js/
-    │   ├── main.js         # Xử lý logic chung, render header/footer, giỏ hàng
-    │   ├── auth.js         # Xử lý đăng nhập/đăng ký phía client
-    │   ├── product.js      # Xử lý hiển thị, tìm kiếm, phân trang sản phẩm
-    │   └── admin.js        # Xử lý toàn bộ logic bảng quản trị (dùng localStorage)
-    └── images/             # Thư mục chứa ảnh minh họa điện thoại, banner,...
+└── README.md               # Tài liệu hướng dẫn đồ án
 ```
 
 ---
@@ -30,40 +37,46 @@ Phone-store/
 ## ⚙️ 2. Chi tiết chức năng các phân hệ
 
 ### I. Phân hệ Quản trị (Admin - 5.0 điểm)
-*Dành cho chủ cửa hàng/quản lý để vận hành hệ thống:*
-1. **Giao diện Admin:** Trang đăng nhập riêng biệt hoàn toàn với khách hàng; tích hợp bảng điều khiển (Dashboard) và menu điều hướng trực quan.
-2. **Quản lý khách hàng:** Hiển thị danh sách tài khoản, hỗ trợ Reset mật khẩu và Khóa/Mở khóa trạng thái tài khoản.
-3. **Quản lý loại sản phẩm:** Thêm, Sửa, Xóa hoặc Ẩn các hãng điện thoại (ví dụ: Apple, Samsung, Xiaomi,...).
-4. **Quản lý danh mục sản phẩm (Điện thoại):** 
-   - Thêm sản phẩm mới (Loại, Mã, Tên, Hình ảnh, Mô tả cấu hình).
-   - Sửa sản phẩm (form điền sẵn thông tin cũ).
-   - Xóa / Ẩn sản phẩm khỏi danh sách bán hàng.
-5. **Quản lý Nhập sản phẩm:** Quản lý phiếu nhập (Ngày nhập, giá nhập, số lượng cho từng sản phẩm - không quản lý nhà cung cấp). Phiếu nhập chỉ được sửa trước khi bấm **"Hoàn thành"** (khóa cứng sau khi hoàn thành).
-6. **Quản lý giá bán:** Thiết lập tỉ lệ % lợi nhuận theo loại hoặc từng sản phẩm; tra cứu nhanh giá vốn, % lợi nhuận và giá bán thực tế.
-7. **Quản lý đơn đặt hàng:** Tra cứu theo khoảng thời gian và tình trạng đơn; xem chi tiết và cập nhật trạng thái (*Mới đặt, Đã xử lý, Đã giao, Hủy*).
-8. **Quản lý tồn kho & Báo cáo:** Tra cứu tồn kho theo sản phẩm/loại sản phẩm; cơ chế cảnh báo hàng sắp hết (dưới ngưỡng giới hạn); báo cáo Xuất - Nhập - Tồn theo khoảng thời gian tùy chọn.
+*Dành cho quản trị viên vận hành hệ thống:*
+1. **Xác thực Admin (`login-admin.html`):** Trang đăng nhập riêng biệt; bảo vệ đường dẫn `admin.html` bằng cơ chế kiểm tra session token/localStorage (`currentAdmin`).
+2. **Quản lý khách hàng:** Hiển thị danh sách tài khoản, hỗ trợ Reset mật khẩu và Khóa / Mở khóa trạng thái tài khoản.
+3. **Quản lý loại sản phẩm:** Thêm, Sửa, Xóa hoặc Ẩn các thương hiệu điện thoại (Apple, Samsung, Xiaomi,...).
+4. **Quản lý danh mục sản phẩm:** 
+   - Thêm sản phẩm mới (Hãng, Mã, Tên, Hình ảnh, Cấu hình).
+   - Chỉnh sửa thông tin sản phẩm trực quan.
+   - Ẩn/Hiện sản phẩm trên giao diện bán hàng.
+5. **Quản lý Nhập hàng:** Lập phiếu nhập (Ngày nhập, giá nhập, số lượng từng máy). Phiếu chỉ được chỉnh sửa trước khi bấm **"Hoàn thành"** (khóa cứng sau khi chốt đơn).
+6. **Quản lý giá bán & Lợi nhuận:** Thiết lập tỉ lệ % lợi nhuận theo danh mục hoặc theo từng sản phẩm; tự động tính toán giá bán ra dựa trên giá vốn.
+7. **Quản lý đơn hàng:** Tra cứu theo mốc thời gian và trạng thái; cập nhật tiến độ (*Mới đặt, Đã xử lý, Đã giao, Đã hủy*).
+8. **Quản lý tồn kho & Báo cáo:** Cảnh báo các mặt hàng sắp hết hàng theo ngưỡng; lập báo cáo Xuất - Nhập - Tồn kho.
 
 ### II. Phân hệ Khách hàng (End-user - 5.0 điểm)
-*Dành cho khách truy cập website mua sắm:*
-1. **Tài khoản & Xác thực:** Đăng ký, Đăng nhập/Đăng xuất (hiển thị tên tài khoản khi đăng nhập thành công), trang quản lý và cập nhật thông tin cá nhân.
-2. **Hiển thị & Tìm kiếm sản phẩm:** 
-   - Trang chủ/Danh sách có phân trang (Pagination).
-   - Trang chi tiết sản phẩm hiển thị đầy đủ hình ảnh, thông số cấu hình.
-   - Tìm kiếm cơ bản theo tên hoặc tìm kiếm nâng cao kết hợp nhiều tiêu chí (Tên + Hãng + Khoảng giá).
-3. **Giỏ hàng & Mua hàng:** Thêm sản phẩm vào giỏ hàng, tùy chỉnh số lượng hoặc xóa sản phẩm. Chọn/nhập địa chỉ nhận hàng, chọn hình thức thanh toán (mặc định COD - Tiền mặt khi nhận hàng) và bước xác nhận đơn hàng tổng quan.
-4. **Lịch sử mua hàng:** Trang tra cứu toàn bộ các đơn hàng cá nhân đã đặt thành công.
+*Dành cho khách hàng tham quan mua sắm:*
+1. **Tài khoản & Xác thực (`login.html`):** Đăng ký tài khoản, đăng nhập/đăng xuất, lưu thông tin phiên làm việc vào `currentUser`.
+2. **Hiển thị & Tìm kiếm sản phẩm (`index.html`):** 
+   - Danh sách sản phẩm có phân trang (Pagination).
+   - Bộ lọc đa tiêu chí: Theo hãng, khoảng giá, từ khóa tìm kiếm.
+   - Hộp thoại (Modal) hoặc khu vực xem chi tiết thông số kỹ thuật.
+3. **Giỏ hàng & Đặt hàng (`shop.js`, `cart-icon.js`):** 
+   - Thêm sản phẩm vào giỏ, điều chỉnh số lượng (có debounce/clamp giá trị), xóa mặt hàng.
+   - Tự động cập nhật số lượng badge trên icon giỏ hàng theo thời gian thực.
+   - Nhập thông tin giao hàng, chọn hình thức thanh toán COD và xác nhận lưu đơn hàng vào `localStorage`.
 
 ---
 
-## 🔗 3. Nguyên lý liên kết & Bảo mật giả lập
+## 🔒 3. Nguyên lý bảo mật & Lưu trữ giả lập (Local-first)
 
-* **Điều hướng Khách hàng:** Từ `index.html` chọn sản phẩm chuyển hướng sang `product-detail.html?id=xxx`. Hoàn tất đơn hàng ở `cart.html` sẽ đẩy dữ liệu vào `localStorage` và chuyển đến `order-history.html`.
-* **Phân quyền bảo mật giả lập (Client-side):** Sử dụng `localStorage.getItem('currentUser')` hoặc `localStorage.getItem('currentAdmin')` thông qua JavaScript ở đầu mỗi trang. Nếu chưa đăng nhập mà truy cập `profile.html` hoặc `admin/dashboard.html`, hệ thống tự động điều hướng (`window.location.href`) ép về trang đăng nhập tương ứng.
+* **Phân quyền truy cập:**
+  * Trang `admin.html` kiểm tra khóa `currentAdmin` trong `localStorage`. Nếu không tồn tại hoặc không hợp lệ, hệ thống tự động chuyển hướng (`location.replace("login-admin.html")`).
+  * Người dùng thông thường sau khi đăng nhập lưu thông tin vào `currentUser`.
+* **Cơ chế lưu trữ:** Toàn bộ bảng dữ liệu danh mục sản phẩm, phiếu nhập, đơn hàng, tài khoản người dùng được khởi tạo và đồng bộ qua API `localStorage` của trình duyệt.
 
 ---
 
 ## 🚀 4. Hướng dẫn chạy đồ án
-1. Clone hoặc tải mã nguồn về máy.
-2. Mở thư mục dự án bằng **Visual Studio Code**.
-3. Cài đặt extension **Live Server**.
-4. Click chuột phải vào file `index.html` (phía khách hàng) hoặc `admin/login.html` (phía quản trị) và chọn **Open with Live Server** để trải nghiệm.
+
+1. Mở thư mục `quan-ly-cua-hang-dien-thoai` bằng **Visual Studio Code**.
+2. Cài đặt tiện ích mở rộng **Live Server** (của tác giả Ritwick Dey).
+3. Trải nghiệm các phân hệ:
+   - **Giao diện Khách hàng:** Click chuột phải vào `index.html` $\rightarrow$ chọn **Open with Live Server**.
+   - **Giao diện Quản trị:** Click chuột phải vào `admin/login-admin.html` $\rightarrow$ chọn **Open with Live Server**.
