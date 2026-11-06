@@ -59,7 +59,6 @@ window.onhashchange = showTab;
 showTab();
 
 
-// Xử lý nút mở Modal
 var openButtons = document.querySelectorAll("[data-open]");
 for (var i = 0; i < openButtons.length; i++) {
   openButtons[i].onclick = function () {
@@ -82,9 +81,7 @@ if (btnLogout) {
   };
 }
 
-// ==========================================================================
-// 1. TỔNG QUAN (DASHBOARD)
-// ==========================================================================
+// 1. DASHBOARD
 function renderDashboard() {
   var users = JSON.parse(localStorage.getItem("users") || "[]");
   var products = JSON.parse(localStorage.getItem("products") || "[]");
@@ -154,9 +151,7 @@ function renderDashboard() {
   }
 }
 
-// ==========================================================================
 // 2. QUẢN LÝ KHÁCH HÀNG (USERS)
-// ==========================================================================
 function users_render() {
   var users = JSON.parse(localStorage.getItem("users") || "[]");
   var inputSearch = document.getElementById("users-search");
@@ -218,9 +213,7 @@ function users_resetPassword(id) {
   }
 }
 
-// ==========================================================================
 // 3. QUẢN LÝ HÃNG SẢN XUẤT (CATEGORIES)
-// ==========================================================================
 var editingCatId = null;
 
 function categories_render() {
@@ -293,8 +286,7 @@ function categories_delete(id) {
       alert("Không thể xóa hãng này vì đang có sản phẩm thuộc hãng!");
       return;
     }
-  }
-
+  }   
   if (confirm("Bạn có chắc chắn muốn xóa hãng này?")) {
     var cats = JSON.parse(localStorage.getItem("categories") || "[]");
     var newCats = [];
@@ -346,9 +338,7 @@ if (formCat) {
   };
 }
 
-// ==========================================================================
 // 4. QUẢN LÝ SẢN PHẨM (PRODUCTS)
-// ==========================================================================
 var editingProdId = null;
 var currentProdImgArray = [];
 
@@ -552,9 +542,7 @@ if (formProd) {
   };
 }
 
-// ==========================================================================
 // 5. QUẢN LÝ NHẬP HÀNG (IMPORTS)
-// ==========================================================================
 var editingImportId = null;
 
 function imports_render() {
@@ -750,9 +738,7 @@ if (formImp) {
   };
 }
 
-// ==========================================================================
-// 6. QUẢN LÝ GIÁ BÁN & % LỢI NHUẬN (PRICING)
-// ==========================================================================
+// 6. QUẢN LÝ GIÁ BÁN & % LỢI NHUẬN
 function calculateCostPrices() {
   var imports = JSON.parse(localStorage.getItem("imports") || "[]");
   var costMap = {};
