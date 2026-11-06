@@ -71,7 +71,6 @@ for (var i = 0; i < openButtons.length; i++) {
   };
 }
 
-// Đăng xuất
 var btnLogout = document.getElementById("btn-logout");
 if (btnLogout) {
   btnLogout.onclick = function (e) {
@@ -345,7 +344,7 @@ if (formCat) {
 }
 
 // ==========================================================================
-// 4. QUẢN LÝ SẢN PHẨM (PRODUCTS) - MẢNG ĐƯỜNG DẪN ẢNH
+// 4. QUẢN LÝ SẢN PHẨM (PRODUCTS)
 // ==========================================================================
 var editingProdId = null;
 var currentProdImgArray = [];
@@ -439,10 +438,13 @@ if (btnOpenProd) {
     editingProdId = null;
     currentProdImgArray = [];
     updateCategoryDropdowns();
+
     var form = document.querySelector("#dlg-product form");
     if (form) form.reset();
     var preview = document.getElementById("p-preview");
     if (preview) preview.style.backgroundImage = "none";
+    var dlg = document.getElementById("dlg-product");
+    if (dlg) dlg.showModal();
   };
 }
 
@@ -662,6 +664,9 @@ if (btnOpenImp) {
     if (container) container.innerHTML = "";
     document.getElementById("i-date").value = new Date().toISOString().split("T")[0];
     imports_addLine();
+
+    var dlg = document.getElementById("dlg-import");
+    if (dlg) dlg.showModal();
   };
 }
 
