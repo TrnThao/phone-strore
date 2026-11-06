@@ -374,19 +374,10 @@ function initDefaultData() {
 
 initDefaultData();
 
-// ==========================================================================
-// CÁC HÀM TIỆN ÍCH DÙNG CHUNG PHÍA CLIENT (HEADER, FOOTER, GIỎ HÀNG)
-// ==========================================================================
-
-// Định dạng tiền tệ
 function formatCurrency(num) {
   return Number(num || 0).toLocaleString("vi-VN") + " ₫";
 }
 
-//Đã fix lỗi giỏ hàng người này mà người kia vẫn thấy +
-//Đã fix lỗi không thanh toán được / không xóa được <<bắt đầu từ dòng này
-
-// Mỗi người dùng có giỏ hàng riêng, khóa theo id (hoặc name nếu không có id)
 function cartKey() {
   const u = JSON.parse(sessionStorage.getItem("currentUser") || "null");
   return u ? "userCart_" + (u.id || u.name) : "userCart_guest";
@@ -399,7 +390,7 @@ function getCart() {
 function saveCart(cart) {
   localStorage.setItem(cartKey(), JSON.stringify(cart));
   updateCartBadge();
-}   //<<Kết thúc code sửa
+}
 
 // Cập nhật số lượng sản phẩm trên icon giỏ hàng ở header
 function updateCartBadge() {
