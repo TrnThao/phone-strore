@@ -1,27 +1,30 @@
 // Danh sách hãng (dùng cho nút lọc và chi tiết sản phẩm)
 const categoryFilter = document.getElementById("categoryFilter");
 const categories = JSON.parse(localStorage.getItem("categories") || "[]");
-
-
-
 const products = JSON.parse(localStorage.getItem("products") || "[]");
 const imports = JSON.parse(localStorage.getItem("imports") || "[]").filter(importRecord => importRecord.status === "done");
 
-
 const productContainer = document.getElementById("productContainer");
 
+// 1. TẠO THẺ SẢN PHẨM (Chỉ tạo sản phẩm đang kinh doanh và hãng đang BẬT)
 if (productContainer) {
+  const danhSachHangHoatDong = new Set(
+    categories
+      .filter(c => c.status !== false)
+      .map(c => String(c.id))
+  );
+
   products
-    .filter(product => product.status !== false)
+    .filter(product => product.status !== false && danhSachHangHoatDong.has(String(product.catId)))
     .forEach(product => {
       const productBox = document.createElement("div");
       productBox.className = "sanpham";
 
       const productList = document.createElement("div");
       productList.className = "productList";
-      productList.dataset.productId = product.id;
+      productList.dataset.productId = String(product.id);
 
-      if (product.img) {
+      if (product.img && product.img.length > 0) {
         const image = document.createElement("img");
         image.src = product.img[0];
         image.alt = product.name;
@@ -34,25 +37,23 @@ if (productContainer) {
     });
 }
 
-
+// 2. TÍNH GIÁ BÁN
 function getProductPrice(product) {
-  const category = categories.find(item => item.id === product.catId);
+  const category = categories.find(item => String(item.id) === String(product.catId));
   const importItem = imports
-    .flatMap(record => record.items)
-    .find(item => item.prodId === product.id);
+    .flatMap(record => record.items || [])
+    .find(item => String(item.prodId) === String(product.id));
 
   const importPrice = importItem?.importPrice ?? 0;
   const profitRate = Number(product.customProfitRate ?? category?.profitRate ?? 10);
-  // const profitRate = category?.profitRate ?? 10;
 
   return importPrice * (1 + profitRate / 100);
 }
 
-
-
+// 3. VẼ NỘI DUNG VÀ NÚT BẤM CHO TỪNG CARD
 document.querySelectorAll(".productList").forEach(productList => {
   const selectedId = productList.dataset.productId;
-  const product = products.find(item => item.id === selectedId);
+  const product = products.find(item => String(item.id) === String(selectedId));
 
   if (!product) return;
 
@@ -63,7 +64,7 @@ document.querySelectorAll(".productList").forEach(productList => {
   name.textContent = product.name;
 
   const price = document.createElement("h3");
-  price.textContent = formatCurrency(getProductPrice(product));
+  price.textContent = typeof formatCurrency === "function" ? formatCurrency(getProductPrice(product)) : getProductPrice(product).toLocaleString("vi-VN") + " ₫";
 
   const detailButton = document.createElement("button");
   detailButton.type = "button";
@@ -74,6 +75,7 @@ document.querySelectorAll(".productList").forEach(productList => {
   card.append(name, price, detailButton);
 });
 
+// 4. QUẢN LÝ PHÂN TRANG VÀ HIỂN THỊ
 const maxsp = 9;
 const cacSanPham = Array.from(
   document.querySelectorAll("#productContainer .sanpham")
@@ -82,35 +84,34 @@ let sanPhamPhuHop = [...cacSanPham];
 let trangHienTai = 0;
 const pagination = document.getElementById("pagination");
 
-
 function hienTrang() {
-
   const batDau = trangHienTai * maxsp;
   const sanPhamTrangNay = sanPhamPhuHop.slice(batDau, batDau + maxsp);
+  
   cacSanPham.forEach(sanPham => {
     sanPham.hidden = !sanPhamTrangNay.includes(sanPham);
   });
+  
+  if (!pagination) return;
   pagination.innerHTML = "";
-  const sotrang = Math.ceil(sanPhamPhuHop.length / 9);
+  const sotrang = Math.ceil(sanPhamPhuHop.length / maxsp);
 
+  for (let i = 0; i < sotrang; i++) {
+    const nutTrang = document.createElement("button");
+    nutTrang.type = "button";
+    nutTrang.textContent = i + 1;
 
-for (let i = 0; i < sotrang; i++) {
-  const nutTrang = document.createElement("button");
-  nutTrang.type = "button";
-  nutTrang.textContent = i + 1;
+    if (i === trangHienTai) nutTrang.classList.add("active");
 
-  if (i === trangHienTai) nutTrang.classList.add("active");
-
-
-  nutTrang.addEventListener("click", () => {
-    trangHienTai = i;
-    hienTrang();
-  });
-  pagination.appendChild(nutTrang);
+    nutTrang.addEventListener("click", () => {
+      trangHienTai = i;
+      hienTrang();
+    });
+    pagination.appendChild(nutTrang);
+  }
 }
-}
-hienTrang();
-// 1. Hàm bỏ dấu tiếng Việt để tìm "dien thoai" vẫn ra "điện thoại"
+
+// 5. LỌC THEO TỪ KHÓA VÀ KHOẢNG GIÁ
 const norm = s => String(s || "")
   .normalize("NFD")
   .replace(/[\u0300-\u036f]/g, "")
@@ -119,60 +120,19 @@ const norm = s => String(s || "")
   .trim();
 
 function loc() {
-  const keyword = norm(document.getElementById("fQ").value);
-  const selectedCategory = document.getElementById("categoryFilter").value;
+  const inputQ = document.getElementById("fQ");
+  const keyword = inputQ ? norm(inputQ.value) : "";
+  const priceMin = document.getElementById("price-min")?.value;
+  const priceMax = document.getElementById("price-max")?.value;
+  const min = (priceMin === "" || priceMin == null) ? null : Number(priceMin);
+  const max = (priceMax === "" || priceMax == null) ? null : Number(priceMax);
 
-  const priceMin = (document.getElementById("price-min").value);
-  const priceMax = (document.getElementById("price-max").value);
-  const min = priceMin === "" ? null : Number(priceMin);
-  const max = priceMax === "" ? null : Number(priceMax);
-
-  sanPhamPhuHop = cacSanPham.filter(card => {
-    const productList = card.querySelector(".productList");
-
-    const product = products.find(
-      item => item.id === productList.dataset.productId
-    );
-    card = productList.closest(".sanpham");
-
-    if (!product || !card) return;
-
-    const matchName = norm(product.name).includes(keyword);
-    const matchCategory =
-      !selectedCategory || product.catId === selectedCategory;
-
-
-
-    const price = getProductPrice(product);
-    const matchPrice =
-      (min === null || price >= min) &&
-      (max === null || price <= max);
-
-      return matchName && matchCategory && matchPrice;
-
-  });
-  trangHienTai = 0;
-  hienTrang();
-}
-hienTrang();
-
-
-// ========================================
-// 5. LỌC THEO HÃNG (Apple, Samsung, Xiaomi, Oppo, Vivo)
-// Hàm mới, không đụng tới hàm loc() ở trên
-// ========================================
-
-// Hãng đang được chọn ("" = hiển thị tất cả)
-let hangDangChon = "";
-
-// Chỉ lọc theo hãng rồi hiển thị lại danh sách + phân trang
-function locTheoHang(catId) {
-  hangDangChon = catId;
+  // Lấy các hãng hợp lệ
+  const danhSachHangHoatDong = new Set(
+    categories.filter(c => c.status !== false).map(c => String(c.id))
+  );
 
   sanPhamPhuHop = cacSanPham.filter(card => {
-    // Không chọn hãng nào thì hiện tất cả
-    if (!hangDangChon) return true;
-
     const productList = card.querySelector(".productList");
     if (!productList) return false;
 
@@ -181,14 +141,65 @@ function locTheoHang(catId) {
     );
     if (!product) return false;
 
-    return String(product.catId) === String(hangDangChon);
+    // Phải là hãng đang bật
+    if (!danhSachHangHoatDong.has(String(product.catId))) return false;
+
+    // Lọc theo từ khóa tên
+    const matchName = norm(product.name).includes(keyword);
+
+    // Lọc theo nút hãng đang bấm (nếu có chọn)
+    const matchHang = hangDangChon === "" || String(product.catId) === String(hangDangChon);
+
+    // Lọc theo khoảng giá
+    const price = getProductPrice(product);
+    const matchPrice =
+      (min === null || price >= min) &&
+      (max === null || price <= max);
+
+    return matchName && matchHang && matchPrice;
   });
 
-  trangHienTai = 0; // quay về trang đầu
+  trangHienTai = 0;
   hienTrang();
 }
 
-// Tạo các nút hãng và gắn sự kiện click
+// 6. LỌC THEO HÃNG BẰNG NÚT BẤM
+let hangDangChon = "";
+
+function locTheoHang(catId) {
+  hangDangChon = catId || "";
+
+  const danhSachHangHoatDong = new Set(
+    categories
+      .filter(c => c.status !== false)
+      .map(c => String(c.id))
+  );
+
+  sanPhamPhuHop = cacSanPham.filter(card => {
+    const productList = card.querySelector(".productList");
+    if (!productList) return false;
+
+    const product = products.find(
+      item => String(item.id) === String(productList.dataset.productId)
+    );
+    if (!product) return false;
+
+    // Chỉ lấy sản phẩm có hãng đang mở
+    if (!danhSachHangHoatDong.has(String(product.catId))) return false;
+
+    // Nếu có chọn một hãng cụ thể
+    if (hangDangChon !== "") {
+      return String(product.catId) === String(hangDangChon);
+    }
+
+    return true;
+  });
+
+  trangHienTai = 0;
+  hienTrang();
+}
+
+// 7. KHỞI TẠO NÚT BẤM DANH MỤC HÃNG
 function khoiTaoNutHang() {
   if (!categoryFilter) return;
 
@@ -200,14 +211,12 @@ function khoiTaoNutHang() {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "nut-hang";
-      btn.dataset.id = category.id;
+      btn.dataset.id = String(category.id);
       btn.textContent = category.name;
 
       btn.addEventListener("click", () => {
-        // Bấm lại đúng nút đang chọn thì bỏ lọc
         const idMoi = hangDangChon === String(category.id) ? "" : String(category.id);
 
-        // Tô sáng nút đang chọn
         categoryFilter.querySelectorAll("button").forEach(b => {
           b.classList.toggle("active", idMoi !== "" && b.dataset.id === idMoi);
         });
@@ -219,13 +228,7 @@ function khoiTaoNutHang() {
     });
 }
 
-khoiTaoNutHang();
-
-
-// ========================================
-// 6. CHI TIẾT SẢN PHẨM
-// ========================================
-
+// 8. CHI TIẾT SẢN PHẨM
 function renderDetail(id) {
   const product = products.find(item => String(item.id) === String(id));
   if (!product) return;
@@ -247,10 +250,11 @@ function renderDetail(id) {
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
   addCart.addEventListener("click", function(){
-    window.Shop.addToCart(product.id);
-    addCart.textContent = "Đã thêm"
+    if (window.Shop && typeof window.Shop.addToCart === "function") {
+      window.Shop.addToCart(product.id);
+      addCart.textContent = "Đã thêm";
+    }
   });
-
 
   const btnNext = document.createElement("button");
   const btnPrev = document.createElement("button");
@@ -267,24 +271,22 @@ function renderDetail(id) {
 
   const title = document.createElement("h2");
   const image = document.createElement("img");
-  image.src = product.img[currentIndex];
+  const imgs = Array.isArray(product.img) ? product.img : (product.img ? [product.img] : []);
+  image.src = imgs[currentIndex] || "";
   image.alt = product.name || "Ảnh sản phẩm";
   title.textContent = product.name || "Chi tiết sản phẩm";
 
-
-  function nextImg(index) {
+  function nextImg() {
+    if (!imgs.length) return;
     currentIndex++;
-    if (currentIndex >= product.img.length) {
-      currentIndex = 0;
-    }
-    image.src = product.img[currentIndex];
+    if (currentIndex >= imgs.length) currentIndex = 0;
+    image.src = imgs[currentIndex];
   }
-  function preImg(index) {
+  function preImg() {
+    if (!imgs.length) return;
     currentIndex--;
-    if (currentIndex < 0) {
-      currentIndex = product.img.length - 1;
-    }
-    image.src = product.img[currentIndex];
+    if (currentIndex < 0) currentIndex = imgs.length - 1;
+    image.src = imgs[currentIndex];
   }
 
   dialog.append(closeButton, addCart, btnPrev, image, btnNext, title);
@@ -292,7 +294,7 @@ function renderDetail(id) {
   const details = [
     `Mã sản phẩm: ${product.code || "Chưa cập nhật"}`,
     `Hãng: ${category?.name || "Chưa cập nhật"}`,
-    `Giá bán: ${formatCurrency(getProductPrice(product))}`,
+    `Giá bán: ${typeof formatCurrency === "function" ? formatCurrency(getProductPrice(product)) : getProductPrice(product).toLocaleString("vi-VN") + " ₫"}`,
     `Mô tả: ${product.desc || "Chưa có mô tả"}`
   ];
   details.forEach(text => {
@@ -303,5 +305,7 @@ function renderDetail(id) {
 
   document.body.appendChild(dialog);
   dialog.showModal();
-
 }
+
+khoiTaoNutHang();
+locTheoHang("");

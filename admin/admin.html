@@ -57,7 +57,7 @@
     </section>
 
     <!-- ================= 2. KHÁCH HÀNG ================= -->
-    <section id="users" class="tab" hidden>
+    <section id="users" class="tab" style="display: none;">
       <div class="page-head"><h1>Quản lý khách hàng</h1></div>
 
       <div class="filter-bar">
@@ -71,7 +71,7 @@
     </section>
 
     <!-- ================= 3. HÃNG SẢN XUẤT ================= -->
-    <section id="categories" class="tab" hidden>
+    <section id="categories" class="tab" style="display: none;">
       <div class="page-head">
         <h1>Quản lý hãng sản xuất</h1>
         <button class="btn" data-open="dlg-category">+ Thêm hãng</button>
@@ -93,7 +93,7 @@
             </div>
           </div>
           <div class="dlg-actions">
-            <button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('dlg-category').close()">Hủy</button>
             <button class="btn" value="ok">Lưu</button>
           </div>
         </form>
@@ -101,7 +101,7 @@
     </section>
 
     <!-- ================= 4. SẢN PHẨM ================= -->
-    <section id="products" class="tab" hidden>
+    <section id="products" class="tab" style="display: none;">
       <div class="page-head">
         <h1>Quản lý sản phẩm</h1>
         <button class="btn" data-open="dlg-product">+ Thêm sản phẩm</button>
@@ -151,7 +151,7 @@
     </section>
 
     <!-- ================= 5. NHẬP HÀNG ================= -->
-    <section id="imports" class="tab" hidden>
+    <section id="imports" class="tab" style="display: none;">
       <div class="page-head">
         <h1>Quản lý nhập hàng</h1>
         <button class="btn" data-open="dlg-import">+ Thêm phiếu nhập</button>
@@ -189,7 +189,7 @@
             <button type="button" class="btn btn-sm btn-ghost" id="import-add-line">+ Thêm dòng</button>
           </div>
           <div class="dlg-actions">
-            <button class="btn btn-ghost" value="cancel" formnovalidate>Hủy</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('dlg-import').close()">Hủy</button>
             <button class="btn" value="ok">Lưu phiếu</button>
           </div>
         </form>
@@ -197,7 +197,7 @@
     </section>
 
     <!-- ================= 6. GIÁ BÁN ================= -->
-    <section id="pricing" class="tab" hidden>
+    <section id="pricing" class="tab" style="display: none;">
       <div class="page-head"><h1>Quản lý giá bán</h1></div>
 
       <div class="card-box">
@@ -224,7 +224,7 @@
     </section>
 
     <!-- ================= 7. ĐƠN HÀNG ================= -->
-    <section id="orders" class="tab" hidden>
+    <section id="orders" class="tab" style="display: none;">
       <div class="page-head"><h1>Quản lý đơn hàng</h1></div>
 
       <div class="filter-bar">
@@ -268,7 +268,7 @@
             </div>
           </div>
           <div class="dlg-actions">
-            <button class="btn btn-ghost" value="cancel" formnovalidate>Đóng</button>
+            <button type="button" class="btn btn-ghost" onclick="document.getElementById('dlg-order').close()">Đóng</button>
             <button class="btn" value="ok">Cập nhật</button>
           </div>
         </form>
@@ -276,7 +276,7 @@
     </section>
 
     <!-- ================= 8. TỒN KHO ================= -->
-    <section id="inventory" class="tab" hidden>
+    <section id="inventory" class="tab" style="display: none;">
       <div class="page-head"><h1>Quản lý tồn kho</h1></div>
 
       <!-- Cảnh báo sắp hết hàng -->
