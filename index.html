@@ -28,7 +28,7 @@
           <rect x="6" y="2" width="12" height="20" rx="2.5" />
           <path d="M11 18.5h2" />
         </svg>
-        <span>Cửa hàng<br>điện thoại</span>
+        <span>SeoPhone X</span>
       </a>
 
       <!-- Danh mục: rê chuột hoặc bấm vào để mở menu -->
@@ -150,6 +150,63 @@
     </div>
   </div>
 
+   <!-- Quảng cáo / ưu đãi nổi bật -->
+  <section class="qc" aria-label="Ưu đãi nổi bật">
+    <div class="qc-tieude">ƯU ĐÃI NỔI BẬT</div>
+
+    <div class="qc-luoi">
+      <article class="qc-chinh">
+        <div class="qc-chinh-chu">
+          <span class="qc-nhan">Hàng mới về</span>
+          <h2>iPhone 15 Pro Max</h2>
+          <p class="qc-giamgia">Giảm đến 3.000.000đ</p>
+          <p class="qc-thongso">Titan tự nhiên · 256GB · Chip A17 Pro · Bảo hành chính hãng</p>
+          <p class="qc-gia"><small>Chỉ từ</small><strong data-gia="SP01">29.900.000 ₫</strong></p>
+          <button class="qc-nut" type="button" onclick="renderDetail('SP01')">Mua ngay</button>
+        </div>
+        <div class="qc-chinh-anh">
+          <img src="assets/images/ip15prmm.png" alt="iPhone 15 Pro Max 256GB">
+        </div>
+      </article>
+
+      <article class="qc-phu qc-sang">
+        <div>
+          <span class="qc-nhan-nho">Trả góp 0%</span>
+          <h3>iPhone 15 128GB</h3>
+          <p class="qc-gia-nho"><span data-gia="SP02">19.950.000 ₫</span></p>
+          <button class="qc-nut-nho" type="button" onclick="renderDetail('SP02')">Xem chi tiết</button>
+        </div>
+        <img src="assets/images/ip15.png" alt="iPhone 15 128GB">
+      </article>
+
+      <article class="qc-phu qc-toi">
+        <div>
+          <span class="qc-nhan-nho">Bán chạy tuần này</span>
+          <h3>iPhone 13 128GB</h3>
+          <p class="qc-gia-nho"><span data-gia="SP03">13.800.000 ₫</span></p>
+          <button class="qc-nut-nho" type="button" onclick="renderDetail('SP03')">Xem chi tiết</button>
+        </div>
+        <img src="assets/images/iphone13-1.jpg" alt="iPhone 13 128GB">
+      </article>
+    </div>
+
+    <ul class="qc-camket">
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v10H1zM14 10h4l4 3v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+        <div><strong>Giao hàng nhanh</strong><small>Miễn phí toàn quốc</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+        <div><strong>Chính hãng 100%</strong><small>Bảo hành 12 tháng</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-15-6.7L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 15 6.7L21 16"/><path d="M16 16h5v5"/></svg></span>
+        <div><strong>Đổi trả 30 ngày</strong><small>Lỗi là đổi mới</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg></span>
+        <div><strong>Trả góp 0%</strong><small>Duyệt nhanh 15 phút</small></div></li>
+    </ul>
+  </section>
+
+
   <!-- Nội dung chính -->
   <div class="page">
 
@@ -179,7 +236,6 @@
     </aside>
 
     <main class="main-col">
-      <div class="section-title">ĐIỆN THOẠI</div>
 
       <div class="danhmuc">
         <div class="content" id="productContainer"></div>

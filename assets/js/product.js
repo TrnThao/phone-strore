@@ -121,6 +121,8 @@ const norm = s => String(s || "")
   .trim();
 
 function loc() {
+const qcl = document.querySelector(".qc");
+if (qcl) qcl.classList.add("qcl");
   hangDangChon = categoryFilter
     ? Array.from(categoryFilter.querySelectorAll("input:checked")).map(o => o.value)
     : [];
@@ -163,7 +165,6 @@ function loc() {
 
     return matchName && matchHang && matchPrice;
   });
-
   trangHienTai = 0;
   hienTrang();
 }
