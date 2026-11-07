@@ -161,17 +161,20 @@ function users_render() {
 
   var html = "";
   for (var i = 0; i < users.length; i++) {
-    var u = users[i];
-    var matchName = u.name.toLowerCase().indexOf(keyword) !== -1;
-    var matchEmail = u.email.toLowerCase().indexOf(keyword) !== -1;
-    var matchPhone = u.phone.indexOf(keyword) !== -1;
+    var u = users[i] || {};
+    var name = String(u.name || "");
+    var email = String(u.email || "");
+    var phone = String(u.phone || "");
+    var matchName = name.toLowerCase().indexOf(keyword) !== -1;
+    var matchEmail = email.toLowerCase().indexOf(keyword) !== -1;
+    var matchPhone = phone.indexOf(keyword) !== -1;
 
     if (matchName || matchEmail || matchPhone) {
       html += "<tr>" +
         "<td><b>" + u.id + "</b></td>" +
-        "<td>" + u.name + "</td>" +
-        "<td>" + u.email + "</td>" +
-        "<td>" + u.phone + "</td>" +
+        "<td>" + name + "</td>" +
+        "<td>" + email + "</td>" +
+        "<td>" + phone + "</td>" +
         "<td>" + (u.registerDate || "---") + "</td>" +
         "<td><span class=\"badge " + (u.status ? "on" : "locked") + "\">" + (u.status ? "Hoạt động" : "Đã khóa") + "</span></td>" +
         "<td class=\"actions\">" +
