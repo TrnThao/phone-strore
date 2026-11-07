@@ -167,11 +167,6 @@ products: [
   // 3. KHÁCH HÀNG (Users)
   users: [
     {
-      name: "admin",
-      password: "123"
-
-    },
-    {
       id: "KH01",
       name: "Nguyễn Văn An",
       email: "an.nguyen@gmail.com",
@@ -349,7 +344,7 @@ products: [
       address: "456 Lê Văn Sỹ, Phường 14, Quận 3, TP.HCM",
       date: "2026-03-27",
       payment: "Chuyển khoản",
-      status: "cancelled", // Đơn đã hủy
+      status: "cancelled",
       items: [
         { prodId: "SP02", name: "iPhone 15 128GB", price: 19950000, qty: 1 }
       ],
@@ -361,47 +356,24 @@ products: [
 // --- HÀM TỰ ĐỘNG NẠP VÀO LOCALSTORAGE NẾU CHƯA CÓ ---
 function initDefaultData() {
   if (!localStorage.getItem("categories")) {
-    localStorage.setItem("categories", JSON.stringify(SEED_DATA.categories));
+    localStorage.setItem("categories", JSON.stringify(SEED_DATA.categories || []));
   }
   if (!localStorage.getItem("products")) {
-    localStorage.setItem("products", JSON.stringify(SEED_DATA.products));
-  }
-  const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-  const seedImages = Object.fromEntries(
-    SEED_DATA.products
-      .filter(product => product.img)
-      .map(product => [product.id, product.img])
-  );
-
-  let imagesUpdated = false;
-
-  savedProducts.forEach(product => {
-    if (seedImages[product.id] && product.img !== seedImages[product.id]) {
-      product.img = seedImages[product.id];
-      imagesUpdated = true;
-    }
-  });
-
-  if (imagesUpdated) {
-    localStorage.setItem("products", JSON.stringify(savedProducts));
+    localStorage.setItem("products", JSON.stringify(SEED_DATA.products || []));
   }
   if (!localStorage.getItem("users")) {
-    localStorage.setItem("users", JSON.stringify(SEED_DATA.users));
+    localStorage.setItem("users", JSON.stringify(SEED_DATA.users || []));
   }
   if (!localStorage.getItem("imports")) {
-    localStorage.setItem("imports", JSON.stringify(SEED_DATA.imports));
+    localStorage.setItem("imports", JSON.stringify(SEED_DATA.imports || []));
   }
   if (!localStorage.getItem("orders")) {
-    localStorage.setItem("orders", JSON.stringify(SEED_DATA.orders));
+    localStorage.setItem("orders", JSON.stringify(SEED_DATA.orders || []));
   }
 }
+
 initDefaultData();
 
-// ==========================================================================
-// CÁC HÀM TIỆN ÍCH DÙNG CHUNG PHÍA CLIENT (HEADER, FOOTER, GIỎ HÀNG)
-// ==========================================================================
-
-// Định dạng tiền tệ
 function formatCurrency(num) {
   return Number(num || 0).toLocaleString("vi-VN") + " ₫";
 }
@@ -439,7 +411,7 @@ function updateCartBadge() {
 
 // Kiểm tra phiên đăng nhập của khách hàng
 function getCurrentUser() {
-  return JSON.parse(localStorage.getItem("currentUser") || "null");
+  return JSON.parse(sessionStorage.getItem("currentUser") || "null");
 }
 
 // Render header dùng chung cho các trang khách hàng
