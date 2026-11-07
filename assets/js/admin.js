@@ -162,9 +162,9 @@ function users_render() {
   var html = "";
   for (var i = 0; i < users.length; i++) {
     var u = users[i];
-    var matchName = u.name.toLowerCase().indexOf(keyword) !== -1;
-    var matchEmail = u.email.toLowerCase().indexOf(keyword) !== -1;
-    var matchPhone = u.phone.indexOf(keyword) !== -1;
+    var matchName = (u.name || "").toLowerCase().indexOf(keyword) !== -1;
+    var matchEmail = (u.email || "").toLowerCase().indexOf(keyword) !== -1;
+    var matchPhone = (u.phone || "").indexOf(keyword) !== -1;
 
     if (matchName || matchEmail || matchPhone) {
       html += "<tr>" +
