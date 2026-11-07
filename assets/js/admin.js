@@ -859,9 +859,7 @@ function pricing_clearProdRate(prodId) {
   pricing_updateProdRate(prodId, "");
 }
 
-// ==========================================================================
 // 7. QUẢN LÝ ĐƠN HÀNG (ORDERS)
-// ==========================================================================
 var currentViewingOrderId = null;
 
 function orders_render() {
@@ -934,11 +932,22 @@ function orders_viewDetail(id) {
       itemsBody.innerHTML = htmlItems;
 
       var statusSelect = document.getElementById("order-status-select");
-      statusSelect.innerHTML =
-        "<option value=\"new\"" + (o.status === "new" ? " selected" : "") + ">Mới đặt</option>" +
-        "<option value=\"processed\"" + (o.status === "processed" ? " selected" : "") + ">Đã xử lý</option>" +
-        "<option value=\"delivered\"" + (o.status === "delivered" ? " selected" : "") + ">Đã giao</option>" +
-        "<option value=\"cancelled\"" + (o.status === "cancelled" ? " selected" : "") + ">Đã hủy</option>";
+      var btnSubmit = document.querySelector("#dlg-order button[type='submit']");
+      var isDelivered = (o.status === "delivered");
+
+      if (isDelivered) {
+        statusSelect.innerHTML = "<option value=\"delivered\" selected>Đã giao </option>";
+        statusSelect.disabled = true;
+        if (btnSubmit) btnSubmit.style.display = "none";
+      } else {
+        statusSelect.disabled = false;
+        statusSelect.innerHTML =
+          "<option value=\"new\"" + (o.status === "new" ? " selected" : "") + ">Mới đặt</option>" +
+          "<option value=\"processed\"" + (o.status === "processed" ? " selected" : "") + ">Đã xử lý</option>" +
+          "<option value=\"delivered\">Đã giao</option>" +
+          "<option value=\"cancelled\"" + (o.status === "cancelled" ? " selected" : "") + ">Đã hủy</option>";
+        if (btnSubmit) btnSubmit.style.display = "inline-block";
+      }
 
       document.getElementById("dlg-order").showModal();
       break;
@@ -951,25 +960,29 @@ if (formOrd) {
   formOrd.onsubmit = function (e) {
     e.preventDefault();
     var newStatus = document.getElementById("order-status-select").value;
+
     if (currentViewingOrderId) {
       var orders = JSON.parse(localStorage.getItem("orders") || "[]");
       for (var i = 0; i < orders.length; i++) {
         if (orders[i].id === currentViewingOrderId) {
+          if (orders[i].status === "delivered") {
+            alert("Đơn hàng này đã giao thành công và đã bị khóa, không thể thay đổi!");
+            document.getElementById("dlg-order").close();
+            return;
+          }
           orders[i].status = newStatus;
           break;
         }
       }
       localStorage.setItem("orders", JSON.stringify(orders));
       orders_render();
-      renderDashboard();
+      if (typeof renderDashboard === "function") renderDashboard();
     }
     document.getElementById("dlg-order").close();
   };
 }
 
-// ==========================================================================
 // 8. QUẢN LÝ TỒN KHO & BÁO CÁO XUẤT NHẬP TỒN (INVENTORY)
-// ==========================================================================
 function calculateCurrentInventory(upToDate) {
   upToDate = upToDate || null;
   var imports = JSON.parse(localStorage.getItem("imports") || "[]");
