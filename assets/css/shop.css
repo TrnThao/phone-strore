@@ -164,9 +164,9 @@
     flex-shrink: 0;
     height: 44px;
     padding: 0 16px;
-    background: rgba(212, 175, 55, 0.12);
+    background: rgba(255, 255, 255, 0.18);
     color: white;
-    border: 1px solid rgba(212, 175, 55, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
@@ -175,7 +175,7 @@
 }
 
 .khunglocsp a.gio-hang:hover {
-    background: rgba(212, 175, 55, 0.28);
+    background: rgba(255, 255, 255, 0.3);
     color: white;
     text-decoration: none;
 }

@@ -16,63 +16,61 @@
     <h1>CHÀO MỪNG ĐẾN VỚI CỬA HÀNG ĐIỆN THOẠI</h1>
   </div>
 
-  <!-- Header
-       Hàng 1: logo | Danh mục | ô tìm kiếm + nút Tìm kiếm | Giỏ hàng | Đăng nhập / người dùng
-       Hàng 2: khoảng giá + Xóa bộ lọc -->
+  <!-- Header (một hàng)
+       logo | Danh mục | ô tìm kiếm + nút Tìm kiếm | Giỏ hàng | Đăng nhập / người dùng
+       Hãng và Khoảng giá nằm ở khung Bộ lọc bên trái phần nội dung -->
   <div class="header">
     <div class="header-inner">
 
       <a class="brand" href="index.html">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="6" y="2" width="12" height="20" rx="2.5"/>
-          <path d="M11 18.5h2"/>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="6" y="2" width="12" height="20" rx="2.5" />
+          <path d="M11 18.5h2" />
         </svg>
-        <span>Cửa hàng<br>điện thoại</span>
+        <span>SeoPhone X</span>
       </a>
 
       <!-- Danh mục: rê chuột hoặc bấm vào để mở menu -->
       <div class="danh-muc" tabindex="0" role="button" aria-haspopup="true">
         <div class="danh-muc-nut">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
-            <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
           </svg>
           <span>Danh mục</span>
           <svg class="mui-ten" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6"/>
+            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
           </svg>
         </div>
         <nav class="danh-muc-menu" aria-label="Danh mục">
           <div class="menu-hop">
-            <div class="menu-muc">
-              <a data-link="products" href="?view=products">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18.5h2"/>
+            <a data-link="products" href="?view=products">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="6" y="2" width="12" height="20" rx="2.5" />
+                <path d="M11 18.5h2" />
               </svg>
               <span>Danh sách sản phẩm</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="m9 6 6 6-6 6"/>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m9 6 6 6-6 6" />
               </svg>
             </a>
-              <!-- Menu con: các hãng, do product.js tạo từ dữ liệu categories -->
-              <div class="menu-con">
-                <div class="menu-hop" id="menuHang"></div>
-              </div>
-            </div>
           </div>
         </nav>
       </div>
 
       <form action name="tksp" class="khunglocsp">
         <label class="locsp timkiem">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
           </svg>
           <span class="sr-only">Tên sản phẩm</span>
           <input id="fQ" name="tktsp" type="text" placeholder="Bạn muốn mua gì hôm nay? VD: iPhone 15">
@@ -81,70 +79,67 @@
         <button type="button" onclick="loc()">Tìm kiếm</button>
 
         <a class="gio-hang" data-link="cart" href="?view=cart">
-          <svg class="gio-hang-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
+          <svg class="gio-hang-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1" />
+            <circle cx="20" cy="21" r="1" />
+            <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
           </svg>
           <span>Giỏ hàng</span>
           <span class="gio-hang-badge" id="cart-count" hidden>0</span>
         </a>
-
-        <div class="locgia">
-          <span class="locgia-nhan">Khoảng giá (₫)</span>
-          <div class="locsp" style="margin:0">
-            <input class="input" id="price-min" min="0" placeholder="Giá từ (₫)" type="number"/>
-            <input class="input" id="price-max" min="0" placeholder="Giá đến (₫)" type="number"/>
-          </div>
-        </div>
-
-        <button class="" type="submit">Xóa bộ lọc</button>
       </form>
 
       <!-- Chưa đăng nhập: nút Đăng nhập -->
       <button id="dangnhap" type="button" onclick="location.href='login.html'">
         <span>Đăng nhập</span>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 21a8 8 0 0 1 16 0" />
         </svg>
       </button>
 
       <!-- Đã đăng nhập: biểu tượng người dùng + menu Hồ sơ / Lịch sử / Đăng xuất -->
       <div id="HienThiND" style="display: none;" tabindex="0">
         <div class="nd-nut">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21a8 8 0 0 1 16 0" />
           </svg>
           <span class="nd-chao">Chào mừng <strong id="HienThiTen"></strong>!</span>
           <svg class="mui-ten" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m6 9 6 6 6-6"/>
+            stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" />
           </svg>
         </div>
         <div class="nd-menu">
           <div class="menu-hop">
             <a data-link="profile" href="?view=profile">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10.5" r="2.2"/>
-                <path d="M5.5 16.5a3.5 3.5 0 0 1 7 0"/><path d="M15 9.5h3.5M15 13h3.5"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="2.5" />
+                <circle cx="9" cy="10.5" r="2.2" />
+                <path d="M5.5 16.5a3.5 3.5 0 0 1 7 0" />
+                <path d="M15 9.5h3.5M15 13h3.5" />
               </svg>
               <span>Hồ sơ cá nhân</span>
             </a>
             <a data-link="orders" href="?view=orders">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9.5 8h5M9.5 12h5"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
+                <path d="M9.5 8h5M9.5 12h5" />
               </svg>
               <span>Lịch sử mua hàng</span>
             </a>
             <button id="DangXuat" type="button">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                <path d="m16 17 5-5-5-5" />
+                <path d="M21 12H9" />
               </svg>
               <span>Đăng xuất</span>
             </button>
@@ -155,26 +150,106 @@
     </div>
   </div>
 
+   <!-- Quảng cáo / ưu đãi nổi bật -->
+  <section class="qc" aria-label="Ưu đãi nổi bật">
+    <div class="qc-tieude">ƯU ĐÃI NỔI BẬT</div>
+
+    <div class="qc-luoi">
+      <article class="qc-chinh">
+        <div class="qc-chinh-chu">
+          <span class="qc-nhan">Hàng mới về</span>
+          <h2>iPhone 15 Pro Max</h2>
+          <p class="qc-giamgia">Giảm đến 3.000.000đ</p>
+          <p class="qc-thongso">Titan tự nhiên · 256GB · Chip A17 Pro · Bảo hành chính hãng</p>
+          <p class="qc-gia"><small>Chỉ từ</small><strong data-gia="SP01">29.900.000 ₫</strong></p>
+          <button class="qc-nut" type="button" onclick="renderDetail('SP01')">Mua ngay</button>
+        </div>
+        <div class="qc-chinh-anh">
+          <img src="assets/images/ip15prmm.png" alt="iPhone 15 Pro Max 256GB">
+        </div>
+      </article>
+
+      <article class="qc-phu qc-sang">
+        <div>
+          <span class="qc-nhan-nho">Trả góp 0%</span>
+          <h3>iPhone 15 128GB</h3>
+          <p class="qc-gia-nho"><span data-gia="SP02">19.950.000 ₫</span></p>
+          <button class="qc-nut-nho" type="button" onclick="renderDetail('SP02')">Xem chi tiết</button>
+        </div>
+        <img src="assets/images/ip15.png" alt="iPhone 15 128GB">
+      </article>
+
+      <article class="qc-phu qc-toi">
+        <div>
+          <span class="qc-nhan-nho">Bán chạy tuần này</span>
+          <h3>iPhone 13 128GB</h3>
+          <p class="qc-gia-nho"><span data-gia="SP03">13.800.000 ₫</span></p>
+          <button class="qc-nut-nho" type="button" onclick="renderDetail('SP03')">Xem chi tiết</button>
+        </div>
+        <img src="assets/images/iphone13-1.jpg" alt="iPhone 13 128GB">
+      </article>
+    </div>
+
+    <ul class="qc-camket">
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13v10H1zM14 10h4l4 3v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg></span>
+        <div><strong>Giao hàng nhanh</strong><small>Miễn phí toàn quốc</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+        <div><strong>Chính hãng 100%</strong><small>Bảo hành 12 tháng</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-15-6.7L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 15 6.7L21 16"/><path d="M16 16h5v5"/></svg></span>
+        <div><strong>Đổi trả 30 ngày</strong><small>Lỗi là đổi mới</small></div></li>
+      <li><span class="qc-icon" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg></span>
+        <div><strong>Trả góp 0%</strong><small>Duyệt nhanh 15 phút</small></div></li>
+    </ul>
+  </section>
+
+
   <!-- Nội dung chính -->
   <div class="page">
-    <main class="main-col">
-      <div class="section-title">ĐIỆN THOẠI</div>
 
-      <div id="categoryFilter" class="cate-container"></div>
+    <!-- Thanh bên trái: bộ lọc Hãng sản phẩm + Khoảng giá -->
+    <aside class="sidebar" aria-label="Bộ lọc sản phẩm">
+      <div class="khung-loc">
+        <div class="khung-loc-dau">
+          <h2>Bộ lọc</h2>
+          <a class="xoa-loc" href="index.html">Xóa bộ lọc</a>
+        </div>
+
+        <div class="nhom-loc">
+          <h3>Hãng sản phẩm</h3>
+          <div id="categoryFilter" class="cate-container"></div>
+        </div>
+
+        <div class="nhom-loc">
+          <h3>Khoảng giá (₫)</h3>
+          <div class="gia-tu-den">
+            <input class="input" id="price-min" min="0" placeholder="Giá từ" type="number" aria-label="Giá từ" />
+            <span aria-hidden="true">–</span>
+            <input class="input" id="price-max" min="0" placeholder="Giá đến" type="number" aria-label="Giá đến" />
+          </div>
+          <button class="ap-dung" type="button" onclick="loc()">Áp dụng</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-col">
 
       <div class="danhmuc">
         <div class="content" id="productContainer"></div>
-        <nav id="pagination" class="pagination" aria-label="Phân trang sản phẩm"></nav>
       </div>
     </main>
   </div>
+  <nav id="pagination" class="pagination" aria-label="Phân trang sản phẩm"></nav>
 
   <a class="len-dau" href="#top" aria-label="Lên đầu trang">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-         stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="m6 15 6-6 6 6"/><path d="m6 21 6-6 6 6" opacity=".55"/>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m6 15 6-6 6 6" />
+      <path d="m6 21 6-6 6 6" opacity=".55" />
     </svg>
-    <span>Lên đầu</span>
   </a>
 
   <div class="footer">
