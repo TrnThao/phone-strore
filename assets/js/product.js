@@ -87,11 +87,11 @@ const pagination = document.getElementById("pagination");
 function hienTrang() {
   const batDau = trangHienTai * maxsp;
   const sanPhamTrangNay = sanPhamPhuHop.slice(batDau, batDau + maxsp);
-  
+
   cacSanPham.forEach(sanPham => {
     sanPham.hidden = !sanPhamTrangNay.includes(sanPham);
   });
-  
+
   if (!pagination) return;
   pagination.innerHTML = "";
   const sotrang = Math.ceil(sanPhamPhuHop.length / maxsp);
@@ -102,6 +102,7 @@ function hienTrang() {
     nutTrang.textContent = i + 1;
 
     if (i === trangHienTai) nutTrang.classList.add("active");
+    if (sotrang === 1) nutTrang.style.display = "none";
 
     nutTrang.addEventListener("click", () => {
       trangHienTai = i;
@@ -120,6 +121,10 @@ const norm = s => String(s || "")
   .trim();
 
 function loc() {
+  hangDangChon = categoryFilter
+    ? Array.from(categoryFilter.querySelectorAll("input:checked")).map(o => o.value)
+    : [];
+
   const inputQ = document.getElementById("fQ");
   const keyword = inputQ ? norm(inputQ.value) : "";
   const priceMin = document.getElementById("price-min")?.value;
@@ -148,7 +153,7 @@ function loc() {
     const matchName = norm(product.name).includes(keyword);
 
     // Lọc theo nút hãng đang bấm (nếu có chọn)
-    const matchHang = hangDangChon === "" || String(product.catId) === String(hangDangChon);
+    const matchHang = hangDangChon.length === 0 || hangDangChon.includes(String(product.catId));
 
     // Lọc theo khoảng giá
     const price = getProductPrice(product);
@@ -164,11 +169,9 @@ function loc() {
 }
 
 // 6. LỌC THEO HÃNG BẰNG NÚT BẤM
-let hangDangChon = "";
-
+let hangDangChon = [];
 function locTheoHang(catId) {
-  hangDangChon = catId || "";
-
+  hangDangChon = Array.isArray(catId) ? catId : (catId ? [String(catId)] : []);
   const danhSachHangHoatDong = new Set(
     categories
       .filter(c => c.status !== false)
@@ -188,8 +191,8 @@ function locTheoHang(catId) {
     if (!danhSachHangHoatDong.has(String(product.catId))) return false;
 
     // Nếu có chọn một hãng cụ thể
-    if (hangDangChon !== "") {
-      return String(product.catId) === String(hangDangChon);
+    if (hangDangChon.length > 0) {
+      return hangDangChon.includes(String(product.catId))
     }
 
     return true;
@@ -208,23 +211,16 @@ function khoiTaoNutHang() {
   categories
     .filter(category => category.status !== false)
     .forEach(category => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "nut-hang";
-      btn.dataset.id = String(category.id);
-      btn.textContent = category.name;
+      const label = document.createElement("label");
+      label.className = "nut-hang";
 
-      btn.addEventListener("click", () => {
-        const idMoi = hangDangChon === String(category.id) ? "" : String(category.id);
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.name = "hang";
+      checkbox.value = String(category.id);
 
-        categoryFilter.querySelectorAll("button").forEach(b => {
-          b.classList.toggle("active", idMoi !== "" && b.dataset.id === idMoi);
-        });
-
-        locTheoHang(idMoi);
-      });
-
-      categoryFilter.appendChild(btn);
+      label.append(checkbox, document.createTextNode(category.name));
+      categoryFilter.appendChild(label);
     });
 }
 
@@ -249,7 +245,7 @@ function renderDetail(id) {
   addCart.className = "cart";
   addCart.type = "button";
   addCart.textContent = "Thêm vào giỏ hàng";
-  addCart.addEventListener("click", function(){
+  addCart.addEventListener("click", function () {
     if (window.Shop && typeof window.Shop.addToCart === "function") {
       window.Shop.addToCart(product.id);
       addCart.textContent = "Đã thêm";

@@ -140,8 +140,7 @@ body {
 
 /* ========================================
    HEADER (dính trên cùng khi cuộn)
-   Hàng 1: logo | Danh mục | tìm kiếm | Tìm kiếm | Giỏ hàng | người dùng
-   Hàng 2: khoảng giá + Xóa bộ lọc
+   Một hàng: logo | Danh mục | tìm kiếm | Tìm kiếm | Giỏ hàng | người dùng
    (thứ tự hiển thị điều khiển bằng thuộc tính order)
    ======================================== */
 .header {
@@ -160,7 +159,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;   /* hàng 2 (lọc giá) nằm giữa, cân với hàng 1 */
     column-gap: 12px;
     row-gap: 0;
 }
@@ -170,16 +168,6 @@ body {
 .khunglocsp>* {
     margin-top: 5px;
     margin-bottom: 5px;
-}
-
-/* Phần tử ép xuống dòng, đồng thời là đường kẻ mảnh ngăn hàng 1 và hàng 2 */
-.header-inner::after {
-    content: "";
-    order: 7;
-    flex: 0 0 100%;
-    height: 1px;
-    margin: 4px 0;
-    background: rgba(255, 255, 255, 0.22);
 }
 
 .brand {
@@ -423,40 +411,6 @@ body:has(.danh-muc:focus-within)::after {
     display: inline-block;
 }
 
-.khunglocsp .locgia {
-    order: 8;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.khunglocsp .locgia .locsp {
-    display: flex;
-    gap: 6px;
-    padding: 3px;
-    background: rgba(255, 255, 255, 0.18);
-}
-
-.khunglocsp .locgia input {
-    width: 100px;
-    height: 32px;
-    padding: 0 8px;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background: white;
-    color: #1f2d3d;
-    font-weight: normal;
-    outline: none;
-}
-
-.khunglocsp .locgia input:focus {
-    border-color: #134e94;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
-}
-
 .khunglocsp button {
     padding: 0 16px;
     border-radius: 10px;
@@ -466,10 +420,11 @@ body:has(.danh-muc:focus-within)::after {
     transition: 0.2s;
 }
 
-/* Nút Tìm kiếm (hàng 1) */
+/* Nút Tìm kiếm */
 .khunglocsp button[type="button"] {
     order: 4;
     height: 44px;
+    font-size: 15px;
     background: white;
     color: #134e94;
     border: 1px solid white;
@@ -479,29 +434,122 @@ body:has(.danh-muc:focus-within)::after {
     background: #e6f0ff;
 }
 
-/* Nút Xóa bộ lọc (hàng 2) */
-.khunglocsp button[type="submit"] {
-    order: 9;
-    height: 38px;
-    background: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.khunglocsp button[type="submit"]:hover {
-    background: rgba(255, 255, 255, 0.18);
-}
-
 /* ========================================
-   BỐ CỤC TRANG (một cột)
+   BỐ CỤC TRANG (thanh bên lọc + danh sách sản phẩm)
    ======================================== */
 .page {
     max-width: 1240px;
-    margin: 20px auto 30px;
+    margin: 10px auto 30px;
     padding: 0 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+/* Thanh bên trái: dính khi cuộn (cao bằng header một hàng) */
+.sidebar {
+    flex: 0 0 280px;
+    width: 280px;
+    position: sticky;
+    top: 92px;
+    max-height: calc(100vh - 108px);
+    overflow-y: auto;
+}
+
+.khung-loc {
+    padding: 20px;
+    background: white;
+    border: 1px solid #dbe7f5;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(19, 78, 148, 0.08);
+}
+
+.khung-loc-dau {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.khung-loc-dau h2 {
+    font-size: 17px;
+    color: #0d3a70;
+}
+
+.xoa-loc {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 4px;
+    color: #134e94;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.xoa-loc:hover {
+    text-decoration: underline;
+}
+
+.nhom-loc h3 {
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #1f2d3d;
+}
+
+.nhom-loc+.nhom-loc {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e3eaf5;
+}
+
+/* Khoảng giá */
+.gia-tu-den {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4b5565;
+}
+
+.gia-tu-den input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #b6c7dd;
+    border-radius: 10px;
+    background: white;
+    color: #1f2d3d;
+    font-size: 14px;
+    outline: none;
+}
+
+.gia-tu-den input:focus {
+    border-color: #134e94;
+    box-shadow: 0 0 0 3px rgba(19, 78, 148, 0.15);
+}
+
+.ap-dung {
+    width: 100%;
+    height: 46px;
+    margin-top: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #134e94;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ap-dung:hover {
+    background: #0d3a70;
 }
 
 .main-col {
+    flex: 1;
+    min-width: 0;
     background: white;
     border: 1px solid #dbe7f5;
     border-radius: 12px;
@@ -529,42 +577,51 @@ body:has(.danh-muc:focus-within)::after {
 }
 
 /* ========================================
-   NÚT LỌC THEO HÃNG (viên thuốc)
+   NÚT LỌC THEO HÃNG (danh sách chọn 1, nằm trong thanh bên)
    ======================================== */
 .cate-container {
     display: flex;
 }
 
 #categoryFilter.cate-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    gap: 0;
     margin: 0;
-    padding: 18px 18px 2px;
+    padding: 0;
 }
 
 #categoryFilter .nut-hang {
-    padding: 8px 20px;
-    border: 1px solid #cfdcec;
-    border-radius: 999px;
-    background: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 6px;
+    border: none;
+    border-radius: 8px;
+    background: none;
     color: #1f2d3d;
     font-size: 15px;
+    text-align: left;
     cursor: pointer;
     transition: 0.2s;
 }
 
+
+
 #categoryFilter .nut-hang:hover {
-    border-color: #134e94;
-    background: #e6f0ff;
+    background: #f1f6fd;
     color: #134e94;
 }
 
 #categoryFilter .nut-hang.active {
+    color: #0d3a70;
+    font-weight: bold;
+}
+
+#categoryFilter .nut-hang.active::before {
     border-color: #134e94;
-    background: #134e94;
-    color: white;
+    background: radial-gradient(circle, #134e94 0 4px, white 5px);
 }
 
 /* ========================================
@@ -572,11 +629,11 @@ body:has(.danh-muc:focus-within)::after {
    Muốn 4 cột: đổi --cot: 3 thành --cot: 4
    ======================================== */
 .content {
-    --cot: 3;
+    --cot: 4;
     --gap: 16px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;   /* hàng cuối thiếu thẻ vẫn nằm giữa */
+    justify-content: left;   /* hàng cuối thiếu thẻ vẫn nằm giữa */
     gap: var(--gap);
     padding: 18px;
     border: none;
@@ -613,7 +670,7 @@ body:has(.danh-muc:focus-within)::after {
 
 .pic {
     display: block;
-    width: 100%;
+    width: 80%;
     height: 190px;
     margin: 0 auto 12px;
     object-fit: contain;
@@ -680,7 +737,7 @@ body:has(.danh-muc:focus-within)::after {
     position: static;
     clear: both;
     text-align: center;
-    padding: 12px 18px 20px;
+    padding: 0px 16px 30px;
     margin: 0;
 }
 
@@ -881,20 +938,33 @@ body:has(.danh-muc:focus-within)::after {
 /* ========================================
    MÀN HÌNH NHỎ
    ======================================== */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 700px) {
     /* Header cao nhiều hàng thì không cần dính trên cùng nữa */
     .header {
         position: relative;
+    }
+
+    /* Thanh bên chuyển lên trên danh sách sản phẩm */
+    .page {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        flex: none;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .main-col {
+        width: 100%;
     }
 }
 
 @media only screen and (max-width: 800px) {
     .content {
         --cot: 2;
-    }
-
-    .khunglocsp .locgia {
-        flex-wrap: wrap;
     }
 }
 
