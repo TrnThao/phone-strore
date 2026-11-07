@@ -1,8 +1,8 @@
 /* ========================================
-   BẢNG MÀU (tông xanh dương)
-   Xanh chính : #134e94   Xanh đậm : #0d3a70   Xanh sáng : #2a7de1
-   Xanh nhạt  : #e6f0ff   Viền nhạt: #cfdcec
-   Nền trang  : #f3f6fb   Chữ       : #1f2d3d
+   BẢNG MÀU (đen + vàng gold, khung vẫn màu trắng)
+   Đen        : #0d0d0d   Vàng chính: #d4af37   Vàng sáng: #f0d36b
+   Vàng đậm   : #a67c00   Vàng nhạt : #fbf3d5   Viền nhạt: #e3d9b8
+   Nền trang  : #f6f4ef   Chữ       : #1a1a1a
    ======================================== */
 
 * {
@@ -17,8 +17,8 @@ html {
 }
 
 body {
-    background-color: #f3f6fb;
-    color: #1f2d3d;
+    background-color: #f6f4ef;
+    color: #1a1a1a;
 }
 
 /* Chữ chỉ dành cho trình đọc màn hình (ẩn trên giao diện) */
@@ -37,8 +37,8 @@ body {
    ======================================== */
 .container {
     width: 100%;
-    border: 1px solid #cfdcec;
-    background: linear-gradient(135deg, #e6f0ff, #ffffff);
+    border: 1px solid #e3d9b8;
+    background: linear-gradient(135deg, #fbf3d5, #ffffff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,16 +47,16 @@ body {
 
 .dangki-login {
     width: 500px;
-    border: 1px solid #cfdcec;
+    border: 1px solid #e3d9b8;
     background: white;
     border-radius: 100px;
-    box-shadow: 0 10px 40px 0px rgba(19, 78, 148, 0.25);
+    box-shadow: 0 10px 40px 0px rgba(166, 124, 0, 0.25);
 
 }
 
 .dangki-login h1 {
     text-align: center;
-    color: #134e94;
+    color: #a67c00;
 }
 
 .dangki-login .dangki-login-form {
@@ -72,14 +72,14 @@ body {
     padding: 0 10px;
     outline: none;
     border: none;
-    border: 1px solid #b6c7dd;
+    border: 1px solid #d9cca0;
     border-radius: 20px;
     transition: 0.2s;
 }
 
 .dangki-login-form input:focus {
-    border-color: #134e94;
-    box-shadow: 0 0 0 3px rgba(19, 78, 148, 0.15);
+    border-color: #c9a227;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
 }
 
 .dangki-login button {
@@ -89,15 +89,15 @@ body {
     margin-bottom: 30px;
     border: none;
     border-radius: 20px;
-    background: #134e94;
-    color: white;
+    background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
+    color: #0d0d0d;
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .dangki-login button:hover {
-    background: #0d3a70;
+    background: #f0d36b;
 }
 
 /* ========================================
@@ -108,8 +108,9 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: #0b2447;
-    color: white;
+    background: #000000;
+    color: #d4af37;
+    border-bottom: 1px solid #a67c00;
 }
 
 .topbar h1 {
@@ -145,9 +146,10 @@ body {
    (thứ tự hiển thị điều khiển bằng thuộc tính order)
    ======================================== */
 .header {
-    background: linear-gradient(135deg, #0d3a70, #134e94 45%, #2a7de1);
+    background: linear-gradient(135deg, #000000, #141414 55%, #231c0a);
     color: white;
-    box-shadow: 0 2px 8px rgba(19, 78, 148, 0.35);
+    border-bottom: 1px solid #d4af37;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -179,7 +181,7 @@ body {
     flex: 0 0 100%;
     height: 1px;
     margin: 4px 0;
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(212, 175, 55, 0.35);
 }
 
 .brand {
@@ -187,7 +189,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: #d4af37;
     text-decoration: none;
     font-weight: bold;
     font-size: 17px;
@@ -209,8 +211,8 @@ body {
     gap: 8px;
     height: 44px;
     padding: 0 16px;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.55);
     border-radius: 10px;
     font-weight: bold;
     font-size: 15px;
@@ -223,12 +225,12 @@ body {
 .danh-muc:focus-within .danh-muc-nut,
 #HienThiND:hover .nd-nut,
 #HienThiND:focus-within .nd-nut {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(212, 175, 55, 0.28);
 }
 
 .danh-muc:focus-visible .danh-muc-nut,
 #HienThiND:focus-visible .nd-nut {
-    outline: 2px solid white;
+    outline: 2px solid #d4af37;
     outline-offset: 2px;
 }
 
@@ -272,7 +274,7 @@ body {
     padding: 8px;
     background: white;
     border-radius: 14px;
-    box-shadow: 0 12px 32px rgba(11, 36, 71, 0.35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .menu-hop a,
@@ -286,7 +288,7 @@ body {
     border: none;
     border-radius: 10px;
     background: none;
-    color: #1f2d3d;
+    color: #1a1a1a;
     font-size: 15px;
     font-weight: normal;
     text-align: left;
@@ -301,13 +303,13 @@ body {
 }
 
 .menu-hop svg:first-child {
-    color: #134e94;
+    color: #a67c00;
 }
 
 .menu-hop a:hover,
 .menu-hop button:hover {
-    background: #e6f0ff;
-    color: #134e94;
+    background: #fbf3d5;
+    color: #7a5c00;
     font-weight: bold;
 }
 
@@ -322,64 +324,6 @@ body {
     color: #dc2626;
 }
 
-/* ----- Menu con "Chọn hãng" bung sang bên phải mục Danh sách sản phẩm ----- */
-.menu-muc {
-    position: relative;
-}
-
-.menu-con {
-    display: none;
-    position: absolute;
-    top: -8px;
-    left: 100%;
-    width: 220px;
-    padding-left: 10px;        /* phần trong suốt nối liền menu và menu con */
-}
-
-.menu-muc:hover .menu-con,
-.menu-muc:focus-within .menu-con {
-    display: block;
-}
-
-/* Không có hãng nào thì không hiện menu con */
-.menu-muc:has(#menuHang:empty) .menu-con {
-    display: none !important;
-}
-
-/* Giữ nền xanh nhạt cho dòng "Danh sách sản phẩm" khi menu con đang mở */
-.menu-muc:hover>a,
-.menu-muc:focus-within>a {
-    background: #e6f0ff;
-    color: #134e94;
-    font-weight: bold;
-}
-
-.menu-hop .muc-hang {
-    padding: 11px 14px;
-    justify-content: flex-start;
-}
-
-.menu-hop .muc-hang.active,
-.menu-hop .muc-hang.active:hover {
-    background: #134e94;
-    color: white;
-    font-weight: bold;
-}
-
-/* Sau khi chọn hãng: ẩn menu tạm thời cho đến khi rê chuột ra vào hoặc bấm lại */
-.danh-muc.da-chon .danh-muc-menu {
-    display: none !important;
-}
-
-body:has(.danh-muc.da-chon)::after {
-    display: none !important;
-}
-
-/* Khi cuộn tới khung sản phẩm, chừa chỗ cho header dính trên cùng */
-.main-col {
-    scroll-margin-top: 140px;
-}
-
 /* Làm mờ phần còn lại của trang khi mở Danh mục (trình duyệt cũ không hỗ trợ :has thì bỏ qua) */
 body:has(.danh-muc:hover)::after,
 body:has(.danh-muc:focus-within)::after {
@@ -387,7 +331,7 @@ body:has(.danh-muc:focus-within)::after {
     position: fixed;
     inset: 0;
     z-index: 999;
-    background: rgba(11, 36, 71, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
     pointer-events: none;
 }
@@ -400,9 +344,9 @@ body:has(.danh-muc:focus-within)::after {
     gap: 8px;
     height: 44px;
     padding: 0 18px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(212, 175, 55, 0.12);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.55);
     border-radius: 10px;
     font-weight: bold;
     font-size: 15px;
@@ -412,7 +356,7 @@ body:has(.danh-muc:focus-within)::after {
 }
 
 #dangnhap:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(212, 175, 55, 0.28);
 }
 
 #HienThiND {
@@ -455,7 +399,7 @@ body:has(.danh-muc:focus-within)::after {
     gap: 8px;
     padding: 0 14px;
     background: white;
-    color: #134e94;
+    color: #a67c00;
     border-radius: 10px;
 }
 
@@ -467,7 +411,7 @@ body:has(.danh-muc:focus-within)::after {
     border: none;
     border-radius: 0;
     background: transparent;
-    color: #1f2d3d;
+    color: #1a1a1a;
     font-size: 15px;
     box-shadow: none;
     outline: none;
@@ -495,7 +439,7 @@ body:has(.danh-muc:focus-within)::after {
     display: flex;
     gap: 6px;
     padding: 3px;
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(212, 175, 55, 0.12);
 }
 
 .khunglocsp .locgia input {
@@ -505,20 +449,19 @@ body:has(.danh-muc:focus-within)::after {
     border: 1px solid transparent;
     border-radius: 8px;
     background: white;
-    color: #1f2d3d;
+    color: #1a1a1a;
     font-weight: normal;
     outline: none;
 }
 
 .khunglocsp .locgia input:focus {
-    border-color: #134e94;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.35);
 }
 
 .khunglocsp button {
     padding: 0 16px;
     border-radius: 10px;
-    font-size: 15px;
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
@@ -529,27 +472,26 @@ body:has(.danh-muc:focus-within)::after {
 .khunglocsp button[type="button"] {
     order: 4;
     height: 44px;
-    background: white;
-    color: #134e94;
-    border: 1px solid white;
+    background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
+    color: #0d0d0d;
+    border: 1px solid #d4af37;
 }
 
 .khunglocsp button[type="button"]:hover {
-    background: #e6f0ff;
+    background: #f0d36b;
 }
 
 /* Nút Xóa bộ lọc (hàng 2) */
 .khunglocsp button[type="submit"] {
     order: 9;
     height: 38px;
-    font-size: 14px;
     background: transparent;
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.75);
 }
 
 .khunglocsp button[type="submit"]:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(212, 175, 55, 0.12);
 }
 
 /* ========================================
@@ -563,9 +505,9 @@ body:has(.danh-muc:focus-within)::after {
 
 .main-col {
     background: white;
-    border: 1px solid #dbe7f5;
+    border: 1px solid #e3d9b8;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(19, 78, 148, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
 
@@ -574,9 +516,9 @@ body:has(.danh-muc:focus-within)::after {
     text-align: center;
     font-weight: bold;
     letter-spacing: 0.5px;
-    color: #134e94;
-    border-bottom: 3px solid #134e94;
-    background: linear-gradient(to bottom, #ffffff, #eef5ff);
+    color: #0d0d0d;
+    border-bottom: 3px solid #c9a227;
+    background: linear-gradient(to bottom, #ffffff, #fbf6e4);
 }
 
 .main {
@@ -606,25 +548,25 @@ body:has(.danh-muc:focus-within)::after {
 
 #categoryFilter .nut-hang {
     padding: 8px 20px;
-    border: 1px solid #cfdcec;
+    border: 1px solid #e3d9b8;
     border-radius: 999px;
     background: white;
-    color: #1f2d3d;
+    color: #1a1a1a;
     font-size: 15px;
     cursor: pointer;
     transition: 0.2s;
 }
 
 #categoryFilter .nut-hang:hover {
-    border-color: #134e94;
-    background: #e6f0ff;
-    color: #134e94;
+    border-color: #c9a227;
+    background: #fbf3d5;
+    color: #7a5c00;
 }
 
 #categoryFilter .nut-hang.active {
-    border-color: #134e94;
-    background: #134e94;
-    color: white;
+    border-color: #c9a227;
+    background: #0d0d0d;
+    color: #f0d36b;
 }
 
 /* ========================================
@@ -651,12 +593,12 @@ body:has(.danh-muc:focus-within)::after {
     min-width: 0;
     min-height: 360px;
     padding: 14px;
-    border: 1px solid #e1e8f2;
+    border: 1px solid #ece5d0;
     border-radius: 12px;
     background-color: white;
     text-align: left;
     position: relative;
-    box-shadow: 0 2px 6px rgba(19, 78, 148, 0.08);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
 }
 
@@ -666,8 +608,8 @@ body:has(.danh-muc:focus-within)::after {
 }
 
 .sanpham:hover {
-    border-color: #2a7de1;
-    box-shadow: 0 8px 20px rgba(19, 78, 148, 0.2);
+    border-color: #c9a227;
+    box-shadow: 0 8px 20px rgba(166, 124, 0, 0.25);
     transform: translateY(-3px);
 }
 
@@ -702,7 +644,7 @@ body:has(.danh-muc:focus-within)::after {
     font-size: 15px;
     line-height: 1.35;
     text-align: left;
-    color: #1f2d3d;
+    color: #1a1a1a;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -719,18 +661,18 @@ body:has(.danh-muc:focus-within)::after {
 .product-card button {
     width: 100%;
     height: 38px;
-    background-color: #e6f0ff;
-    color: #134e94;
+    background-color: #fbf3d5;
+    color: #7a5c00;
     font-weight: bold;
-    border: 1px solid #b6d0f5;
+    border: 1px solid #e3cf86;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .product-card button:hover {
-    background-color: #134e94;
-    color: white;
+    background-color: #0d0d0d;
+    color: #f0d36b;
 }
 
 /* ========================================
@@ -751,23 +693,23 @@ body:has(.danh-muc:focus-within)::after {
     margin: 4px;
     font-size: 18px;
     background: white;
-    color: #134e94;
-    border: 1px solid #b6c7dd;
+    color: #7a5c00;
+    border: 1px solid #d9cca0;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .pagination button:hover {
-    background: #e6f0ff;
+    background: #fbf3d5;
 }
 
 .pagination button.active {
     font-weight: bold;
     text-decoration: underline;
-    background: #134e94;
-    color: white;
-    border-color: #134e94;
+    background: #0d0d0d;
+    color: #f0d36b;
+    border-color: #0d0d0d;
 }
 
 /* ========================================
@@ -784,16 +726,18 @@ body:has(.danh-muc:focus-within)::after {
     height: 46px;
     padding: 0 18px;
     border-radius: 12px;
-    background: #0b2447;
-    color: white;
+    background: #000000;
+    color: #d4af37;
+    border: 1px solid #d4af37;
     font-weight: bold;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(11, 36, 71, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     transition: 0.2s;
 }
 
 .len-dau:hover {
-    background: #134e94;
+    background: #d4af37;
+    color: #0d0d0d;
 }
 
 /* ========================================
@@ -803,12 +747,12 @@ body:has(.danh-muc:focus-within)::after {
     clear: both;
     display: flex;
     flex-direction: column;
-    background: #134e94;
-    color: #dbe7f5;
+    background: #000000;
+    color: #bfae7a;
     text-align: center;
     padding: 2rem;
     font-size: 0.9rem;
-    border-top: 1px solid #0d3a70;
+    border-top: 1px solid #d4af37;
 }
 
 /* ========================================
@@ -822,14 +766,14 @@ body:has(.danh-muc:focus-within)::after {
     height: 60%;
     transform: translate(-50%, -50%);
     margin: 0;
-    background-color: #f5f9ff;
-    border: 1px solid #cfdcec;
+    background-color: #fffdf6;
+    border: 1px solid #e3d9b8;
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(19, 78, 148, 0.35);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
 }
 
 #product-detail-dialog::backdrop {
-    background: rgba(13, 58, 112, 0.45);
+    background: rgba(0, 0, 0, 0.55);
 }
 
 
@@ -845,8 +789,8 @@ body:has(.danh-muc:focus-within)::after {
     top: 2%;
     right: 2%;
     background: white;
-    color: #134e94;
-    border: 1px solid #b6c7dd;
+    color: #7a5c00;
+    border: 1px solid #d9cca0;
     border-radius: 6px;
     cursor: pointer;
 
@@ -870,8 +814,8 @@ body:has(.danh-muc:focus-within)::after {
     width: 3%;
     height: 8%;
     border-radius: 5px;
-    background-color: #134e94;
-    color: white;
+    background-color: #0d0d0d;
+    color: #f0d36b;
     border: none;
     opacity: 0.2;
 }
@@ -903,21 +847,21 @@ body:has(.danh-muc:focus-within)::after {
     width: 27%;
     height: 8%;
     border-radius: 10px;
-    background: #174F91;
+    background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
     cursor: pointer;
-    color: white;
+    color: #0d0d0d;
     font-weight: bold;
     border: none;
     transition: 0.2s;
 }
 
 #product-detail-dialog .cart:hover {
-    background: #0d3a70;
+    background: #f0d36b;
 }
 
 #product-detail-dialog h2 {
     font-size: 30px;
-    color: #134e94;
+    color: #7a5c00;
     position: absolute;
     top: 10%;
     margin-left: 42%;
@@ -941,33 +885,6 @@ body:has(.danh-muc:focus-within)::after {
 /* ========================================
    MÀN HÌNH NHỎ
    ======================================== */
-@media only screen and (max-width: 1180px) {
-    /* Hàng 1: logo + Danh mục (trái) | giỏ hàng + người dùng (phải). Ô tìm kiếm xuống hàng 2 */
-    .danh-muc {
-        margin-right: auto;
-    }
-
-    .header .khunglocsp a.gio-hang,
-    #dangnhap,
-    #HienThiND {
-        order: 2;
-    }
-
-    /* Ô tìm kiếm chiếm gần hết một hàng riêng (chừa chỗ cho nút Tìm kiếm 100px + khoảng cách) */
-    .khunglocsp label.locsp.timkiem {
-        flex: 1 1 calc(100% - 120px);
-    }
-
-    /* Giỏ hàng chỉ còn biểu tượng (huy hiệu số lượng vẫn giữ) */
-    .header .khunglocsp a.gio-hang {
-        padding: 0 13px;
-    }
-
-    .header .khunglocsp a.gio-hang>span:not(.gio-hang-badge) {
-        display: none;
-    }
-}
-
 @media only screen and (max-width: 900px) {
     /* Header cao nhiều hàng thì không cần dính trên cùng nữa */
     .header {
@@ -985,38 +902,9 @@ body:has(.danh-muc:focus-within)::after {
     }
 }
 
-@media only screen and (max-width: 640px) {
-    /* Người dùng chỉ còn biểu tượng; tên và "Chào mừng" xem được trên màn hình lớn hơn */
-    .nd-chao,
-    #HienThiND .mui-ten {
-        display: none;
-    }
-
-    .nd-nut,
-    #dangnhap {
-        padding: 0 12px;
-    }
-
-    #dangnhap span {
-        display: none;
-    }
-}
-
 @media only screen and (max-width: 560px) {
     .brand span {
         display: none;
-    }
-
-    .menu-con {
-        display: block;
-        position: static;
-        width: auto;
-        padding: 0 0 4px 22px;
-    }
-
-    .menu-con .menu-hop {
-        padding: 0;
-        box-shadow: none;
     }
 
     .danh-muc-menu {
