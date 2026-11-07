@@ -152,34 +152,53 @@
   text-align: right;
 }
 
-/* ===== Nút Giỏ hàng: sang phải + bo góc + bỏ gạch chân ===== */
+/* ===== Nút Giỏ hàng trong header (nằm cuối ô tìm kiếm) ===== */
 .khunglocsp a.gio-hang,
 .khunglocsp a.gio-hang:visited {
-    margin-left: auto;              /* đẩy sang bên phải */
+    order: 5;                       /* hàng 1, sau nút Tìm kiếm */
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    position: relative;
-    padding: 6px 16px;
-    background: #134e94;
+    position: relative;             /* để huy hiệu số lượng bám theo nút */
+    flex-shrink: 0;
+    height: 44px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.18);
     color: white;
-    border: 1px solid #134e94;
-    border-radius: 8px;             /* bo góc bao quanh */
-    text-decoration: none;          /* bỏ gạch chân */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    text-decoration: none;
     font-weight: bold;
+    white-space: nowrap;
     transition: 0.2s;
 }
 
 .khunglocsp a.gio-hang:hover {
-    background: #0d3a70;
+    background: rgba(255, 255, 255, 0.3);
     color: white;
     text-decoration: none;
 }
 
-/* Huy hiệu nằm lọt trong góc để không bị cắt ở mép phải màn hình */
+/* Huy hiệu số lượng trên góc nút giỏ hàng */
 .gio-hang-badge {
+    position: absolute;
     top: -9px;
-    right: 2px;
+    right: -7px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: #ef4444;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+}
+
+/* Bắt buộc: để thuộc tính hidden còn ẩn được huy hiệu khi giỏ trống */
+.gio-hang-badge[hidden] {
+    display: none !important;
 }
 
 /* ----- Thanh toán ----- */
