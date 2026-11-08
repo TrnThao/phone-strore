@@ -822,127 +822,223 @@ input[type="checkbox"] {
    ======================================== */
 #product-detail-dialog {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    height: 60%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-    background-color: #fffdf6;
+    inset: 0;
+    margin: auto;
+    width: min(1000px, 94vw);
+    height: fit-content;
+    min-height: 480px;
+    max-height: 92vh;
+    padding: 0;
+    overflow: hidden auto;
     border: 1px solid #e3d9b8;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    background: linear-gradient(90deg, #fbf6e4 0 44%, #fffdf6 44% 100%);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    color: #1a1a1a;
+}
+
+#product-detail-dialog[open] {
+    display: grid;
+    grid-template-columns: 44% max-content 1fr;
+    grid-template-rows: auto auto auto 1fr auto auto;
+    animation: hien-chi-tiet 0.25s ease-out;
+}
+
+@keyframes hien-chi-tiet {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 #product-detail-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
 }
 
-
+/* Ảnh sản phẩm (nền trắng hòa vào nền kem nhờ multiply) */
 #product-detail-dialog img {
-    width: 40%;
-    height: 80%;
-    float: left;
-
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    padding: 36px 28px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 }
 
-#product-detail-dialog .close {
-    position: absolute;
-    top: 2%;
-    right: 2%;
+/* Nút chuyển ảnh: nằm đè lên hai mép ảnh */
+#product-detail-dialog .slide-prev,
+#product-detail-dialog .slide-next {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    align-self: center;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e3d9b8;
+    border-radius: 50%;
     background: white;
     color: #7a5c00;
-    border: 1px solid #d9cca0;
-    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
     cursor: pointer;
+    opacity: 0.6;
+    transition: 0.2s;
+}
 
+#product-detail-dialog .slide-prev {
+    justify-self: start;
+    margin-left: 14px;
+}
+
+#product-detail-dialog .slide-next {
+    justify-self: end;
+    margin-right: 14px;
+}
+
+#product-detail-dialog .slide-prev:hover,
+#product-detail-dialog .slide-next:hover {
+    background: #0d0d0d;
+    color: #f0d36b;
+    border-color: #0d0d0d;
+    opacity: 1;
+}
+
+/* Nút đóng */
+#product-detail-dialog .close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #d9cca0;
+    border-radius: 50%;
+    background: white;
+    color: #7a5c00;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 #product-detail-dialog .close:hover {
     background: #e53935;
-    color: white;
     border-color: #e53935;
+    color: white;
 }
 
-
-
-
-#product-detail-dialog .slide-prev,
-#product-detail-dialog .slide-next {
-    position: absolute;
-    top: 40%;
-    z-index: 1;
-    cursor: pointer;
-    width: 3%;
-    height: 8%;
-    border-radius: 5px;
-    background-color: #0d0d0d;
-    color: #f0d36b;
-    border: none;
-    opacity: 0.2;
+/* Tên sản phẩm */
+#product-detail-dialog h2 {
+    grid-column: 2 / 4;
+    grid-row: 1;
+    margin: 52px 32px 16px;
+    font-size: 30px;
+    line-height: 1.2;
+    color: #1a1a1a;
 }
 
-#product-detail-dialog .slide-prev:hover {
-    transition: 0.3s;
-    opacity: 1.5;
+#product-detail-dialog p {
+    margin: 0;
+    text-align: left;
 }
 
-#product-detail-dialog .slide-next:hover {
-    transition: 0.3s;
-    opacity: 1.5;
-}
-
-
-#product-detail-dialog .slide-prev {
-    left: 1%;
-}
-
-#product-detail-dialog .slide-next {
-    left: 36%;
-}
-
-
-#product-detail-dialog .cart {
-    position: absolute;
-    margin-top: 38%;
-    margin-left: 42%;
-    width: 27%;
-    height: 8%;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
-    cursor: pointer;
-    color: #0d0d0d;
+/* Mã sản phẩm và Hãng: dạng nhãn nhỏ */
+#product-detail-dialog p:nth-of-type(1),
+#product-detail-dialog p:nth-of-type(2) {
+    grid-row: 2;
+    justify-self: start;
+    align-self: center;
+    margin-bottom: 18px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
     font-weight: bold;
-    border: none;
+}
+
+#product-detail-dialog p:nth-of-type(1) {
+    grid-column: 2;
+    margin-left: 32px;
+    border: 1px solid #e3cf86;
+    background: #fbf3d5;
+    color: #7a5c00;
+}
+
+#product-detail-dialog p:nth-of-type(2) {
+    grid-column: 3;
+    margin-left: 10px;
+    background: #0d0d0d;
+    color: #f0d36b;
+}
+
+/* Giá bán: nổi bật */
+#product-detail-dialog p:nth-of-type(3) {
+    grid-column: 2 / 4;
+    grid-row: 3;
+    margin: 0 32px 18px;
+    padding: 14px 18px;
+    border-left: 5px solid #c9a227;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #fbf3d5, #fffdf6);
+    font-size: 28px;
+    font-weight: bold;
+    color: #e53935;
+}
+
+/* Mô tả */
+#product-detail-dialog p:nth-of-type(4) {
+  grid-column: 2 / 4;
+    grid-row: 4;
+    align-self: start;
+    margin: 0 32px 20px;
+    padding: 16px 20px;
+    border: 1px solid #e3d9b8;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(166, 124, 0, 0.1);
+    font-size: 17px;
+    line-height: 1.7;
+    color: #222;
+}
+
+/* Nút thêm vào giỏ hàng */
+#product-detail-dialog .cart {
+    grid-column: 2 / 4;
+    grid-row: 5;
+    height: 52px;
+    margin: 0 32px 14px;
+    border: 1px solid #d4af37;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
+    color: #0d0d0d;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
     transition: 0.2s;
 }
 
 #product-detail-dialog .cart:hover {
-    background: #f0d36b;
+    background: #0d0d0d;
+    color: #f0d36b;
+    border-color: #0d0d0d;
+}
+#product-detail-dialog::after {
+    content: "✓ Chính hãng 100%  ·  Bảo hành 12 tháng  ·  Đổi trả 30 ngày";
+    grid-column: 2 / 4;
+    grid-row: 6;
+    margin: 0 32px 28px;
+    font-size: 14px;
+    color: #6b5a1e;
 }
 
-#product-detail-dialog h2 {
-    font-size: 30px;
-    color: #7a5c00;
-    position: absolute;
-    top: 10%;
-    margin-left: 42%;
-}
 
-#product-detail-dialog p:first-of-type {
-    margin-top: 13%;
-}
-
-#product-detail-dialog p {
-    font-size: 18px;
-    bottom: 20%;
-    margin-left: 42%;
-    text-align: left;
-    line-height: 1.1;
-    margin-top: 3%;
-    color: #333;
-
-}
 
 /* ========================================
    MÀN HÌNH NHỎ
@@ -1303,9 +1399,6 @@ input[type="checkbox"] {
 
 
 /* Dừng khi duyệt bằng bàn phím (Tab). Tách thành luật riêng để trình duyệt cũ chưa hiểu :has() không làm hỏng luật trên */
-.qc-bang:has(.qc-the:focus-visible) .qc-day {
-    animation-play-state: paused;
-}
 
 @keyframes qc-chay {
     to {

@@ -76,7 +76,7 @@ document.querySelectorAll(".productList").forEach(productList => {
 });
 
 // 4. QUẢN LÝ PHÂN TRANG VÀ HIỂN THỊ
-const maxsp = 9;
+const maxsp = 12;
 const cacSanPham = Array.from(
   document.querySelectorAll("#productContainer .sanpham")
 );

@@ -175,6 +175,26 @@ products: [
       desc: "Chip Apple A20 Pro 2nm, màn hình OLED 6.9 inch Super Retina XDR, vỏ khung nhôm nguyên khối bền bỉ.",
       customProfitRate: null,
       status: true
+    },
+    {
+      id: "SP14",
+      code: "IP17PM",
+      name: "iPhone 17 Pro Max 256GB",
+      catId: "CAT01",
+      img: [],
+      desc: "Chip Apple A19Pro",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP15",
+      code: "IP16PM",
+      name: "iPhone 16 Pro Max 256GB",
+      catId: "CAT01",
+      img: [],
+      desc: "Chip Apple A19Pro 2nm",
+      customProfitRate: null,
+      status: true
     }
   ],
 
@@ -241,7 +261,8 @@ products: [
       items: [
         { prodId: "SP01", qty: 25, importPrice: 26000000 },
         { prodId: "SP02", qty: 20, importPrice: 17500000 },
-        { prodId: "SP04", qty: 20, importPrice: 25000000 }
+        { prodId: "SP04", qty: 20, importPrice: 25000000 },
+        { prodId: "SP13", qty: 20, importPrice: 60000000}
       ]
     },
     {
@@ -367,8 +388,6 @@ products: [
   ]
 };
 
-
-
 const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
 
 for (const product of SEED_DATA.products || []) {
@@ -378,9 +397,6 @@ for (const product of SEED_DATA.products || []) {
 }
 
 localStorage.setItem("products", JSON.stringify(savedProducts));
-
-
-
 
 // --- HÀM TỰ ĐỘNG NẠP VÀO LOCALSTORAGE NẾU CHƯA CÓ ---
 function initDefaultData() {
