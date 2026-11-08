@@ -161,6 +161,50 @@ products: [
       desc: "Máy cũ qua sử dụng, ngừng kinh doanh mặt hàng mới.",
       customProfitRate: null,
       status: false
+    },
+    { //Bổ sung IP18prm
+      id: "SP13",
+      code: "IP18PM",
+      name: "iPhone 18 Pro Max 256GB",
+      catId: "CAT01",
+      img: ["assets/images/ip18prm.jpg",
+            "assets/images/ip18prm-black.png",
+            "assets/images/ip18prm-grey.png",
+            "assets/images/ip18prm-silver.png"
+      ],
+      desc: "Chip Apple A20 Pro 2nm, màn hình OLED 6.9 inch Super Retina XDR, vỏ khung nhôm nguyên khối bền bỉ.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP14",
+      code: "IP17PM",
+      name: "iPhone 17 Pro Max 256GB",
+      catId: "CAT01",
+      img: [],
+      desc: "Chip Apple A19Pro",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP15",
+      code: "IP16PM",
+      name: "iPhone 16 Pro Max 256GB",
+      catId: "CAT01",
+      img: [],
+      desc: "Chip Apple A19Pro 2nm",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP16",
+      code: "IP15PM",
+      name: "iPhone 15 Pro Max 256GB",
+      catId: "CAT01",
+      img: [],
+      desc: "Chip Apple A19Pro 2nm, màn hình OLED",
+      customProfitRate: null,
+      status: true
     }
   ],
 
@@ -227,7 +271,8 @@ products: [
       items: [
         { prodId: "SP01", qty: 25, importPrice: 26000000 },
         { prodId: "SP02", qty: 20, importPrice: 17500000 },
-        { prodId: "SP04", qty: 20, importPrice: 25000000 }
+        { prodId: "SP04", qty: 20, importPrice: 25000000 },
+        { prodId: "SP13", qty: 20, importPrice: 60000000}
       ]
     },
     {
@@ -352,6 +397,16 @@ products: [
     }
   ]
 };
+
+const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+
+for (const product of SEED_DATA.products || []) {
+  if (!savedProducts.some(saved => saved.id === product.id)) {
+    savedProducts.push(product);
+  }
+}
+
+localStorage.setItem("products", JSON.stringify(savedProducts));
 
 // --- HÀM TỰ ĐỘNG NẠP VÀO LOCALSTORAGE NẾU CHƯA CÓ ---
 function initDefaultData() {
