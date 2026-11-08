@@ -195,16 +195,6 @@ products: [
       desc: "Chip Apple A19Pro 2nm",
       customProfitRate: null,
       status: true
-    },
-    {
-      id: "SP16",
-      code: "IP15PM",
-      name: "iPhone 15 Pro Max 256GB",
-      catId: "CAT01",
-      img: [],
-      desc: "Chip Apple A19Pro 2nm, màn hình OLED",
-      customProfitRate: null,
-      status: true
     }
   ],
 
