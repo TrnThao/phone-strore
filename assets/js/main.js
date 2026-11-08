@@ -163,7 +163,7 @@ products: [
       status: false
     },
     { //Bổ sung IP18prm
-      id: "SP01",
+      id: "SP13",
       code: "IP18PM",
       name: "iPhone 18 Pro Max 256GB",
       catId: "CAT01",
@@ -366,6 +366,21 @@ products: [
     }
   ]
 };
+
+
+
+const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+
+for (const product of SEED_DATA.products || []) {
+  if (!savedProducts.some(saved => saved.id === product.id)) {
+    savedProducts.push(product);
+  }
+}
+
+localStorage.setItem("products", JSON.stringify(savedProducts));
+
+
+
 
 // --- HÀM TỰ ĐỘNG NẠP VÀO LOCALSTORAGE NẾU CHƯA CÓ ---
 function initDefaultData() {

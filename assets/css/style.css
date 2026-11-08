@@ -1301,9 +1301,6 @@ input[type="checkbox"] {
     animation: qc-chay var(--thoi-gian, 40s) linear infinite;
 }
 
-.qc-bang:hover .qc-day {
-    animation-play-state: paused;
-}
 
 /* Dừng khi duyệt bằng bàn phím (Tab). Tách thành luật riêng để trình duyệt cũ chưa hiểu :has() không làm hỏng luật trên */
 .qc-bang:has(.qc-the:focus-visible) .qc-day {
