@@ -161,6 +161,20 @@ products: [
       desc: "Máy cũ qua sử dụng, ngừng kinh doanh mặt hàng mới.",
       customProfitRate: null,
       status: false
+    },
+    { //Bổ sung IP18prm
+      id: "SP01",
+      code: "IP18PM",
+      name: "iPhone 18 Pro Max 256GB",
+      catId: "CAT01",
+      img: ["assets/images/ip18prm.jpg",
+            "assets/images/ip18prm-black.png",
+            "assets/images/ip18prm-grey.png",
+            "assets/images/ip18prm-silver.png"
+      ],
+      desc: "Chip Apple A20 Pro 2nm, màn hình OLED 6.9 inch Super Retina XDR, vỏ khung nhôm nguyên khối bền bỉ.",
+      customProfitRate: null,
+      status: true
     }
   ],
 
