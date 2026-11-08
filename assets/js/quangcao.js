@@ -190,3 +190,108 @@
   hienNhip(0);
   khoiDong();
 })();
+
+//Sửa ở đây
+// Menu Danh mục dạng bảng rộng : ô hãng + máy nổi bật. Chỉ đọc dữ liệu, dùng locTheoHang/renderDetail có sẵn
+(function () {
+  const menu = document.querySelector(".danh-muc-menu");
+  const hop = menu && menu.querySelector(".menu-hop");
+  if (!hop || typeof categories === "undefined" || typeof products === "undefined" ||
+      typeof locTheoHang !== "function" || typeof renderDetail !== "function") return;
+
+  const hang = categories.filter(c => c.status !== false);
+  if (!hang.length) return;
+  const hangBat = new Set(hang.map(c => String(c.id)));
+  const spBan = products.filter(p => p.status !== false && hangBat.has(String(p.catId)));
+  const dem = id => spBan.filter(p => String(p.catId) === id).length;
+
+  const dong = () => { if (document.activeElement) document.activeElement.blur(); };
+
+  function chonHang(id) {
+    // Đồng bộ ô tích ở khung Bộ lọc bên trái
+    document.querySelectorAll("#categoryFilter input").forEach(cb => {
+      cb.checked = id !== "" && cb.value === id;
+    });
+    document.querySelector(".qc")?.classList.add("qcl");   // ẩn khối ưu đãi để sản phẩm hiện ngay
+    locTheoHang(id ? [id] : []);
+    dong();
+    document.querySelector(".page")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Mục bên trái "Danh sách sản phẩm": xem tất cả hãng
+    // Bấm "Danh sách sản phẩm" mới bung/thu menu con
+  const muc = hop.querySelector('a[data-link="products"]');
+  const danhMuc = menu.closest(".danh-muc");
+  function moMenuCon(mo) {
+    menu.classList.toggle("mo", mo);
+    muc?.setAttribute("aria-expanded", String(mo));
+  }
+  muc?.setAttribute("aria-expanded", "false");
+  muc?.addEventListener("click", e => {
+    e.preventDefault();
+    moMenuCon(!menu.classList.contains("mo"));
+  });
+  // Rời khỏi Danh mục thì thu menu con lại
+  danhMuc.addEventListener("mouseleave", () => moMenuCon(false));
+  danhMuc.addEventListener("focusout", e => {
+    if (!danhMuc.contains(e.relatedTarget)) moMenuCon(false);
+  });
+
+  function cot(tieuDe) {
+    const s = document.createElement("section");
+    s.className = "mega-cot";
+    const h = document.createElement("h3");
+    h.textContent = tieuDe;
+    s.appendChild(h);
+    return s;
+  }
+
+  // Cột 1: ô hãng
+  const cotHang = cot("Hãng điện thoại");
+  const luoi = document.createElement("div");
+  luoi.className = "mega-hang";
+  const tatCa = document.createElement("a");
+  tatCa.href = "#";
+  tatCa.className = "mega-the mega-tatca";
+  const tatCaTen = document.createElement("strong");
+  tatCaTen.textContent = "Tất cả hãng";
+  const tatCaSo = document.createElement("span");
+  tatCaSo.textContent = spBan.length + " mẫu";
+  tatCa.append(tatCaTen, tatCaSo);
+  tatCa.addEventListener("click", e => { e.preventDefault(); chonHang(""); });
+  luoi.appendChild(tatCa);
+  hang.forEach(c => {
+    const id = String(c.id);
+    const a = document.createElement("a");
+    a.href = "#";
+    a.className = "mega-the";
+    const ten = document.createElement("strong");
+    ten.textContent = c.name;
+    const so = document.createElement("span");
+    so.textContent = dem(id) + " mẫu";
+    a.append(ten, so);
+    a.addEventListener("click", e => { e.preventDefault(); chonHang(id); });
+    luoi.appendChild(a);
+  });
+  cotHang.appendChild(luoi);
+
+  // Cột 2: máy nổi bật (6 mẫu đầu danh sách)
+  const cotMay = cot("Điện thoại nổi bật");
+  const chips = document.createElement("div");
+  chips.className = "mega-chips";
+  spBan.slice(0, 6).forEach(p => {
+    const a = document.createElement("a");
+    a.href = "#";
+    a.className = "mega-chip";
+    a.textContent = p.name;
+    a.addEventListener("click", e => { e.preventDefault(); dong(); renderDetail(p.id); });
+    chips.appendChild(a);
+  });
+  cotMay.appendChild(chips);
+
+  const phai = document.createElement("div");
+  phai.className = "mega-phai";
+  phai.append(cotHang, cotMay);
+  hop.appendChild(phai);
+  menu.classList.add("mega");
+})();

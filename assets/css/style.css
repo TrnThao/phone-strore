@@ -1474,3 +1474,61 @@ input[type="checkbox"] {
         transition: none;
     }
 }
+/* ========================================
+   MENU DANH MỤC DẠNG BẢNG RỘNG (hãng + máy nổi bật)
+   ======================================== */
+/* Mặc định menu chỉ có một dòng; bấm "Danh sách sản phẩm" (thêm class .mo) mới bung rộng */
+.danh-muc-menu.mega {
+    width: 290px;
+}
+
+.danh-muc-menu.mega.mo {
+    width: min(780px, calc(100vw - 32px));
+}
+
+.danh-muc-menu.mega.mo .menu-hop {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 12px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+/* Dòng đang mở: nền sáng, mũi tên xoay xuống */
+.danh-muc-menu.mega.mo .menu-hop > a[data-link="products"] {
+    background: #fbf3d5;
+    color: #7a5c00;
+    font-weight: bold;
+}
+
+.danh-muc-menu.mega .menu-hop > a[data-link="products"] svg:last-child {
+    transition: transform 0.2s;
+}
+
+.danh-muc-menu.mega.mo .menu-hop > a[data-link="products"] svg:last-child {
+    transform: rotate(90deg);
+}
+
+.mega-phai {
+    display: none;
+}
+
+.danh-muc-menu.mega.mo .mega-phai {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
+    min-width: 0;
+}
+
+.mega-tatca {
+    grid-column: 1 / -1;
+}
+
+@media only screen and (max-width: 700px) {
+    .danh-muc-menu.mega.mo .menu-hop,
+    .danh-muc-menu.mega.mo .mega-phai {
+        grid-template-columns: 1fr;
+    }
+}
