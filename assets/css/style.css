@@ -249,6 +249,13 @@ body {
     white-space: nowrap;
 }
 
+.brand-logo {
+    width: 40px;
+    height: 40px;
+    margin-left: -10px;
+    object-fit: contain;
+}
+
 /* ----- Nút Danh mục + menu thả xuống ----- */
 .danh-muc {
     order: 2;
