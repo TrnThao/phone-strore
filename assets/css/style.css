@@ -37,42 +37,45 @@ body {
    ======================================== */
 .container {
     width: 100%;
+    min-height: 100vh;
+    padding: 20px 0;
     border: 1px solid #e3d9b8;
     background: linear-gradient(135deg, #fbf3d5, #ffffff);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    justify-content: center;   /* giữa theo chiều ngang */
+    align-items: center;       /* giữa theo chiều dọc */
 }
 .dangki-login {
-    width: 500px;
+    width: min(420px, 92vw);
+    padding: 40px 34px 34px;
     border: 1px solid #e3d9b8;
     background: white;
-    border-radius: 100px;
-    box-shadow: 0 10px 40px 0px rgba(166, 124, 0, 0.25);
-
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(166, 124, 0, 0.12);
 }
 
 .dangki-login h1 {
     text-align: center;
+    font-size: 26px;
+    margin-bottom: 28px;
     color: #a67c00;
 }
 
 .dangki-login .dangki-login-form {
     width: 100%;
-    height: 50px;
-    margin: 30px 0;
-    padding: 0 20px;
+    height: 42px;
+    margin: 0 0 16px;
+    padding: 0;
 }
 
 .dangki-login-form input {
     width: 100%;
     height: 100%;
-    padding: 0 10px;
+    padding: 0 12px;
+    font-size: 15px;
     outline: none;
-    border: none;
-    border: 1px solid #d9cca0;
-    border-radius: 20px;
+    border: 1px solid #9a9a9a;
+    border-radius: 4px;
     transition: 0.2s;
 }
 
@@ -81,15 +84,17 @@ body {
     box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
 }
 
+/* Nút chính: Đăng nhập / Đăng kí ngay 
 .dangki-login button {
-    width: 30%;
-    height: 50px;
-    margin: 0 35%;
-    margin-bottom: 30px;
+    display: block;
+    width: 100%;
+    height: 44px;
+    margin: 8px 0 0;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
     background: linear-gradient(135deg, #f0d36b, #c9a227 55%, #a67c00);
     color: #0d0d0d;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
@@ -97,6 +102,54 @@ body {
 
 .dangki-login button:hover {
     background: #f0d36b;
+}
+
+.dangki-login .phu,
+.dangki-login #quaylaidangnhap {
+    background: #e1e4e6;
+    color: #2c2e2f;
+}
+
+.dangki-login .phu:hover,
+.dangki-login #quaylaidangnhap:hover {
+    background: #d3d7da;
+}
+
+
+/* Hai nút liền nhau (form đăng ký) cách nhau một chút 
+.dangki-login button + button {
+    margin-top: 12px;
+}
+
+/* Đường kẻ "hoặc" 
+.dangki-login .hoac {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    color: #6c7378;
+    font-size: 14px;
+}*/
+
+.dangki-login .hoac::before,
+.dangki-login .hoac::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #d9dcde;
+}
+.dangki-login .lien-ket {
+    display: block;
+    margin-top: 18px;
+    text-align: center;
+    font-size: 15px;
+    color: #a67c00;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dangki-login .lien-ket:hover {
+    text-decoration: underline;
 }
 /* ========================================
    THANH THÔNG BÁO TRÊN CÙNG (chữ chạy qua lại)

@@ -17,8 +17,13 @@
       <div class="dangki-login-form">
         <input type="password" id="password" name="password" placeholder="Mật khẩu" required>
       </div>
-      <button type="submit" >Đăng nhập</button>
-      <button id="dangki" type="button">Đăng kí</button>
+      <button type="submit">Đăng nhập</button>
+
+      <a href="#" id="dangki" class="lien-ket">Chưa có tài khoản? Đăng kí ngay</a>
+
+      <div class="hoac"><span>hoặc</span></div>
+
+      <button type="button" class="phu" onclick="document.getElementById('dangki').click()">Đăng kí</button>
     </form>
   </div>
   <script src="assets/js/auth.js"></script>
