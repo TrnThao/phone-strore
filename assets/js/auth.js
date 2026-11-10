@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         
         <button type="submit" id="xacnhandangki">Đăng kí ngay</button>
-        <button id="quaylaidangnhap" type="button">Quay lại đăng nhập</button>
+        <div id="quaylaidangnhap" type="button">Quay lại đăng nhập</div>
+
       </form>`;
 
       const quayLai = document.getElementById('quaylaidangnhap');
