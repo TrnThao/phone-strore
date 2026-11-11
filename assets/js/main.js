@@ -161,7 +161,137 @@ products: [
       desc: "Máy cũ qua sử dụng, ngừng kinh doanh mặt hàng mới.",
       customProfitRate: null,
       status: false
-    }
+    },
+    {
+      id: "SP13",
+      code: "IP18PM",
+      name: "iPhone 18 Pro Max 256GB",
+      catId: "CAT01",
+      img: ["assets/images/ip18prm.jpg",
+            "assets/images/ip18prm-black.png",
+            "assets/images/ip18prm-grey.png",
+            "assets/images/ip18prm-silver.png"
+      ],
+      desc: "Chip Apple A20 Pro 2nm, màn hình OLED 6.9 inch Super Retina XDR, vỏ khung nhôm nguyên khối bền bỉ.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP14",
+      code: "IP17PM",
+      name: "iPhone 17 Pro Max 256GB",
+      catId: "CAT01",
+      img: ["assets/images/ip17prm.jpg",
+            "assets/images/ip17prm-1.jpg",
+            "assets/images/ip17prm-2.jpg"
+      ],
+      desc: "iPhone 17 Pro Max sở hữu màn hình OLED 6,9 inch, chip A19 Pro, camera Fusion 48MP, zoom quang học 8x, pin bền bỉ, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP15",
+      code: "IP16PM",
+      name: "iPhone 16 Pro Max 256GB",
+      catId: "CAT01",
+      img: ["assets/images/ip16prm.png",
+           "assets/images/ip16prm-1.png"
+      ],
+      desc: "iPhone 16 Pro Max sở hữu màn hình OLED 6,9 inch, chip A18 Pro, camera 48MP, zoom quang học 5x, khung titan, pin dung lượng lớn, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP16",
+      code: "VVX300ULTRA",
+      name: "Vivo X300 Ultra 512GB",
+      catId: "CAT05",
+      img: [
+            "assets/images/vvx300.jpg"
+      ],
+      desc: "vivo X300 Ultra sở hữu màn hình AMOLED 6,82 inch 2K, chip Snapdragon 8 Elite Gen 5, camera ZEISS 200MP, pin 6600mAh, sạc nhanh 100W, chống nước IP68/IP69.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP17",
+      code: "IPDUO",
+      name: "iPhone Duo 256GB",
+      catId: "CAT01",
+      img: [
+            "assets/images/ipduo.jpg",
+            "assets/images/ipduo-1.jpg"
+      ],
+      desc: "iPhone Duo sở hữu màn hình Super Retina XDR, chip A20 Pro, camera 48MP, zoom quang học 5x, pin lithium-ion, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP18",
+      code: "XIAOMIULTRA5G",
+      name: "Xiaomi 17 Ultra 5G 16GB 512GB",
+      catId: "CAT03",
+      img: [
+            "assets/images/xom17.jpg",
+            "assets/images/xom17-1.jpg"
+      ],
+      desc: "Xiaomi 17 Ultra 5G sở hữu màn hình LTPO AMOLED, chip Snapdragon 8 Elite Gen 5, camera 200MP, pin 6000mAh, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP19",
+      code: "VIVOY36",
+      name: "Vivo Y36 8GB 256GB",
+      catId: "CAT05",
+      img: [
+            "assets/images/vvy36.jpg",
+            "assets/images/vvy36-1.jpg"
+      ],
+      desc: "Vivo Y36 8GB 256GB sở hữu màn hình IPS LCD, chip Snapdragon 680, camera 50MP, pin 5000mAh, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP20",
+      code: "OPPOFN6",
+      name: "OPPO Find N6 16GB 512GB",
+      catId: "CAT04",
+      img: ["assets/images/oppofinen6.jpg",
+            "assets/images/oppofinen6-1.jpg"
+      ],
+      desc: "OPPO Find N6 sở hữu màn hình AMOLED, chip Snapdragon 8 Elite Gen 5, camera 200MP, pin 6000mAh, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP21",
+      code: "IP14PRM",
+      name: "iPhone 14 Pro Max 256GB",
+      catId: "CAT01",
+      img: [
+            "assets/images/ip14prm.jpg",
+            "assets/images/ip14prm-1.jpg",
+            "assets/images/ip14prm-2.jpg"
+      ],
+      desc: "iPhone 14 Pro Max sở hữu màn hình Super Retina XDR OLED, chip A16 Bionic, camera 48MP, zoom quang học 3x, pin lithium-ion, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
+    {
+      id: "SP22",
+      code: "IP16PLUS",
+      name: "iPhone 16 Plus 256GB",
+      catId: "CAT01",
+      img: [
+            "assets/images/ip16pl.jpg",
+            "assets/images/ip16pl-1.jpg",
+            "assets/images/ip16pl-2.jpg"
+      ],
+      desc: "iPhone 16 Plus sở hữu màn hình Super Retina XDR OLED, chip A18, camera 48MP, zoom quang học 2x, pin lithium-ion, hỗ trợ 5G.",
+      customProfitRate: null,
+      status: true
+    },
   ],
 
   // 3. KHÁCH HÀNG (Users)
@@ -227,7 +357,17 @@ products: [
       items: [
         { prodId: "SP01", qty: 25, importPrice: 26000000 },
         { prodId: "SP02", qty: 20, importPrice: 17500000 },
-        { prodId: "SP04", qty: 20, importPrice: 25000000 }
+        { prodId: "SP04", qty: 20, importPrice: 25000000 },
+        { prodId: "SP13", qty: 20, importPrice: 60000000},
+        { prodId: "SP14", qty: 20, importPrice: 30000000},
+        { prodId: "SP15", qty: 20, importPrice: 22000000},
+        { prodId: "SP16", qty: 20, importPrice: 15000000},
+        { prodId: "SP17", qty: 20, importPrice: 67000000},
+        { prodId: "SP18", qty: 20, importPrice: 10100000},
+        { prodId: "SP19", qty: 20, importPrice: 3620000},
+        { prodId: "SP20", qty: 20, importPrice: 30200000},
+        { prodId: "SP21", qty: 20, importPrice: 21300000},
+        { prodId: "SP22", qty: 20, importPrice: 27000000}
       ]
     },
     {
@@ -353,6 +493,16 @@ products: [
   ]
 };
 
+const savedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+
+for (const product of SEED_DATA.products || []) {
+  if (!savedProducts.some(saved => saved.id === product.id)) {
+    savedProducts.push(product);
+  }
+}
+
+localStorage.setItem("products", JSON.stringify(savedProducts));
+
 // --- HÀM TỰ ĐỘNG NẠP VÀO LOCALSTORAGE NẾU CHƯA CÓ ---
 function initDefaultData() {
   if (!localStorage.getItem("categories")) {
@@ -378,8 +528,16 @@ function formatCurrency(num) {
   return Number(num || 0).toLocaleString("vi-VN") + " ₫";
 }
 
+//Đã fix lỗi giỏ hàng người này mà người kia vẫn thấy +
+//Đã fix lỗi không thanh toán được / không xóa được <<bắt đầu từ dòng này
+
+// Mỗi người dùng có giỏ hàng riêng, khóa theo id (hoặc name nếu không có id)
 function cartKey() {
-  const u = JSON.parse(sessionStorage.getItem("currentUser") || "null");
+  const u = JSON.parse(
+    sessionStorage.getItem("currentUser") ||
+    localStorage.getItem("currentUser") ||
+    "null"
+  );
   return u ? "userCart_" + (u.id || u.name) : "userCart_guest";
 }
 
@@ -390,7 +548,7 @@ function getCart() {
 function saveCart(cart) {
   localStorage.setItem(cartKey(), JSON.stringify(cart));
   updateCartBadge();
-}
+}   //<<Kết thúc code sửa
 
 // Cập nhật số lượng sản phẩm trên icon giỏ hàng ở header
 function updateCartBadge() {
